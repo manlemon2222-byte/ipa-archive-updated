@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>arm64</string>
+    </array>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>DTPlatformVersion</key>
+    <string>16.4</string>
+    <key>NSUserActivityTypes</key>
+    <array>
+      <string>com.georgegarside.bluetoothinspector.activity.pro</string>
+    </array>
+    <key>CFBundleName</key>
+    <string>BT Inspector</string>
+    <key>DTSDKName</key>
+    <string>iphoneos16.4</string>
+    <key>INAlternativeAppNames</key>
+    <array>
+      <dict>
+        <key>INAlternativeAppName</key>
+        <string>BT Inspector</string>
+      </dict>
+      <dict>
+        <key>INAlternativeAppName</key>
+        <string>Bluetooth</string>
+      </dict>
+      <dict>
+        <key>INAlternativeAppName</key>
+        <string>Bluetooth Inspector</string>
+      </dict>
+    </array>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>App Icon60x60</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>App Icon</string>
+      </dict>
+    </dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>The app uses Bluetooth to provide information about local peripherals found. This information is not transmitted anywhere and only kept on device for the current session.</string>
+    <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+    <dict>
+      <key>map</key>
+      <string>Location services is required to map found devices.</string>
+    </dict>
+    <key>UILaunchScreen</key>
+    <dict>
+      <key>UINavigationBar</key>
+      <dict/>
+      <key>UIColorName</key>
+      <string>LaunchScreen</string>
+    </dict>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>The app optionally uses location to map found devices and perform background scanning.</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The app optionally uses location to map found devices and perform background scanning.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>bluetooth-central</string>
+      <string>location</string>
+    </array>
+    <key>DTSDKBuild</key>
+    <string>20E238</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.7</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>BuildMachineOSBuild</key>
+    <string>22F5037d</string>
+    <key>DTPlatformBuild</key>
+    <string>20E238</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTXcodeBuild</key>
+    <string>14E222b</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>MinimumOSVersion</key>
+    <string>16.0</string>
+    <key>CFBundleVersion</key>
+    <string>1046</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>The app uses Bluetooth to provide information about local peripherals found. This information is not transmitted anywhere and only kept on device for the current session.</string>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+      <integer>2</integer>
+    </array>
+    <key>CFBundleIdentifier</key>
+    <string>com.georgegarside.bluetoothinspector</string>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+      <key>UIApplicationSupportsMultipleScenes</key>
+      <true/>
+    </dict>
+    <key>DTXcode</key>
+    <string>1430</string>
+    <key>CFBundleExecutable</key>
+    <string>BT Inspector</string>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>App Icon60x60</string>
+          <string>App Icon76x76</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>App Icon</string>
+      </dict>
+    </dict>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTAppStoreToolsBuild</key>
+    <string>14E221</string>
+  </dict>
+</plist>

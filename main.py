@@ -232,11 +232,11 @@ class CacheDB:
             WHERE base_url=? AND path_name=?;''', [baseUrlId, pathName])
         row = x.fetchone()
         return row[0] if row else None
-
     def getUrl(self, uid: int) -> str:
         x = self._db.execute('''SELECT url, path_name FROM idx
             INNER JOIN urls ON urls.pk=base_url WHERE idx.pk=?;''', [uid])
         base, path = x.fetchone()
+        # path_name now uses standard slashes for nested files
         return base + '/' + quote(path)
 
     # Insert URL
@@ -647,7 +647,11 @@ def procSinglePending(
     full_path = path_name
     display_path = path_name.replace(NESTED_SEP, ' -> ')
     print(f'[{processed}|{pending} queued]: load[{uid}] {display_path}')
-    url = base_url + '/' + quote(path_name)
+    
+    DB = CacheDB()
+    url = DB.getUrl(uid)
+    del DB
+    
     try:
         return uid, loadIpa(uid, url)
     except Exception as e:
@@ -678,16 +682,19 @@ def loadIpa(uid: int, url: str, *,
     if not overwrite and plist_path.exists():
         return True
 
-    # Parse nested path if present
-    # Format from DB: baseUrl + '/' + quote(path_name)
-    # where path_name can be "Outer.zip##Inner.ipa"
+    # Support both old format (##) and new format (nested slash)
     inner_path = None
-    quoted_sep = quote(NESTED_SEP)
-    if quoted_sep in url:
-        url, inner_path_quoted = url.split(quoted_sep, 1)
-        inner_path = unquote(inner_path_quoted)
-    elif NESTED_SEP in url:
-        url, inner_path = url.split(NESTED_SEP, 1)
+    
+    # Check for implicit nested path (archive.rar/file.ipa)
+    # Look for common archive extensions followed by a slash
+    for ext in ['.zip/', '.rar/', '.7z/', '.tar/', '.tar.gz/', '.tgz/']:
+        if ext in url.lower():
+            # Split at the end of the extension
+            idx = url.lower().find(ext) + len(ext) - 1
+            base_url = url[:idx]
+            inner_path = unquote(url[idx+1:])
+            url = base_url
+            break
 
     # Handle non-ZIP nested archives (RAR, 7z, etc.)
     # RemoteZip does not work on these via the Archive.org bridge.
