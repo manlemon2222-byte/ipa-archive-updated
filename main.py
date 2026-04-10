@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from typing import TYPE_CHECKING, Iterable
-from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.parse import quote, unquote
 from urllib.request import Request, urlopen, urlretrieve
@@ -606,7 +606,7 @@ def _lookupBaseUrl(url_or_index: 'str|int') -> 'tuple[int|None, str|None]':
 
 def processPending():
     processed = 0
-    with Pool(processes=10) as pool:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         while True:
             DB = CacheDB()
             pending = DB.count(done=0)
@@ -619,7 +619,7 @@ def processPending():
             batch = [(processed + i + 1, pending - i - 1, *x)
                      for i, x in enumerate(batch)]
 
-            for uid, success in pool.imap_unordered(_procSinglePendingWrapper, batch):
+            for uid, success in executor.map(_procSinglePendingWrapper, batch):
                 processed += 1
                 DB = CacheDB()
                 fsize = onceReadSizeFromFile(uid)
