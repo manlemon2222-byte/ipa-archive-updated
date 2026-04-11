@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from typing import TYPE_CHECKING, Iterable
-from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 from urllib.request import Request, urlopen, urlretrieve
 from argparse import ArgumentParser
 from sys import stderr
@@ -13,10 +13,12 @@ import gzip
 import os
 import re
 import subprocess
-from PIL import Image, PngImagePlugin
+import tempfile
+from PIL import Image, PngImagePlugin, ImageFile
 
 # Increase limit for large metadata chunks
 PngImagePlugin.MAX_TEXT_CHUNK = 100 * 1024 * 1024 # 100MB
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 import warnings
 with warnings.catch_warnings():  # hide macOS LibreSSL warning
@@ -28,6 +30,7 @@ if TYPE_CHECKING:
 
 
 USE_ZIP_FILESIZE = False
+NESTED_SEP = '##'
 re_info_plist = re.compile(r'Payload/([^/]+)/Info.plist')
 # re_links = re.compile(r'''<a\s[^>]*href=["']([^>]+\.ipa)["'][^>]*>''')
 re_archive_url = re.compile(
@@ -229,11 +232,11 @@ class CacheDB:
             WHERE base_url=? AND path_name=?;''', [baseUrlId, pathName])
         row = x.fetchone()
         return row[0] if row else None
-
     def getUrl(self, uid: int) -> str:
         x = self._db.execute('''SELECT url, path_name FROM idx
             INNER JOIN urls ON urls.pk=base_url WHERE idx.pk=?;''', [uid])
         base, path = x.fetchone()
+        # path_name now uses standard slashes for nested files
         return base + '/' + quote(path)
 
     # Insert URL
@@ -440,6 +443,50 @@ def pathToListJson(baseUrlId: int, *, tmp: bool = False) -> Path:
     return CACHE_DIR / 'url_cache' / f'{baseUrlId}.json.gz'
 
 
+def getNestedIpas(url: str, zipPath: str) -> 'list[tuple[str, int, str]]':
+    ''' 
+    Peeks into a zip file on Archive.org and returns a list of .ipa files found inside.
+    Path format: "Archive.zip##Internal/Path/App.ipa"
+    '''
+    print(f'  peeking into zip: {zipPath}')
+    try:
+        with RemoteZip(url) as rz:
+            return [(f'{zipPath}{NESTED_SEP}{info.filename}', info.file_size, None)
+                    for info in rz.infolist()
+                    if info.filename.lower().endswith('.ipa') and info.file_size > 0]
+    except Exception as e:
+        print(f'  [WARN] could not peek into zip {zipPath}: {e}', file=stderr)
+    return []
+
+
+def getNestedIpasViaViewArchive(url: str, archivePath: str) -> 'list[tuple[str, int, str]]':
+    ''' 
+    Peeks into a non-zip archive (RAR, 7z, tar) on Archive.org using its view_archive.php bridge.
+    This avoids downloading the whole archive just to list its contents.
+    '''
+    print(f'  peeking into archive (via bridge): {archivePath}')
+    try:
+        # Construct the bridge URL
+        bridge_url = url
+        if not bridge_url.endswith('/'):
+            bridge_url += '/'
+        
+        req = Request(bridge_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urlopen(req) as res:
+            html = res.read().decode('utf-8', errors='ignore')
+        
+        # Regex to find files inside the table
+        pattern = r'<tr><td><a [^>]*href="[^"]*">([^<]+)</a><td><td>[^<]*<td [^>]*size">(\d+)</tr>'
+        matches = re.findall(pattern, html)
+        
+        return [(f'{archivePath}{NESTED_SEP}{name}', int(size), None)
+                for name, size in matches
+                if name.lower().endswith('.ipa') and int(size) > 0]
+    except Exception as e:
+        print(f'  [WARN] could not peek into archive {archivePath}: {e}', file=stderr)
+    return []
+
+
 def downloadListArchiveOrg(
     archiveId: str, json_file: Path, *, force: bool = False
 ) -> 'list[tuple[str, int, str]]':
@@ -465,9 +512,26 @@ def downloadListArchiveOrg(
         if 'error' in data:
             print(f'[ERROR] Archive.org: {data["error"]}', file=stderr)
         return []
-    return [(x['name'], int(x.get('size', 0)), x.get('crc32'))
-            for x in data['result']
-            if x['source'] == 'original' and x['name'].endswith('.ipa')]
+
+    baseUrl = urlForArchiveOrgId(archiveId)
+    rv = []
+    for x in data['result']:
+        if x['source'] != 'original':
+            continue
+        name = x['name']
+        size = int(x.get('size', 0))
+        crc = x.get('crc32')
+
+        name_lower = name.lower()
+        if name_lower.endswith('.ipa'):
+            rv.append((name, size, crc))
+        elif name_lower.endswith('.zip'):
+            url = f'{baseUrl}/{quote(name)}'
+            rv.extend(getNestedIpas(url, name))
+        elif name_lower.endswith(('.rar', '.7z', '.tar', '.tar.gz', '.tgz')):
+            url = f'{baseUrl}/{quote(name)}'
+            rv.extend(getNestedIpasViaViewArchive(url, name))
+    return rv
 
 
 ###############################################
@@ -542,7 +606,7 @@ def _lookupBaseUrl(url_or_index: 'str|int') -> 'tuple[int|None, str|None]':
 
 def processPending():
     processed = 0
-    with Pool(processes=8) as pool:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         while True:
             DB = CacheDB()
             pending = DB.count(done=0)
@@ -555,19 +619,17 @@ def processPending():
             batch = [(processed + i + 1, pending - i - 1, *x)
                      for i, x in enumerate(batch)]
 
-            result = pool.starmap_async(procSinglePending, batch).get()
-            processed += len(result)
-            DB = CacheDB()
-            for uid, success in result:
+            for uid, success in executor.map(_procSinglePendingWrapper, batch):
+                processed += 1
+                DB = CacheDB()
                 fsize = onceReadSizeFromFile(uid)
                 if fsize:
                     DB.setFilesize(uid, fsize)
                 if success:
-                    print(f"[DEBUG] About to mark DONE: uid={uid}")
                     DB.setDone(uid)
                 else:
                     DB.setError(uid, done=3)
-            del DB
+                del DB
     DB = CacheDB()
     err_count = DB.count(done=3)
     if err_count > 0:
@@ -577,12 +639,21 @@ def processPending():
             print(f' - [{uid}] {base}/{quote(path_name)}')
 
 
+def _procSinglePendingWrapper(args):
+    return procSinglePending(*args)
+
+
 def procSinglePending(
     processed: int, pending: int, uid: int, base_url: str, path_name
 ) -> 'tuple[int, bool]':
-    url = base_url + '/' + quote(path_name)
-    humanUrl = url.split('archive.org/download/')[-1]
-    print(f'[{processed}|{pending} queued]: load[{uid}] {humanUrl}')
+    full_path = path_name
+    display_path = path_name.replace(NESTED_SEP, ' -> ')
+    print(f'[{processed}|{pending} queued]: load[{uid}] {display_path}')
+    
+    DB = CacheDB()
+    url = DB.getUrl(uid)
+    del DB
+    
     try:
         return uid, loadIpa(uid, url)
     except Exception as e:
@@ -613,62 +684,171 @@ def loadIpa(uid: int, url: str, *,
     if not overwrite and plist_path.exists():
         return True
 
-    with RemoteZip(url) as zip:
-        if USE_ZIP_FILESIZE:
-            filesize = zip.fp.tell() if zip.fp else 0
-            with open(basename.with_suffix('.size'), 'w') as fp:
-                fp.write(str(filesize))
+    # Support both old format (##) and new format (nested slash)
+    inner_path = None
+    
+    # Check for implicit nested path (archive.rar/file.ipa)
+    # Look for common archive extensions followed by a slash
+    for ext in ['.zip/', '.rar/', '.7z/', '.tar/', '.tar.gz/', '.tgz/']:
+        if ext in url.lower():
+            # Split at the end of the extension
+            idx = url.lower().find(ext) + len(ext) - 1
+            base_url = url[:idx]
+            inner_path = unquote(url[idx+1:])
+            url = base_url
+            break
 
-        app_name = None
-        artwork = False
-        zip_listing = zip.infolist()
-        has_payload_folder = False
+    # Handle non-ZIP nested archives (RAR, 7z, etc.)
+    # RemoteZip does not work on these via the Archive.org bridge.
+    if inner_path and not url.lower().endswith('.zip'):
+        direct_inner_url = f"{url}/{quote(inner_path)}"
+        with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
+            print(f"  downloading inner ipa from bridge: {inner_path}")
+            try:
+                urlretrieve(direct_inner_url, tmp.name)
+                import zipfile
+                with zipfile.ZipFile(tmp.name) as zip:
+                    return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
+            except Exception as e:
+                print(f"ERROR: [{uid}] could not download/process inner ipa: {e}", file=stderr)
+                return False
 
-        for entry in zip_listing:
-            fn = entry.filename.lstrip('/')
-            has_payload_folder |= fn.startswith('Payload/')
+    # Handle ZIP archives (RemoteZip is fast here)
+    import time
+    last_err = None
+    for attempt in range(3):
+        try:
+            with RemoteZip(url) as outer_zip:
+                if inner_path:
+                    # Open nested IPA from outer ZIP and save to temp file to ensure seekability
+                    import zipfile
+                    with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
+                        print(f"  extracting nested ipa to temp: {inner_path}")
+                        with outer_zip.open(inner_path) as src:
+                            while True:
+                                buf = src.read(1024*1024)
+                                if not buf: break
+                                tmp.write(buf)
+                        tmp.flush()
+                        with zipfile.ZipFile(tmp.name) as zip:
+                            return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
+                else:
+                    # Regular direct IPA
+                    if USE_ZIP_FILESIZE:
+                        filesize = outer_zip.fp.tell() if outer_zip.fp else 0
+                        with open(basename.with_suffix('.size'), 'w') as fp:
+                            fp.write(str(filesize))
+                    return _processIpaZip(uid, outer_zip, basename, img_path, plist_path, image_only)
+        except Exception as e:
+            last_err = e
+            if '404' in str(e): break # Don't retry 404
+            print(f"  [WARN] connect attempt {attempt+1} failed for {uid}: {e}", file=stderr)
+            time.sleep(1)
+    
+    if last_err:
+        print(f"ERROR: [{uid}] connection failed after retries: {last_err}", file=stderr)
+    return False
+
+
+def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) -> bool:
+    app_name = None
+    artwork = False
+    zip_listing = zip.infolist()
+    has_payload_folder = False
+
+    # First pass: find app_name and iTunesArtwork
+    for entry in zip_listing:
+        fn = entry.filename.lstrip('/')
+        
+        # Detect Payload folder
+        if fn.lower().startswith('payload/'):
+            has_payload_folder = True
+
+        # Extract iTunesArtwork if not already found
+        if not artwork and fn.lower() == 'itunesartwork' and entry.file_size > 0:
+            extractZipEntry(zip, entry, img_path)
+            if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
+                if processImage(img_path):
+                    artwork = True
+                else:
+                    img_path.unlink() # Cleanup
+        
+        # Find Info.plist to get app_name
+        if not app_name:
             plist_match = re_info_plist.match(fn)
-            if fn == 'iTunesArtwork':
-                extractZipEntry(zip, entry, img_path)
-                artwork = os.path.getsize(img_path) > 0
-            elif plist_match:
+            if plist_match:
                 app_name = plist_match.group(1)
                 if not image_only:
                     extractZipEntry(zip, entry, plist_path)
 
-        if not has_payload_folder:
-            print(f'ERROR: [{uid}] ipa has no "Payload/" root folder',
-                  file=stderr)
+    if not has_payload_folder:
+        print(f'ERROR: [{uid}] ipa has no "Payload/" root folder', file=stderr)
 
-        # if no iTunesArtwork found, load file referenced in plist
-        if not artwork and app_name and plist_path.exists():
-            with open(plist_path, 'rb') as fp:
-                icon_names = iconNameFromPlist(plistlib.load(fp))
-                icon = expandImageName(zip_listing, app_name, icon_names)
-                if icon:
-                    extractZipEntry(zip, icon, img_path)
-        
-        # Automatically fix CGBI and convert PNG to JPG
-        if img_path.exists():
-            processImage(img_path)
+    # if no iTunesArtwork found, load file referenced in plist
+    if not artwork and app_name and plist_path.exists():
+        with open(plist_path, 'rb') as fp:
+            try:
+                plist = plistlib.load(fp)
+                icon_names = iconNameFromPlist(plist)
+                # Try all candidates until one works
+                for icon_name in icon_names + ['Icon', 'icon']:
+                    icon = expandImageName(zip_listing, app_name, [icon_name])
+                    if icon:
+                        extractZipEntry(zip, icon, img_path)
+                        if os.path.exists(img_path) and os.path.getsize(img_path) > 8:
+                            if processImage(img_path):
+                                artwork = True
+                                break
+                            else:
+                                img_path.unlink() # Cleanup
+            except Exception as e:
+                print(f'ERROR: [{uid}] failed to parse plist or find icon: {e}', file=stderr)
+    
+    # If artwork was found via iTunesArtwork in first pass, process it
+    if artwork and not os.path.exists(basename.with_suffix('.jpg')) and os.path.exists(img_path):
+        processImage(img_path)
 
     return plist_path.exists()
 
 
 def extractZipEntry(zip: 'RemoteZip', zipInfo: 'ZipInfo', dest_filename: Path):
-    with zip.open(zipInfo) as src:
-        with open(dest_filename, 'wb') as tgt:
-            tgt.write(src.read())
+    import time
+    for attempt in range(3):
+        try:
+            with zip.open(zipInfo) as src:
+                data = src.read()
+                if data and (data.startswith(b'<!DOCTYPE html>') or data.startswith(b'<html>')):
+                    print(f'  [WARN] detected HTML 404 instead of data for {zipInfo.filename}', file=stderr)
+                    return
+                
+                if data and data.startswith(b'\x00' * 32):
+                    print(f'  [WARN] detected zero-filled data for {zipInfo.filename}', file=stderr)
+                    return
 
-def processImage(png_path: Path):
+                if data and data.startswith(b'PK\x03\x04'):
+                    print(f'  [WARN] detected ZIP header instead of data for {zipInfo.filename}', file=stderr)
+                    return
+
+                if data:
+                    with open(dest_filename, 'wb') as tgt:
+                        tgt.write(data)
+                    return
+        except Exception as e:
+            print(f'  [WARN] attempt {attempt+1} failed to extract {zipInfo.filename}: {e}', file=stderr)
+            if '500' in str(e) or '503' in str(e):
+                time.sleep(1)
+                continue
+            break
+
+def processImage(png_path: Path) -> bool:
     if not png_path.exists() or png_path.stat().st_size < 8:
-        return
+        return False
     
     # Check if zero-filled
     with open(png_path, 'rb') as f:
         header = f.read(32)
         if header.startswith(b'\x00' * 8):
-            return
+            return False
 
     # Fix CGBI if present
     if b'CgBI' in header:
@@ -679,8 +859,8 @@ def processImage(png_path: Path):
             fixed_path = png_path.with_name(png_path.stem + "-free.png")
             if fixed_path.exists():
                 fixed_path.replace(png_path)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"  [WARN] pngdefry failed: {e}", file=stderr)
             
     # Convert to JPG
     try:
@@ -688,8 +868,10 @@ def processImage(png_path: Path):
         with Image.open(png_path) as img:
             img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
         png_path.unlink() # Remove PNG after successful conversion
-    except Exception:
-        pass
+        return True
+    except Exception as e:
+        print(f"  [WARN] PIL conversion failed for {png_path}: {e}", file=stderr)
+        return False
 
 
 ###############################################
@@ -701,16 +883,48 @@ RESOLUTION_ORDER = ['3x', '2x', '180', '167', '152', '120']
 def expandImageName(
     zip_listing: 'list[ZipInfo]', appName: str, iconList: 'list[str]'
 ) -> 'ZipInfo|None':
-    for iconName in iconList + ['Icon', 'icon']:
-        zipPath = f'Payload/{appName}/{iconName}'
-        matchingNames = [x.filename.split('/', 2)[-1] for x in zip_listing
-                         if x.filename.lstrip('/').startswith(zipPath)]
-        if len(matchingNames) > 0:
-            for bestName in sortedByResolution(matchingNames):
-                bestPath = f'Payload/{appName}/{bestName}'
-                for x in zip_listing:
-                    if x.filename.lstrip('/') == bestPath and x.file_size > 0:
-                        return x
+    app_prefix = f'Payload/{appName}/'.lower()
+    
+    # Normalize icon names
+    search_names = []
+    for name in iconList + ['Icon', 'icon']:
+        if not name: continue
+        search_names.append(name.lower())
+        if not name.lower().endswith('.png'):
+            search_names.append(name.lower() + '.png')
+
+    # 1. Try case-insensitive exact matches
+    for x in zip_listing:
+        fn = x.filename.lstrip('/')
+        if fn.lower().startswith(app_prefix):
+            rel_fn = fn[len(app_prefix):].lower()
+            if rel_fn in search_names:
+                return x
+
+    # 2. Try matching by resolution (if multiple files match the base name)
+    for name in search_names:
+        zipPath = f'Payload/{appName}/{name}'.lower()
+        matching = [x for x in zip_listing 
+                    if x.filename.lstrip('/').lower().startswith(zipPath)]
+        if matching:
+            return sorted(matching, key=lambda x: resolutionIndex(x.filename))[0]
+
+    # 3. Fallback: Any PNG in the app folder that looks like an icon (e.g. has "icon" in name, even if encoded)
+    # This handles the Japanese characters issue where the name in Info.plist doesn't match the ZIP encoding.
+    fallback_icons = []
+    for x in zip_listing:
+        fn = x.filename.lstrip('/')
+        if fn.lower().startswith(app_prefix) and fn.lower().endswith('.png'):
+            rel_fn = fn[len(app_prefix):].lower()
+            # If it contains 'icon', or starts with 'icon', or is just a small PNG
+            if 'icon' in rel_fn or 'πéó' in rel_fn or x.file_size < 500000:
+                fallback_icons.append(x)
+    
+    if fallback_icons:
+        # Prefer files with "icon" in them, otherwise sort by size (heuristic)
+        fallback_icons.sort(key=lambda x: ('icon' in x.filename.lower() or 'πéó' in x.filename.lower(), x.file_size), reverse=True)
+        return fallback_icons[0]
+
     return None
 
 

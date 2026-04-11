@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UIApplicationShortcutItems</key>
+    <array>
+      <dict>
+        <key>UIApplicationShortcutItemTitle</key>
+        <string>REPL</string>
+        <key>UIApplicationShortcutItemIconType</key>
+        <string>UIApplicationShortcutIconTypePlay</string>
+        <key>UIApplicationShortcutItemType</key>
+        <string>REPL</string>
+      </dict>
+      <dict>
+        <key>UIApplicationShortcutItemTitle</key>
+        <string>PyPI</string>
+        <key>UIApplicationShortcutItemIconType</key>
+        <string>UIApplicationShortcutIconTypeSearch</string>
+        <key>UIApplicationShortcutItemType</key>
+        <string>PyPI</string>
+      </dict>
+    </array>
+    <key>DTPlatformVersion</key>
+    <string>16.1</string>
+    <key>UISupportsDocumentBrowser</key>
+    <true/>
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleDefault</string>
+    <key>DTSDKBuild</key>
+    <string>20B71</string>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+      <key>CFBundleAlternateIcons</key>
+      <dict>
+        <key>Dark 3</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 360x60</string>
+            <string>Dark 376x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 3</string>
+        </dict>
+        <key>Light 4</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 460x60</string>
+            <string>Light 476x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 4</string>
+        </dict>
+        <key>Dark 2</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 260x60</string>
+            <string>Dark 276x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 2</string>
+        </dict>
+        <key>Dark 7</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 760x60</string>
+            <string>Dark 776x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 7</string>
+        </dict>
+        <key>Dark</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark60x60</string>
+            <string>Dark76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark</string>
+        </dict>
+        <key>Stripes</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Stripes60x60</string>
+            <string>Stripes76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Stripes</string>
+        </dict>
+        <key>Light</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light60x60</string>
+            <string>Light76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light</string>
+        </dict>
+        <key>Dark 6</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 660x60</string>
+            <string>Dark 676x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 6</string>
+        </dict>
+        <key>Light 3</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 360x60</string>
+            <string>Light 376x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 3</string>
+        </dict>
+        <key>Light 6</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 660x60</string>
+            <string>Light 676x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 6</string>
+        </dict>
+        <key>Dark 5</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 560x60</string>
+            <string>Dark 576x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 5</string>
+        </dict>
+        <key>Light 5</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 560x60</string>
+            <string>Light 576x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 5</string>
+        </dict>
+        <key>AppIcon-VPP</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>AppIcon-VPP60x60</string>
+            <string>AppIcon-VPP76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>AppIcon-VPP</string>
+        </dict>
+        <key>Type</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Type60x60</string>
+            <string>Type76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Type</string>
+        </dict>
+        <key>Dark 4</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 460x60</string>
+            <string>Dark 476x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 4</string>
+        </dict>
+        <key>Light 2</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 260x60</string>
+            <string>Light 276x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 2</string>
+        </dict>
+      </dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon60x60</string>
+          <string>AppIcon76x76</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon</string>
+      </dict>
+    </dict>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSCameraUsageDescription</key>
+    <string>Allow camera usage if you want to allow scripts accessing to it. The app itself doesn't require photo library access.</string>
+    <key>NSUbiquitousContainers</key>
+    <dict>
+      <key>iCloud.ch.marcela.ada.Pyto</key>
+      <dict>
+        <key>NSUbiquitousContainerSupportedFolderLevels</key>
+        <string>Any</string>
+        <key>NSUbiquitousContainerName</key>
+        <string>Pyto</string>
+        <key>NSUbiquitousContainerIsDocumentScopePublic</key>
+        <true/>
+      </dict>
+    </dict>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeName</key>
+        <string>Python Script</string>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeIconFiles</key>
+        <array/>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.python-script</string>
+          <string>ch.ada.python-script</string>
+        </array>
+        <key>LSHandlerRank</key>
+        <string>Owner</string>
+      </dict>
+      <dict>
+        <key>CFBundleTypeName</key>
+        <string>Python Wheel</string>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeIconFiles</key>
+        <array/>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>ch.ada.pyto.wheel</string>
+        </array>
+        <key>LSHandlerRank</key>
+        <string>Owner</string>
+      </dict>
+    </array>
+    <key>DTXcodeBuildDistribution</key>
+    <string>14B47b</string>
+    <key>DTXcodeBuild</key>
+    <string>14B47b</string>
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+      <dict>
+        <key>UTTypeIconFiles</key>
+        <array/>
+        <key>UTTypeIdentifier</key>
+        <string>ch.ada.python-script</string>
+        <key>UTTypeConformsTo</key>
+        <array>
+          <string>public.text</string>
+        </array>
+        <key>UTTypeDescription</key>
+        <string>Python Script</string>
+        <key>UTTypeTagSpecification</key>
+        <dict>
+          <key>public.filename-extension</key>
+          <array>
+            <string>py</string>
+          </array>
+        </dict>
+      </dict>
+      <dict>
+        <key>UTTypeIconFiles</key>
+        <array/>
+        <key>UTTypeIdentifier</key>
+        <string>ch.ada.pyto.wheel</string>
+        <key>UTTypeConformsTo</key>
+        <array>
+          <string>com.pkware.zip-archive</string>
+        </array>
+        <key>UTTypeDescription</key>
+        <string>Python Wheel</string>
+        <key>UTTypeTagSpecification</key>
+        <dict>
+          <key>public.filename-extension</key>
+          <array>
+            <string>whl</string>
+          </array>
+        </dict>
+      </dict>
+    </array>
+    <key>CFBundleIdentifier</key>
+    <string>ch.marcela.ada.Pyto</string>
+    <key>NSUserActivityTypes</key>
+    <array>
+      <string>CallFunctionIntent</string>
+      <string>GetObjectDescriptionIntent</string>
+      <string>GetPropertyIntent</string>
+      <string>GetScriptOutputIntent</string>
+      <string>ImportModuleIntent</string>
+      <string>PythonScript</string>
+      <string>ReloadWidgetIntent</string>
+      <string>ReloadWidgetsIntent</string>
+      <string>RunCodeIntent</string>
+      <string>RunCommandIntent</string>
+      <string>RunScriptIntent</string>
+      <string>ScriptIntent</string>
+      <string>SetContentInAppIntent</string>
+      <string>SetPropertyIntent</string>
+      <string>StartHandlingWidgetsInAppIntent</string>
+      <string>ch.marcela.ada.Pyto.script</string>
+    </array>
+    <key>UIFileSharingEnabled</key>
+    <true/>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+      <integer>2</integer>
+    </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>pisth</string>
+    </array>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundleAlternateIcons</key>
+      <dict>
+        <key>Dark 3</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 360x60</string>
+            <string>Dark 376x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 3</string>
+        </dict>
+        <key>Light 4</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 460x60</string>
+            <string>Light 476x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 4</string>
+        </dict>
+        <key>Dark 2</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 260x60</string>
+            <string>Dark 276x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 2</string>
+        </dict>
+        <key>Dark 7</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 760x60</string>
+            <string>Dark 776x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 7</string>
+        </dict>
+        <key>Dark</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark60x60</string>
+            <string>Dark76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark</string>
+        </dict>
+        <key>Stripes</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Stripes60x60</string>
+            <string>Stripes76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Stripes</string>
+        </dict>
+        <key>Light</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light60x60</string>
+            <string>Light76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light</string>
+        </dict>
+        <key>Dark 6</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 660x60</string>
+            <string>Dark 676x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 6</string>
+        </dict>
+        <key>Light 3</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 360x60</string>
+            <string>Light 376x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 3</string>
+        </dict>
+        <key>Light 6</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 660x60</string>
+            <string>Light 676x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 6</string>
+        </dict>
+        <key>Dark 5</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 560x60</string>
+            <string>Dark 576x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 5</string>
+        </dict>
+        <key>Light 5</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 560x60</string>
+            <string>Light 576x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 5</string>
+        </dict>
+        <key>AppIcon-VPP</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>AppIcon-VPP60x60</string>
+            <string>AppIcon-VPP76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>AppIcon-VPP</string>
+        </dict>
+        <key>Type</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Type60x60</string>
+            <string>Type76x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Type</string>
+        </dict>
+        <key>Dark 4</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Dark 460x60</string>
+            <string>Dark 476x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Dark 4</string>
+        </dict>
+        <key>Light 2</key>
+        <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+            <string>Light 260x60</string>
+            <string>Light 276x76</string>
+          </array>
+          <key>CFBundleIconName</key>
+          <string>Light 2</string>
+        </dict>
+      </dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon60x60</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon</string>
+      </dict>
+    </dict>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+    <key>MinimumOSVersion</key>
+    <string>14.0</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Allow photo library usage if you want to allow scripts accessing to it or if you want to save Matplotlib figures. The app itself doesn't require photo library access.</string>
+    <key>CFBundleName</key>
+    <string>Pyto</string>
+    <key>CFBundleShortVersionString</key>
+    <string>18.0.12</string>
+    <key>UIStatusBarHidden</key>
+    <false/>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>audio</string>
+      <string>fetch</string>
+      <string>processing</string>
+    </array>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>arm64</string>
+    </array>
+    <key>INIntentsSupported</key>
+    <array>
+      <string>RunScriptIntent</string>
+      <string>RunCodeIntent</string>
+      <string>StartHandlingWidgetsInAppIntent</string>
+      <string>RunCommandIntent</string>
+    </array>
+    <key>CFBundleExecutable</key>
+    <string>Pyto</string>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Scripts can play music.</string>
+    <key>DTAppStoreToolsBuild</key>
+    <string>14C17</string>
+    <key>BuildMachineOSBuild</key>
+    <string>22C5044e</string>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Allow microphone usage if you want to allow scripts accessing to it. The app itself doesn't require access to the microphone.</string>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+      <key>UIApplicationSupportsMultipleScenes</key>
+      <true/>
+      <key>UISceneConfigurations</key>
+      <dict>
+        <key>UIWindowSceneSessionRoleApplication</key>
+        <array>
+          <dict>
+            <key>UISceneStoryboardFile</key>
+            <string>Main</string>
+            <key>UISceneConfigurationName</key>
+            <string>Document Browser</string>
+            <key>UISceneDelegateClassName</key>
+            <string>Pyto.SceneDelegate</string>
+          </dict>
+        </array>
+      </dict>
+    </dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Scripts can access location.</string>
+    <key>CFBundleVersion</key>
+    <string>431</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Viewer</string>
+        <key>CFBundleURLName</key>
+        <string></string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>pyto-run</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>pyto</string>
+        </array>
+      </dict>
+    </array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+      <string>pyto.backgroundfetch</string>
+    </array>
+    <key>DTSDKName</key>
+    <string>iphoneos16.1</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <key>NSContactsUsageDescription</key>
+    <string>Allow contacts usage if you want to allow scripts to use them.</string>
+    <key>DTPlatformBuild</key>
+    <string>20B71</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow photo library usage if you want to allow scripts accessing to it. The app itself doesn't require photo library access.</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>DTXcode</key>
+    <string>1410</string>
+  </dict>
+</plist>
