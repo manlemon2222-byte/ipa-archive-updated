@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>armv7</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string></string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb484933594923311</string>
+        </array>
+      </dict>
+    </array>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>DTPlatformVersion</key>
+    <string>9.1</string>
+    <key>CFBundleName</key>
+    <string>Color Cap - Add custom text to photos &amp; pics for Instagram</string>
+    <key>DTSDKName</key>
+    <string>iphoneos9.1</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon29x29</string>
+          <string>AppIcon40x40</string>
+          <string>AppIcon57x57</string>
+          <string>AppIcon60x60</string>
+        </array>
+      </dict>
+    </dict>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>CFBundleDisplayName</key>
+    <string>Color Cap</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>instagram</string>
+      <string>twitter</string>
+      <string>whatsapp</string>
+      <string>wechat</string>
+      <string>line</string>
+      <string>comgooglemaps</string>
+      <string>fbapi</string>
+      <string>fbauth2</string>
+      <string>fbshareextension</string>
+      <string>fb-messenger-api</string>
+    </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Add location to photos</string>
+    <key>DTSDKBuild</key>
+    <string>13B137</string>
+    <key>CFBundleShortVersionString</key>
+    <string>2.8.4</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Show tips and information when you enter participating local venues.</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>BuildMachineOSBuild</key>
+    <string>14F1021</string>
+    <key>DTPlatformBuild</key>
+    <string>13B137</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTXcodeBuild</key>
+    <string>7B91b</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>UIAppFonts</key>
+    <array>
+      <string>Cubano-Regular.otf</string>
+      <string>Tommaso.ttf</string>
+      <string>AirstreamNF.ttf</string>
+      <string>Tightrope-Regular.ttf</string>
+      <string>FFF Tusj.ttf</string>
+      <string>JennaSue.ttf</string>
+      <string>Sullivan-Bevel.otf</string>
+      <string>Skinny-Regular.ttf</string>
+      <string>CODE Bold.otf</string>
+      <string>Sweetie Pie.ttf</string>
+      <string>MarketingScript.ttf</string>
+      <string>Rolina.ttf</string>
+      <string>Arabella.ttf</string>
+      <string>Backspacer tribute to Pearl Jam.ttf</string>
+      <string>Sabrina AT.otf</string>
+      <string>FairyDustB.ttf</string>
+      <string>Note this.ttf</string>
+      <string>Justus-ItalicOldstyle.ttf</string>
+      <string>BebasNeue.otf</string>
+      <string>TypoSlabserif-Light.ttf</string>
+      <string>Comfortaa-Bold.ttf</string>
+      <string>TravelingTypewriter.ttf</string>
+    </array>
+    <key>CFBundleVersion</key>
+    <string>56</string>
+    <key>UIPrerenderedIcon</key>
+    <true/>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>MinimumOSVersion</key>
+    <string>7.0</string>
+    <key>FacebookAppID</key>
+    <string>484933594923311</string>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+    </array>
+    <key>Fabric</key>
+    <dict>
+      <key>Kits</key>
+      <array>
+        <dict>
+          <key>KitName</key>
+          <string>Crashlytics</string>
+          <key>KitInfo</key>
+          <dict/>
+        </dict>
+      </array>
+      <key>APIKey</key>
+      <string>17fb62ebf1aa7f64314dc195aca11544ceb2b316</string>
+    </dict>
+    <key>FacebookDisplayName</key>
+    <string>Color Cap</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.izzyapp.colorcap</string>
+    <key>DTXcode</key>
+    <string>0710</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Certain features, like adding location to photos, require location services</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <key>CFBundleExecutable</key>
+    <string>Color Cap</string>
+    <key>UIMainStoryboardFile</key>
+    <string>MainStoryboard</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTAppStoreToolsBuild</key>
+    <string>12D4d</string>
+  </dict>
+</plist>

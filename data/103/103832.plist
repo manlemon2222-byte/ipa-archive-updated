@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Y! Finance</string>
+	<key>CFBundleExecutable</key>
+	<string>Y! Finance</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yahoo.finance</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>finance</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.yahoo.finance</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>yfinance</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.2</string>
+	<key>DTCompiler</key>
+	<string>4.2</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTPlatformVersion</key>
+	<string>4.0 GM</string>
+	<key>DTSDKName</key>
+	<string>iphoneos4.0</string>
+	<key>DTXcode</key>
+	<string>0323</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MedialetsAppID</key>
+	<string>036c4b0e9abf7fdee47d9ee1f1b2182c3585e8a0</string>
+	<key>MedialetsUseTestServers</key>
+	<false/>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<string>YES</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
+	<key>YUserAgentStringProductName</key>
+	<string>iPhone Finance</string>
+	<key>YahooBuildNumber</key>
+	<string>535</string>
+</dict>
+</plist>
