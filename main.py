@@ -31,6 +31,7 @@ if TYPE_CHECKING:
 
 USE_ZIP_FILESIZE = False
 NESTED_SEP = '##'
+PNGDEFRY_BIN = Path(__file__).parent / 'pngdefry'
 re_info_plist = re.compile(r'Payload/([^/]+)/Info.plist')
 # re_links = re.compile(r'''<a\s[^>]*href=["']([^>]+\.ipa)["'][^>]*>''')
 re_archive_url = re.compile(
@@ -854,7 +855,7 @@ def processImage(png_path: Path) -> bool:
     if b'CgBI' in header:
         try:
             # -s for silent, -free to create [name]-free.png
-            subprocess.run(['pngdefry', '-s', '-free', str(png_path)], 
+            subprocess.run([str(PNGDEFRY_BIN), '-s', '-free', str(png_path)], 
                            check=True, capture_output=True)
             fixed_path = png_path.with_name(png_path.stem + "-free.png")
             if fixed_path.exists():
