@@ -29,9 +29,16 @@ if TYPE_CHECKING:
     from zipfile import ZipInfo
 
 
+import platform
 USE_ZIP_FILESIZE = False
 NESTED_SEP = '##'
-PNGDEFRY_BIN = Path(__file__).parent / 'pngdefry'
+
+# Detect OS and set pngdefry binary name
+if platform.system() == 'Windows':
+    PNGDEFRY_BIN = Path(__file__).parent / 'pngdefry' / 'pngdefry.exe'
+else:
+    PNGDEFRY_BIN = Path(__file__).parent / 'pngdefry' / 'pngdefry'
+
 re_info_plist = re.compile(r'Payload/([^/]+)/Info.plist')
 # re_links = re.compile(r'''<a\s[^>]*href=["']([^>]+\.ipa)["'][^>]*>''')
 re_archive_url = re.compile(
