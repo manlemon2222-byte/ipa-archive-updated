@@ -288,6 +288,7 @@ function validUrl(url) {
 
 function entryToDict(entry) {
     const pk = entry[0];
+    const img_pk = entry[9] || pk;
     return {
         pk: pk,
         platform: entry[1],
@@ -299,7 +300,7 @@ function entryToDict(entry) {
         pathName: entry[7],
         size: entry[8],
         ipa_url: baseUrls[entry[6]] + '/' + entry[7],
-        img_url: 'data/' + Math.floor(pk / 1000) + '/' + pk + '.jpg',
+        img_url: 'data/' + Math.floor(img_pk / 1000) + '/' + img_pk + '.jpg',
     }
 }
 

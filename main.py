@@ -188,24 +188,25 @@ def main():
 def fix_missing_images(DB: 'CacheDB'):
     missing = []
     print("Checking for missing images...")
-    entries = list(DB.enumJsonIpa(done=1))
+    # Only iterate over the unique master images (~58k)
+    entries = list(DB.getUniqueImagePks())
     total = len(entries)
-    for i, entry in enumerate(entries):
-        pk = entry[0]
+    for i, (pk, img_pk) in enumerate(entries):
         if i % 1000 == 0:
-            print(f"\rChecked {i}/{total} images...", end="")
-        img_path = diskPath(pk, '.jpg')
+            print(f"\rChecked {i}/{total} unique images...", end="")
+        img_path = diskPath(img_pk, '.jpg')
         if not img_path.exists():
-            missing.append(pk)
-    print(f"\rChecked {total}/{total} images. Done.")
+            # Use the master pk to trigger the reload
+            missing.append(img_pk)
+    print(f"\rChecked {total}/{total} unique images. Done.")
     
     if not missing:
         print("No missing images found.")
     else:
-        print(f"Found {len(missing)} missing images. Fixing...")
+        print(f"Found {len(missing)} missing unique images. Fixing...")
         for pk in missing:
             url = DB.getUrl(pk)
-            print(f"[{pk}] Fix image: {url}")
+            print(f"[{pk}] Fix unique image: {url}")
             loadIpa(pk, url, overwrite=True, image_only=True)
     print("done.")
 
@@ -273,6 +274,19 @@ class CacheDB:
         # path_name now uses standard slashes for nested files
         return base + '/' + quote(path)
 
+    def hasImage(self, bundle_id: str, version: str) -> 'int|None':
+        if not bundle_id or not version:
+            return None
+        res = self._db.execute('''
+            SELECT image_pk FROM idx 
+            WHERE bundle_id=? AND version=? AND image_pk IS NOT NULL 
+            LIMIT 1''', [bundle_id, version]).fetchone()
+        if res:
+            pk = res[0]
+            if diskPath(pk, '.jpg').exists():
+                return pk
+        return None
+
     # Insert URL
 
     def insertBaseUrl(self, base: str) -> int:
@@ -336,9 +350,19 @@ class CacheDB:
                 TRIM(IFNULL(title,
                     REPLACE(path_name,RTRIM(path_name,REPLACE(path_name,'/','')),'')
                 )) as tt, IFNULL(bundle_id, ""),
-                version, base_url, path_name, fsize / 1024
+                version, base_url, path_name, fsize / 1024,
+                image_pk
             FROM idx WHERE done=?
             ORDER BY tt COLLATE NOCASE, min_os, platform, version;''', [done])
+
+    def getUniqueImagePks(self) -> Iterable[tuple[int, int]]:
+        ''' Returns (pk, image_pk) for each unique image_pk '''
+        yield from self._db.execute('''
+            SELECT MIN(pk), image_pk 
+            FROM idx 
+            WHERE done=1 AND image_pk IS NOT NULL 
+            GROUP BY image_pk
+        ''')
 
     # Filesize
 
@@ -430,15 +454,33 @@ class CacheDB:
         if not platforms and minOS[0] in [0, 1, 2, 3]:
             platforms = 1 << 1  # fallback to iPhone for old versions
 
+        # Find existing image for same bundle_id and version
+        image_pk = uid
+        if bundleId and version:
+            res = self._db.execute('''
+                SELECT image_pk FROM idx 
+                WHERE bundle_id=? AND version=? AND image_pk IS NOT NULL 
+                LIMIT 1''', [bundleId, version]).fetchone()
+            if res:
+                potential_img_pk = res[0]
+                if diskPath(potential_img_pk, '.jpg').exists():
+                    image_pk = potential_img_pk
+                    # If we found a duplicate, we can delete our own image if it exists
+                    for ext in ['.jpg', '.png']:
+                        p = diskPath(uid, ext)
+                        if p.exists():
+                            os.remove(p)
+
         self._db.execute('''
             UPDATE idx SET
-                done=1, min_os=?, platform=?, title=?, bundle_id=?, version=?
+                done=1, min_os=?, platform=?, title=?, bundle_id=?, version=?, image_pk=?
             WHERE pk=?;''', [
             (minOS[0] * 10000 + minOS[1] * 100 + minOS[2]) or None,
             platforms or None,
             title or None,
             bundleId or None,
             version or None,
+            image_pk,
             uid,
         ])
         self._db.commit()
@@ -789,34 +831,59 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
     artwork = False
     zip_listing = zip.infolist()
     has_payload_folder = False
-
-    # First pass: find app_name and iTunesArtwork
+    
+    # First pass: find Info.plist AND check for duplicates
     for entry in zip_listing:
         fn = entry.filename.lstrip('/')
-        
-        # Detect Payload folder
         if fn.lower().startswith('payload/'):
             has_payload_folder = True
 
-        # Extract iTunesArtwork if not already found
-        if not artwork and fn.lower() == 'itunesartwork' and entry.file_size > 0:
-            extractZipEntry(zip, entry, img_path)
-            if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
-                if processImage(img_path):
-                    artwork = True
-                else:
-                    img_path.unlink() # Cleanup
-        
-        # Find Info.plist to get app_name
         if not app_name:
             plist_match = re_info_plist.match(fn)
             if plist_match:
                 app_name = plist_match.group(1)
-                if not image_only:
-                    extractZipEntry(zip, entry, plist_path)
+                extractZipEntry(zip, entry, plist_path)
+                
+                # Deduplication check: if we already have this app's icon, don't download it again
+                if plist_path.exists():
+                    try:
+                        with open(plist_path, 'rb') as fp:
+                            plist = plistlib.load(fp)
+                            bid = plist.get('CFBundleIdentifier')
+                            v_short = str(plist.get('CFBundleShortVersionString', ''))
+                            v_long = str(plist.get('CFBundleVersion', ''))
+                            ver = v_short or v_long
+                            
+                            db = CacheDB()
+                            existing_img_pk = db.hasImage(bid, ver)
+                            if existing_img_pk:
+                                print(f'  reusing image from {existing_img_pk}')
+                                artwork = True # Skip further icon extraction
+                                if image_only: return True # Optimization: if only image requested, we are done
+                            del db
+                    except:
+                        pass
+                
+                if image_only and not artwork:
+                    pass # Continue to find icon
+                elif image_only and artwork:
+                    return True
 
     if not has_payload_folder:
         print(f'ERROR: [{uid}] ipa has no "Payload/" root folder', file=stderr)
+
+    # Second pass: extract iTunesArtwork if needed
+    if not artwork:
+        for entry in zip_listing:
+            fn = entry.filename.lstrip('/')
+            if fn.lower() == 'itunesartwork' and entry.file_size > 0:
+                extractZipEntry(zip, entry, img_path)
+                if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
+                    if processImage(img_path):
+                        artwork = True
+                        break
+                    else:
+                        img_path.unlink() # Cleanup
 
     # if no iTunesArtwork found, load file referenced in plist
     if not artwork and app_name and plist_path.exists():
@@ -896,15 +963,26 @@ def processImage(png_path: Path) -> bool:
         except Exception as e:
             print(f"  [WARN] pngdefry failed: {e}", file=stderr)
             
-    # Convert to JPG
+    # Convert to JPG and Optimize
     try:
         jpg_path = png_path.with_suffix('.jpg')
         with Image.open(png_path) as img:
-            img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
+            # Convert to RGB
+            if img.mode != 'RGB':
+                img = img.convert('RGB')
+            
+            # Downscale if larger than 128x128
+            MAX_SIZE = (128, 128)
+            if img.width > MAX_SIZE[0] or img.height > MAX_SIZE[1]:
+                img.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
+            
+            # Save optimized JPEG
+            img.save(jpg_path, 'JPEG', quality=80, optimize=True)
+            
         png_path.unlink() # Remove PNG after successful conversion
         return True
     except Exception as e:
-        print(f"  [WARN] PIL conversion failed for {png_path}: {e}", file=stderr)
+        print(f"  [WARN] PIL conversion/optimization failed for {png_path}: {e}", file=stderr)
         return False
 
 
