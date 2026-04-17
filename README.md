@@ -96,10 +96,6 @@ To add files to the archive follow these steps:
 4. `python3 main.py export json`
 
 
-**Optimization & Deduplication:** 
-The `main.py run` command now automatically optimizes all icons (max 128x128 JPG) and deduplicates them by BundleID and Version. This saves significant storage and bandwidth.
-
-
 To update:
 - `python3 main.py update` # check all links (if not udpated recently)
 - `python3 main.py update [url|base_url_id]`  # force update

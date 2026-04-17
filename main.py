@@ -54,7 +54,7 @@ def main():
 
     cmd = cli.add_parser('add', help='Add urls to cache')
     cmd.add_argument('urls', metavar='URL', nargs='+',
-                     help='Search URLs for .ipa links')
+                     help='Search URLs for .ipa links. Use "continue" to resume interrupted progress.')
 
     cmd = cli.add_parser('update', help='Update all urls')
     cmd.add_argument('urls', metavar='URL', nargs='*', help='URLs or index')
@@ -88,13 +88,30 @@ def main():
                      nargs='+', help='Primary key')
 
     cli.add_parser('fix-imgs', help='Check and fix missing images')
-    cli.add_parser('clear-queue', help='DELETE all pending entries (done=0) from the database')
+    
+    cmd = cli.add_parser('clear-queue', help='DELETE pending entries from the database')
+    cmd.add_argument('queue_type', choices=['run', 'add'], metavar='type', 
+                     help='run: Processing queue (done=0), add: Scraping queue')
 
     args = parser.parse_args()
 
     if args.cmd == 'add':
-        for url in args.urls:
-            addNewUrl(url)
+        if args.urls == ['continue']:
+            queue = CacheDB().getScrapeQueue()
+            if not queue:
+                print('Nothing to resume.')
+            else:
+                print(f'Resuming {len(queue)} collections...')
+                for url in queue:
+                    addNewUrl(url, resume=True)
+        else:
+            # Add all URLs to queue first so they can be resumed if interrupted
+            db = CacheDB()
+            for url in args.urls:
+                db.addToScrapeQueue(url)
+            
+            for url in args.urls:
+                addNewUrl(url, resume=False)
         print('done.')
 
     elif args.cmd == 'update':
@@ -199,8 +216,8 @@ def main():
         fix_missing_images(CacheDB())
 
     elif args.cmd == 'clear-queue':
-        count = CacheDB().clearQueue()
-        print(f'Successfully cleared {count} pending entries from the database.')
+        count = CacheDB().clearQueue(type=args.queue_type)
+        print(f'Successfully cleared {count} {args.queue_type} entries from the database.')
 
 
 def fix_missing_images(DB: 'CacheDB'):
@@ -277,14 +294,67 @@ class CacheDB:
                 title TEXT DEFAULT NULL,
                 bundle_id TEXT DEFAULT NULL,
                 version TEXT DEFAULT NULL,
+                image_pk INTEGER DEFAULT NULL,
 
                 UNIQUE(base_url, path_name) ON CONFLICT ABORT,
                 FOREIGN KEY (base_url) REFERENCES urls (pk) ON DELETE RESTRICT
             );
         ''')
+        self._db.execute('''
+            CREATE TABLE IF NOT EXISTS scrape_queue(
+                url TEXT PRIMARY KEY
+            );
+        ''')
+        self._db.execute('''
+            CREATE TABLE IF NOT EXISTS scanned_archives(
+                base_url_id INTEGER,
+                archive_name TEXT,
+                size INTEGER,
+                crc TEXT,
+                PRIMARY KEY(base_url_id, archive_name),
+                FOREIGN KEY (base_url_id) REFERENCES urls (pk) ON DELETE CASCADE
+            );
+        ''')
 
     def __del__(self) -> None:
         self._db.close()
+
+    def addToScrapeQueue(self, url: str):
+        self._db.execute('INSERT OR IGNORE INTO scrape_queue (url) VALUES (?);', [url])
+        self._db.commit()
+
+    def removeFromScrapeQueue(self, url: str):
+        self._db.execute('DELETE FROM scrape_queue WHERE url=?;', [url])
+        self._db.commit()
+
+    def getScrapeQueue(self) -> 'list[str]':
+        x = self._db.execute('SELECT url FROM scrape_queue;')
+        return [row[0] for row in x.fetchall()]
+
+    def isArchiveScanned(self, baseUrlId: int, name: str, size: int, crc: str) -> bool:
+        x = self._db.execute('''SELECT 1 FROM scanned_archives 
+            WHERE base_url_id=? AND archive_name=? AND size=? AND crc=?;''', 
+            [baseUrlId, name, size, crc])
+        return x.fetchone() is not None
+
+    def markArchiveScanned(self, baseUrlId: int, name: str, size: int, crc: str):
+        self._db.execute('''INSERT OR REPLACE INTO scanned_archives 
+            (base_url_id, archive_name, size, crc) VALUES (?,?,?,?);''',
+            [baseUrlId, name, size, crc])
+        self._db.commit()
+
+    def getNestedIpasFromIdx(self, baseUrlId: int, archiveName: str) -> 'list[tuple[str, int, str]]':
+        prefix = archiveName + NESTED_SEP
+        x = self._db.execute('''SELECT path_name, fsize FROM idx 
+            WHERE base_url=? AND path_name LIKE ?;''', [baseUrlId, prefix + '%'])
+        return [(row[0], row[1], None) for row in x.fetchall()]
+
+    def clearScannedArchives(self, baseUrlId: int = None):
+        if baseUrlId:
+            self._db.execute('DELETE FROM scanned_archives WHERE base_url_id=?;', [baseUrlId])
+        else:
+            self._db.execute('DELETE FROM scanned_archives;')
+        self._db.commit()
 
     # Get URL
 
@@ -449,11 +519,22 @@ class CacheDB:
         self._db.commit()
         return x.rowcount
 
-    def clearQueue(self) -> int:
-        ''' DELETE all entries with done=0 (pending) from database. '''
-        x = self._db.execute('DELETE FROM idx WHERE done=0;')
-        self._db.commit()
-        return x.rowcount
+    def clearQueue(self, type: str = 'run') -> int:
+        ''' 
+        DELETE entries from the database.
+        run: pending entries (done=0) from idx table.
+        add: scraping queue and scanned archives cache.
+        '''
+        if type == 'run':
+            x = self._db.execute('DELETE FROM idx WHERE done=0;')
+            self._db.commit()
+            return x.rowcount
+        elif type == 'add':
+            x1 = self._db.execute('DELETE FROM scrape_queue;')
+            x2 = self._db.execute('DELETE FROM scanned_archives;')
+            self._db.commit()
+            return x1.rowcount
+        return 0
 
     def setError(self, uid: int, *, done: int) -> None:
         self._db.execute('UPDATE idx SET done=? WHERE pk=?;', [done, uid])
@@ -551,14 +632,31 @@ class CacheDB:
 # [add] Process HTML link list
 ###############################################
 
-def addNewUrl(url: str) -> None:
+def addNewUrl(url: str, resume: bool = False) -> None:
+    DB = CacheDB()
     archiveId = extractArchiveOrgId(url)
     if not archiveId:
         return
-    baseUrlId = CacheDB().insertBaseUrl(urlForArchiveOrgId(archiveId))
+    
+    # Pre-calculate base URL ID
+    baseUrl = urlForArchiveOrgId(archiveId)
+    baseUrlId = DB.insertBaseUrl(baseUrl)
+
+    if not resume:
+        # If explicitly adding a new URL, clear previous scan cache for this URL
+        # as requested "process a new URL from the beginning"
+        print(f'Starting fresh scan for: {url}')
+        DB.clearScannedArchives(baseUrlId)
+    
+    # Add to resume queue
+    DB.addToScrapeQueue(url)
+
     json_file = pathToListJson(archiveId)
-    entries = downloadListArchiveOrg(archiveId, json_file)
-    inserted = CacheDB().insertIpaUrls(baseUrlId, entries)
+    entries = downloadListArchiveOrg(baseUrlId, archiveId, json_file, resume=resume)
+    inserted = DB.insertIpaUrls(baseUrlId, entries)
+    
+    # If successful, remove from queue
+    DB.removeFromScrapeQueue(url)
     print(f'new links added: {inserted} of {len(entries)}')
 
 
@@ -625,7 +723,7 @@ def getNestedIpasViaViewArchive(url: str, archivePath: str) -> 'list[tuple[str, 
 
 
 def downloadListArchiveOrg(
-    archiveId: str, json_file: Path, *, force: bool = False
+    baseUrlId: int, archiveId: str, json_file: Path, *, force: bool = False, resume: bool = False
 ) -> 'list[tuple[str, int, str]]':
     ''' :returns: List of `(path_name, file_size, crc32)` '''
     # store json for later
@@ -642,8 +740,14 @@ def downloadListArchiveOrg(
                         break
                     fp.write(block)
     # read saved json from disk
-    with gzip.open(json_file, 'rb') as fp:
-        data = json.load(fp)
+    try:
+        with gzip.open(json_file, 'rb') as fp:
+            data = json.load(fp)
+    except (EOFError, OSError, json.JSONDecodeError) as e:
+        print(f'[WARN] Cache file corrupted for {archiveId} ({e}). Re-downloading...', file=stderr)
+        if json_file.exists():
+            json_file.unlink()
+        return downloadListArchiveOrg(baseUrlId, archiveId, json_file, force=True, resume=resume)
     # process and add to DB
     if 'result' not in data:
         if 'error' in data:
@@ -652,6 +756,7 @@ def downloadListArchiveOrg(
 
     baseUrl = urlForArchiveOrgId(archiveId)
     rv = []
+    DB = CacheDB()
     for x in data['result']:
         if x.get('source') != 'original':
             continue
@@ -663,11 +768,35 @@ def downloadListArchiveOrg(
         if name_lower.endswith('.ipa'):
             rv.append((name, size, crc))
         elif name_lower.endswith('.zip'):
+            if resume and DB.isArchiveScanned(baseUrlId, name, size, crc):
+                # Skip re-peeking, fetch from idx
+                cached = DB.getNestedIpasFromIdx(baseUrlId, name)
+                if cached:
+                    print(f'  skipping already scanned zip: {name}')
+                    rv.extend(cached)
+                    continue
+
             url = f'{baseUrl}/{quote(name)}'
-            rv.extend(getNestedIpas(url, name))
+            nested_ipas = getNestedIpas(url, name)
+            # Efficiently insert as we go to avoid data loss on crash
+            DB.insertIpaUrls(baseUrlId, nested_ipas)
+            DB.markArchiveScanned(baseUrlId, name, size, crc)
+            rv.extend(nested_ipas)
         elif name_lower.endswith(('.rar', '.7z', '.tar', '.tar.gz', '.tgz')) and not name_lower.endswith('_archive.torrent'):
+            if resume and DB.isArchiveScanned(baseUrlId, name, size, crc):
+                # Skip re-peeking, fetch from idx
+                cached = DB.getNestedIpasFromIdx(baseUrlId, name)
+                if cached:
+                    print(f'  skipping already scanned archive: {name}')
+                    rv.extend(cached)
+                    continue
+
             url = f'{baseUrl}/{quote(name)}'
-            rv.extend(getNestedIpasViaViewArchive(url, name))
+            nested_ipas = getNestedIpasViaViewArchive(url, name)
+            # Efficiently insert as we go
+            DB.insertIpaUrls(baseUrlId, nested_ipas)
+            DB.markArchiveScanned(baseUrlId, name, size, crc)
+            rv.extend(nested_ipas)
     return rv
 
 
@@ -686,8 +815,8 @@ def updateUrl(url_or_uid: 'str|int', proc_i: int, proc_total: int):
 
     old_json_file = pathToListJson(archiveId)
     new_json_file = pathToListJson(archiveId, tmp=True)
-    old_entries = set(downloadListArchiveOrg(archiveId, old_json_file))
-    new_entries = set(downloadListArchiveOrg(archiveId, new_json_file))
+    old_entries = set(downloadListArchiveOrg(baseUrlId, archiveId, old_json_file, resume=True))
+    new_entries = set(downloadListArchiveOrg(baseUrlId, archiveId, new_json_file, resume=True))
     old_diff = old_entries - new_entries
     new_diff = new_entries - old_entries
 
