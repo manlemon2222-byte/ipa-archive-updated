@@ -226,7 +226,24 @@ def fix_missing_images(DB: 'CacheDB'):
         for pk in missing:
             url = DB.getUrl(pk)
             print(f"[{pk}] Fix unique image: {url}")
+            
+            # Get current state to handle retry logic
+            res = DB._db.execute("SELECT done FROM idx WHERE pk=?", [pk]).fetchone()
+            state = res[0] if res else 1
+            
             loadIpa(pk, url, overwrite=True, image_only=True)
+            
+            if not diskPath(pk, ".jpg").exists():
+                if state == 1:
+                    print(f"  [WARN] [{pk}] Still no image. Setting to retry state (done=2).")
+                    DB._db.execute("UPDATE idx SET done=2 WHERE image_pk=?", [pk])
+                    DB._db.commit()
+                else:
+                    print(f"  [ERROR] [{pk}] Still no image after retry. Marking as permanent error.")
+                    # Mark ALL entries sharing this image as permanent error
+                    uids = DB._db.execute("SELECT pk FROM idx WHERE image_pk=?", [pk]).fetchall()
+                    for (uid,) in uids:
+                        DB.setPermanentError(uid)
     print("done.")
 
 
@@ -379,7 +396,7 @@ class CacheDB:
         yield from self._db.execute('''
             SELECT MIN(pk), image_pk 
             FROM idx 
-            WHERE done=1 AND image_pk IS NOT NULL 
+            WHERE done IN (1, 2) AND image_pk IS NOT NULL 
             GROUP BY image_pk
         ''')
 
