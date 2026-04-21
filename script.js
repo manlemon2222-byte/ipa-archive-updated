@@ -173,7 +173,7 @@ function urlsToImgs(redirectUrl, list) {
     const template = getTemplate('.screenshot');
     var rv = '<div class="carousel">';
     for (var i = 0; i < list.length; i++) {
-        rv += renderTemplate(template, { $REF: list[i], $URL: redirectUrl + list[i] }).replace(/XSRC=/g, 'src=');
+        rv += renderTemplate(template, { $REF: list[i], $URL: redirectUrl + list[i] }).replace(/XSRC=/gi, 'src=');
     }
     return rv + '</div>';
 }
@@ -325,7 +325,7 @@ function entriesToStr(templateType, data) {
             $SIZE: humanSize(entry.size),
             $URLNAME: entry.pathName.split('/').slice(-1), // decodeURI
             $URL: validUrl(entry.ipa_url),
-        }).replace(/XSRC=/g, 'src=');
+        }).replace(/XSRC=/gi, 'src=');
     }
     return rv;
 }
