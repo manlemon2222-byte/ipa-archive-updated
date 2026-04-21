@@ -38,7 +38,7 @@
 	<div id="templates" hidden>
 		<div class="entry full">
 			<div>
-				<img src="$IMG" onerror="onImgError(this)">
+				<img XSRC="$IMG" onerror="onImgError(this)">
 				<button onclick="installIPA($IDX)">Install</button>
 			</div>
 			<div class="info">
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<div class="entry short">
-			<div><img src="$IMG" onerror="onImgError(this)"></div>
+			<div><img XSRC="$IMG" onerror="onImgError(this)"></div>
 			<div class="info">
 				<h4>$TITLE</h4>
 				<div>BundleId: $BUNDLEID</div>
@@ -72,7 +72,7 @@
 			<div>$IMG</div>
 			<p>$DESCRIPTION</p>
 		</div>
-		<a class="screenshot" href="$REF" target="_blank"><img src="$URL" crossorigin="anonymous"
+		<a class="screenshot" href="$REF" target="_blank"><img XSRC="$URL" crossorigin="anonymous"
 				referrerpolicy="no-referrer"></a>
 		<div class="randomAction">
 			Actions:
