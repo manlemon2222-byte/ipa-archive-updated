@@ -1,246 +1,0 @@
-  [WARN] connect attempt 1 failed for 26: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-  [WARN] connect attempt 2 failed for 26: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-  [WARN] attempt 1 failed to extract Payload/SixDOH.app/Info.plist: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-  [WARN] attempt 2 failed to extract Payload/SixDOH.app/Info.plist: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-  [WARN] attempt 1 failed to extract iTunesArtwork: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-  [WARN] attempt 1 failed to extract iTunesArtwork: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/8%20Bit%20Rally.ipa
-  [WARN] connect attempt 1 failed for 30: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/9%20Innings%20-%20Pro%20Baseball%202011.ipa
-  [WARN] connect attempt 2 failed for 30: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/9%20Innings%20-%20Pro%20Baseball%202011.ipa
-  [WARN] connect attempt 1 failed for 31: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/90210%20The.Game.ipa
-  [WARN] connect attempt 1 failed for 32: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Bloody%20Fun%20Day.ipa
-  [WARN] connect attempt 2 failed for 32: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Bloody%20Fun%20Day.ipa
-  [WARN] connect attempt 3 failed for 32: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Bloody%20Fun%20Day.ipa
-ERROR: [32] connection failed after retries: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Bloody%20Fun%20Day.ipa
-  [WARN] connect attempt 1 failed for 33: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Mechanical%20Story.ipa
-  [WARN] connect attempt 2 failed for 33: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Mechanical%20Story.ipa
-  [WARN] connect attempt 1 failed for 34: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Monster%20Ate%20My%20Homework.ipa
-  [WARN] connect attempt 2 failed for 34: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Monster%20Ate%20My%20Homework.ipa
-  [WARN] attempt 1 failed to extract Payload/amonsteratemyhomework.app/Info.plist: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A%20Monster%20Ate%20My%20Homework.ipa
-  [WARN] attempt 1 failed to extract Payload/ATeam.app/Info.plist: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/A-Team.ipa
-  [WARN] attempt 1 failed to extract Payload/AliciaDarkstone.app/Info.plist: 500 Server Error: Internal Server Error for url: https://dn720708.ca.archive.org/0/items/Over700iOSGames/Alicia%20Darkstone%20-%20The%20Mysterious%20Abduction.ipa
-Checking for missing images...
-Checked 0/73177 unique images...Checked 1000/73177 unique images...Checked 2000/73177 unique images...Checked 3000/73177 unique images...Checked 4000/73177 unique images...Checked 5000/73177 unique images...Checked 6000/73177 unique images...Checked 7000/73177 unique images...Checked 8000/73177 unique images...Checked 9000/73177 unique images...Checked 10000/73177 unique images...Checked 11000/73177 unique images...Checked 12000/73177 unique images...Checked 13000/73177 unique images...Checked 14000/73177 unique images...Checked 15000/73177 unique images...Checked 16000/73177 unique images...Checked 17000/73177 unique images...Checked 18000/73177 unique images...Checked 19000/73177 unique images...Checked 20000/73177 unique images...Checked 21000/73177 unique images...Checked 22000/73177 unique images...Checked 23000/73177 unique images...Checked 24000/73177 unique images...Checked 25000/73177 unique images...Checked 26000/73177 unique images...Checked 27000/73177 unique images...Checked 28000/73177 unique images...Checked 29000/73177 unique images...Checked 30000/73177 unique images...Checked 31000/73177 unique images...Checked 32000/73177 unique images...Checked 33000/73177 unique images...Checked 34000/73177 unique images...Checked 35000/73177 unique images...Checked 36000/73177 unique images...Checked 37000/73177 unique images...Checked 38000/73177 unique images...Checked 39000/73177 unique images...Checked 40000/73177 unique images...Checked 41000/73177 unique images...Checked 42000/73177 unique images...Checked 43000/73177 unique images...Checked 44000/73177 unique images...Checked 45000/73177 unique images...Checked 46000/73177 unique images...Checked 47000/73177 unique images...Checked 48000/73177 unique images...Checked 49000/73177 unique images...Checked 50000/73177 unique images...Checked 51000/73177 unique images...Checked 52000/73177 unique images...Checked 53000/73177 unique images...Checked 54000/73177 unique images...Checked 55000/73177 unique images...Checked 56000/73177 unique images...Checked 57000/73177 unique images...Checked 58000/73177 unique images...Checked 59000/73177 unique images...Checked 60000/73177 unique images...Checked 61000/73177 unique images...Checked 62000/73177 unique images...Checked 63000/73177 unique images...Checked 64000/73177 unique images...Checked 65000/73177 unique images...Checked 66000/73177 unique images...Checked 67000/73177 unique images...Checked 68000/73177 unique images...Checked 69000/73177 unique images...Checked 70000/73177 unique images...Checked 71000/73177 unique images...Checked 72000/73177 unique images...Checked 73000/73177 unique images...Checked 73177/73177 unique images. Done.
-Found 11235 missing unique images. Fixing...
-[23] Fix unique image: https://archive.org/download/Over700iOSGames/3D%20Rollercoaster%20Rush%20-%20Wild%20West.ipa
-[24] Fix unique image: https://archive.org/download/Over700iOSGames/3D%20Rollercoaster%20Rush.ipa
-[26] Fix unique image: https://archive.org/download/Over700iOSGames/6%20Degrees%20of%20Hollywood.ipa
-[27] Fix unique image: https://archive.org/download/Over700iOSGames/7%20Wonders%20-%20Magical%20Mystery%20Tour.ipa
-[28] Fix unique image: https://archive.org/download/Over700iOSGames/8%20Bit%20Rally.ipa
-[29] Fix unique image: https://archive.org/download/Over700iOSGames/9%20Innings%20-%20Pro%20Baseball%202009.ipa
-[30] Fix unique image: https://archive.org/download/Over700iOSGames/9%20Innings%20-%20Pro%20Baseball%202011.ipa
-[31] Fix unique image: https://archive.org/download/Over700iOSGames/90210%20The.Game.ipa
-[32] Fix unique image: https://archive.org/download/Over700iOSGames/A%20Bloody%20Fun%20Day.ipa
-  [WARN] [32] Still no image. Setting to retry state (done=2).
-[33] Fix unique image: https://archive.org/download/Over700iOSGames/A%20Mechanical%20Story.ipa
-[34] Fix unique image: https://archive.org/download/Over700iOSGames/A%20Monster%20Ate%20My%20Homework.ipa
-[35] Fix unique image: https://archive.org/download/Over700iOSGames/A%2B%20Burger.ipa
-  reusing image from 35
-[36] Fix unique image: https://archive.org/download/Over700iOSGames/A-Team.ipa
-  reusing image from 36
-[37] Fix unique image: https://archive.org/download/Over700iOSGames/A.I.R%20Defense.ipa
-  reusing image from 37
-[38] Fix unique image: https://archive.org/download/Over700iOSGames/ABOVE.ipa
-  reusing image from 38
-[39] Fix unique image: https://archive.org/download/Over700iOSGames/ARC%20Squadron.ipa
-  reusing image from 39
-[40] Fix unique image: https://archive.org/download/Over700iOSGames/About%20Love%20and%20Hate.ipa
-  reusing image from 40
-[41] Fix unique image: https://archive.org/download/Over700iOSGames/Absolute%20Minesweeper.ipa
-  reusing image from 41
-[42] Fix unique image: https://archive.org/download/Over700iOSGames/Abundante.ipa
-  reusing image from 42
-[43] Fix unique image: https://archive.org/download/Over700iOSGames/Ace%20Combat%20XI.ipa
-  reusing image from 43
-[44] Fix unique image: https://archive.org/download/Over700iOSGames/Ace%20Commando.ipa
-  reusing image from 44
-[45] Fix unique image: https://archive.org/download/Over700iOSGames/Act%20of%20Fury.ipa
-  reusing image from 45
-[46] Fix unique image: https://archive.org/download/Over700iOSGames/Activision%20Anthologies.ipa
-  reusing image from 46
-[47] Fix unique image: https://archive.org/download/Over700iOSGames/Addicus.ipa
-  reusing image from 47
-[48] Fix unique image: https://archive.org/download/Over700iOSGames/Adventure%20Bar%20Story.ipa
-  reusing image from 48
-[49] Fix unique image: https://archive.org/download/Over700iOSGames/Adventures%20of%20Veronica%20Wright.ipa
-  reusing image from 49
-[50] Fix unique image: https://archive.org/download/Over700iOSGames/Against%20The%20Fire.ipa
-  reusing image from 50
-[51] Fix unique image: https://archive.org/download/Over700iOSGames/Age%20of%20Tribes.ipa
-  reusing image from 51
-[52] Fix unique image: https://archive.org/download/Over700iOSGames/Air%20Hockey.ipa
-  reusing image from 52
-[53] Fix unique image: https://archive.org/download/Over700iOSGames/Air%20Mail.ipa
-  reusing image from 53
-[54] Fix unique image: https://archive.org/download/Over700iOSGames/Air%20Penguin.ipa
-  reusing image from 54
-[55] Fix unique image: https://archive.org/download/Over700iOSGames/Air%20Tycoon%202.ipa
-  reusing image from 55
-[56] Fix unique image: https://archive.org/download/Over700iOSGames/Airport%20Mania%20-%20First%20Flight.ipa
-  reusing image from 56
-[57] Fix unique image: https://archive.org/download/Over700iOSGames/Alice%20in%20Wonderland%20-%20An%20Adventure%20Beyond%20The%20Mirror.ipa
-  reusing image from 57
-[58] Fix unique image: https://archive.org/download/Over700iOSGames/Alicia%20Darkstone%20-%20The%20Mysterious%20Abduction.ipa
-  reusing image from 58
-[59] Fix unique image: https://archive.org/download/Over700iOSGames/Alien%20Escape.ipa
-  reusing image from 59
-[60] Fix unique image: https://archive.org/download/Over700iOSGames/Alien%20Horde.ipa
-  reusing image from 60
-[61] Fix unique image: https://archive.org/download/Over700iOSGames/Alienz.ipa
-  reusing image from 61
-[62] Fix unique image: https://archive.org/download/Over700iOSGames/Alive%204%20Ever%20Returns.ipa
-  reusing image from 62
-[63] Fix unique image: https://archive.org/download/Over700iOSGames/Alive%204%20Ever.ipa
-  reusing image from 63
-[64] Fix unique image: https://archive.org/download/Over700iOSGames/Alphabetic.ipa
-[65] Fix unique image: https://archive.org/download/Over700iOSGames/Alpine%20Racer.ipa
-  reusing image from 65
-[66] Fix unique image: https://archive.org/download/Over700iOSGames/Amateur%20Surgeon%202.ipa
-  reusing image from 66
-[67] Fix unique image: https://archive.org/download/Over700iOSGames/Amateur%20Surgeon%203.ipa
-[68] Fix unique image: https://archive.org/download/Over700iOSGames/Amateur%20Surgeon.ipa
-  reusing image from 68
-[69] Fix unique image: https://archive.org/download/Over700iOSGames/Amazing%20Alex.ipa
-  reusing image from 69
-[70] Fix unique image: https://archive.org/download/Over700iOSGames/American%20McGee%27s%20Crooked%20House.ipa
-  reusing image from 70
-[71] Fix unique image: https://archive.org/download/Over700iOSGames/Ancient%20Tribe.ipa
-  reusing image from 71
-[72] Fix unique image: https://archive.org/download/Over700iOSGames/AngryBirds3.0.0.ipa
-  reusing image from 72
-[73] Fix unique image: https://archive.org/download/Over700iOSGames/AngryBirdsRio1.5.0.ipa
-  reusing image from 73
-[74] Fix unique image: https://archive.org/download/Over700iOSGames/AngryBirdsSeasons3.1.1.ipa
-  reusing image from 74
-[75] Fix unique image: https://archive.org/download/Over700iOSGames/AngryBirdsSpace1.4.0.ipa
-  reusing image from 75
-[76] Fix unique image: https://archive.org/download/Over700iOSGames/AngryBirdsStarWars1.1.2.ipa
-  reusing image from 76
-[77] Fix unique image: https://archive.org/download/Over700iOSGames/Animal%20Festival%20Pro.ipa
-  reusing image from 77
-[78] Fix unique image: https://archive.org/download/Over700iOSGames/Apollo%2011%20-%20The%20Game.ipa
-  reusing image from 78
-[79] Fix unique image: https://archive.org/download/Over700iOSGames/Aqueduct.ipa
-  reusing image from 79
-[80] Fix unique image: https://archive.org/download/Over700iOSGames/Arcade%20Park.ipa
-[81] Fix unique image: https://archive.org/download/Over700iOSGames/Archibald%27s%20Adventure.ipa
-  reusing image from 81
-[82] Fix unique image: https://archive.org/download/Over700iOSGames/Archon%20Classic.ipa
-  reusing image from 82
-[83] Fix unique image: https://archive.org/download/Over700iOSGames/Archon%20Conquest.ipa
-  reusing image from 83
-[84] Fix unique image: https://archive.org/download/Over700iOSGames/Are%20You%20Alright.ipa
-  reusing image from 84
-[85] Fix unique image: https://archive.org/download/Over700iOSGames/Arkanoid.ipa
-  reusing image from 85
-[86] Fix unique image: https://archive.org/download/Over700iOSGames/Army%20of%20Darkness%20Defense.ipa
-  reusing image from 86
-[87] Fix unique image: https://archive.org/download/Over700iOSGames/Aroma%20Coffee.ipa
-  reusing image from 87
-[88] Fix unique image: https://archive.org/download/Over700iOSGames/Around%20the%20World%20in%2080s%20Days.ipa
-  reusing image from 88
-[89] Fix unique image: https://archive.org/download/Over700iOSGames/Arvale%20Journey%20of%20Illusion.ipa
-  reusing image from 89
-[90] Fix unique image: https://archive.org/download/Over700iOSGames/Arvale%20Ocean%20of%20Time.ipa
-  reusing image from 90
-[91] Fix unique image: https://archive.org/download/Over700iOSGames/Arvale%20Short%20Tales%20-%20Varju%20The%20Druid.ipa
-  reusing image from 91
-[92] Fix unique image: https://archive.org/download/Over700iOSGames/Asphalt%204.ipa
-  reusing image from 92
-[93] Fix unique image: https://archive.org/download/Over700iOSGames/Asphalt%205.ipa
-  reusing image from 93
-[94] Fix unique image: https://archive.org/download/Over700iOSGames/Asphalt%206.ipa
-  reusing image from 94
-[95] Fix unique image: https://archive.org/download/Over700iOSGames/Assault%20Squadron.ipa
-  reusing image from 95
-[96] Fix unique image: https://archive.org/download/Over700iOSGames/Asterix_Total_Retaliation-1.2.ipa
-  reusing image from 96
-[97] Fix unique image: https://archive.org/download/Over700iOSGames/Atomic%20Ball.ipa
-  reusing image from 97
-[98] Fix unique image: https://archive.org/download/Over700iOSGames/Aurifi.ipa
-  reusing image from 98
-[99] Fix unique image: https://archive.org/download/Over700iOSGames/Avenging%20Spirit.ipa
-  reusing image from 99
-[100] Fix unique image: https://archive.org/download/Over700iOSGames/Aztec%20Quest.ipa
-  reusing image from 100
-[101] Fix unique image: https://archive.org/download/Over700iOSGames/BANG%20the%20Official%20Video%20Game.ipa
-  reusing image from 101
-[102] Fix unique image: https://archive.org/download/Over700iOSGames/BATTLEFIELD.BAD.COMPANY.2.World-v1.0.0.ipa
-  reusing image from 102
-[103] Fix unique image: https://archive.org/download/Over700iOSGames/Backbreaker%202%20-%20Vengeance.ipa
-  reusing image from 103
-[104] Fix unique image: https://archive.org/download/Over700iOSGames/Backbreaker%20Football.ipa
-  reusing image from 104
-[105] Fix unique image: https://archive.org/download/Over700iOSGames/Backgammon%20Classics.ipa
-  reusing image from 105
-[106] Fix unique image: https://archive.org/download/Over700iOSGames/Bag%20It.ipa
-  reusing image from 106
-[107] Fix unique image: https://archive.org/download/Over700iOSGames/Balloonia.ipa
-  reusing image from 107
-[108] Fix unique image: https://archive.org/download/Over700iOSGames/BanzaiRabbit.ipa
-  reusing image from 108
-[109] Fix unique image: https://archive.org/download/Over700iOSGames/Baseball%20Manager%202010.ipa
-  reusing image from 109
-[110] Fix unique image: https://archive.org/download/Over700iOSGames/Baseball%20Slugger.ipa
-  reusing image from 110
-[111] Fix unique image: https://archive.org/download/Over700iOSGames/Baseball%20Superstars%202010.ipa
-  reusing image from 111
-[112] Fix unique image: https://archive.org/download/Over700iOSGames/Baseball%20Superstars%202011.ipa
-  reusing image from 112
-[113] Fix unique image: https://archive.org/download/Over700iOSGames/Baseball%20Superstars%20II%20Pro.ipa
-  reusing image from 113
-[114] Fix unique image: https://archive.org/download/Over700iOSGames/BaseballSuperstars2009.ipa
-  reusing image from 114
-[115] Fix unique image: https://archive.org/download/Over700iOSGames/Batmobile_Game_v.1.1.ipa
-  reusing image from 115
-[116] Fix unique image: https://archive.org/download/Over700iOSGames/Battle%20Field.ipa
-  reusing image from 116
-[117] Fix unique image: https://archive.org/download/Over700iOSGames/Battle%20Of%20Midway.ipa
-  reusing image from 117
-[118] Fix unique image: https://archive.org/download/Over700iOSGames/Battle%20for%20Wesnoth.ipa
-  reusing image from 118
-[119] Fix unique image: https://archive.org/download/Over700iOSGames/Battleground.ipa
-  reusing image from 119
-[120] Fix unique image: https://archive.org/download/Over700iOSGames/Battleship.ipa
-  reusing image from 120
-[121] Fix unique image: https://archive.org/download/Over700iOSGames/Beauty%20Lawyer%20Victoria%202.ipa
-  reusing image from 121
-[122] Fix unique image: https://archive.org/download/Over700iOSGames/Bejeweled%202.ipa
-[123] Fix unique image: https://archive.org/download/Over700iOSGames/Beyond%20Ynth.ipa
-  reusing image from 123
-[124] Fix unique image: https://archive.org/download/Over700iOSGames/Big%20City%20Adventure%20-%20San%20Francisco.ipa
-  reusing image from 124
-[125] Fix unique image: https://archive.org/download/Over700iOSGames/Bikini%20Beach%20Party.ipa
-  reusing image from 125
-[126] Fix unique image: https://archive.org/download/Over700iOSGames/Bio%20Crisis.ipa
-  reusing image from 126
-[127] Fix unique image: https://archive.org/download/Over700iOSGames/Bit%20Trip%20Beat.ipa
-  reusing image from 127
-[128] Fix unique image: https://archive.org/download/Over700iOSGames/BitBit%20Robot.ipa
-[129] Fix unique image: https://archive.org/download/Over700iOSGames/Blaaast.ipa
-  reusing image from 129
-[130] Fix unique image: https://archive.org/download/Over700iOSGames/Blackout.ipa
-[131] Fix unique image: https://archive.org/download/Over700iOSGames/Blades%20of%20Fury.ipa
-  reusing image from 131
-[132] Fix unique image: https://archive.org/download/Over700iOSGames/Blazing%20Star.ipa
-  reusing image from 132
-[133] Fix unique image: https://archive.org/download/Over700iOSGames/Blobster.ipa
-[134] Fix unique image: https://archive.org/download/Over700iOSGames/Block%20Breaker%203%20Unlimited.ipa
-  reusing image from 134
-[135] Fix unique image: https://archive.org/download/Over700iOSGames/Block%20Breaker%20Deluxe%202.ipa
-  reusing image from 135
-[136] Fix unique image: https://archive.org/download/Over700iOSGames/BlockBlocker.ipa
-[137] Fix unique image: https://archive.org/download/Over700iOSGames/Blocked%20Star.ipa
-[138] Fix unique image: https://archive.org/download/Over700iOSGames/Blocks%20of%20Pyramid%20Breaker.ipa
-  reusing image from 138
-[139] Fix unique image: https://archive.org/download/Over700iOSGames/Blokus-v1.0.2-Splintr.ipa
-  reusing image from 139
-[140] Fix unique image: https://archive.org/download/Over700iOSGames/Blokus.ipa
-  reusing image from 139
-  [WARN] [140] Still no image. Setting to retry state (done=2).
-Traceback (most recent call last):
-  File "/data/data/com.termux/files/home/ipa-archive-updated/main.py", line 1440, in <module>
-  File "/data/data/com.termux/files/home/ipa-archive-updated/main.py", line 221, in main
-  File "/data/data/com.termux/files/home/ipa-archive-updated/main.py", line 261, in fix_missing_images
-    uids = DB._db.execute("SELECT pk FROM idx WHERE image_pk=?", [pk]).fetchall()
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-sqlite3.OperationalError: attempt to write a readonly database
