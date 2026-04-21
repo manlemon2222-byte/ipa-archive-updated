@@ -947,7 +947,7 @@ def onceReadSizeFromFile(uid: int) -> 'int|None':
 def loadIpa(uid: int, url: str, *,
             overwrite: bool = False, image_only: bool = False) -> bool:
     basename = diskPath(uid, '')
-    basename.parent.mkdir(exist_ok=True)
+    basename.parent.mkdir(exist_ok=True, mode=0o755)
     img_path = basename.with_suffix('.png')
     plist_path = basename.with_suffix('.plist')
     if not overwrite and plist_path.exists():
@@ -1192,6 +1192,7 @@ def processImage(png_path: Path) -> bool:
             
             # Save optimized JPEG
             img.save(jpg_path, 'JPEG', quality=80, optimize=True)
+            os.chmod(jpg_path, 0o644)
             
         png_path.unlink() # Remove PNG after successful conversion
         return True

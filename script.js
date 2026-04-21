@@ -288,7 +288,7 @@ function validUrl(url) {
 
 function entryToDict(entry) {
     const pk = entry[0];
-    const img_pk = entry[9] || pk;
+    const img_pk = (entry[9] !== undefined && entry[9] !== null) ? entry[9] : pk;
     return {
         pk: pk,
         platform: entry[1],
@@ -300,8 +300,19 @@ function entryToDict(entry) {
         pathName: entry[7],
         size: entry[8],
         ipa_url: baseUrls[entry[6]] + '/' + entry[7],
-        img_url: 'data/' + Math.floor(img_pk / 1000) + '/' + img_pk + '.jpg',
+        img_url: 'data/' + Math.floor(img_pk / 1000) + '/' + img_pk + '.jpg?v=' + Date.now(),
     }
+}
+
+var alerted = false;
+function onImgError(img) {
+    if (!alerted) {
+        alerted = true;
+        alert('Image failed to load:\n' + img.src + '\n\nPlease check if the data folder exists at this location.');
+        console.error('Image failed to load:', img.src);
+    }
+    img.onerror = null;
+    img.src = 'apple-touch-icon.png';
 }
 
 function entriesToStr(templateType, data) {
