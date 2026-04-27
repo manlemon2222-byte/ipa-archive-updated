@@ -63,7 +63,7 @@
     <key>CFBundleDisplayName</key>
     <string>爱奇艺PPS</string>
     <key>QYApplicationKey</key>
-    <string>200011019b3bee280d6fbbea9c34cc0e</string>
+    <string></string>
     <key>DTXcodeBuild</key>
     <string>8B62</string>
     <key>CFBundleLocalizations</key>
@@ -256,9 +256,9 @@
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>FacebookAppID</key>
-    <string>882371088575811</string>
+    <string></string>
     <key>QYApplicationKeyPhone</key>
-    <string>20210202f5452f04d6d63114a334b6e8</string>
+    <string></string>
     <key>UIPrerenderedIcon</key>
     <true/>
     <key>BuildMachineOSBuild</key>
@@ -282,7 +282,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb882371088575811</string>
+          <string></string>
         </array>
       </dict>
       <dict>
@@ -300,7 +300,7 @@
         <string>weixin</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wxbb2360444164c6aa</string>
+          <string></string>
         </array>
       </dict>
       <dict>
@@ -310,7 +310,7 @@
         <string>qqplugin</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>QQ84D2B53A</string>
+          <string></string>
         </array>
       </dict>
       <dict>
@@ -320,7 +320,7 @@
         <string>sinasso</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>sinaweibosso.3094926901</string>
+          <string></string>
         </array>
       </dict>
       <dict>
@@ -330,7 +330,7 @@
         <string>tencentsso</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wb801365134</string>
+          <string></string>
         </array>
       </dict>
       <dict>

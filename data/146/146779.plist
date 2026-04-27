@@ -94,7 +94,7 @@
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Taking in-game screenshots</string>
     <key>FacebookAppID</key>
-    <string>890992850960575</string>
+    <string>a</string>
     <key>UIAppFonts</key>
     <array>
       <string>MatisseB.ttf</string>
@@ -262,7 +262,7 @@
         <array>
           <string>fb890992850960575</string>
           <string>rm171639com.gameloft.iOSTemplate</string>
-          <string>wx2d0965087360da4d</string>
+          <string></string>
         </array>
       </dict>
     </array>

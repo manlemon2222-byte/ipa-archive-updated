@@ -122,7 +122,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>accountLogin25332598</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -132,7 +132,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ap2019100967896027</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -142,7 +142,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>dingoa6sfiex4n8pasxfku</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -152,7 +152,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb2986503928</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -160,7 +160,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxac5d4a7e04147b64</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
