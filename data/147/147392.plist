@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>armv7</string>
+    </array>
+    <key>UIRequiresFullScreen</key>
+    <true/>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>DTPlatformVersion</key>
+    <string>9.2</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTSDKName</key>
+    <string>iphoneos9.2</string>
+    <key>CFBundleName</key>
+    <string>PS Express</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon29x29</string>
+          <string>AppIcon40x40</string>
+          <string>AppIcon60x60</string>
+        </array>
+      </dict>
+    </dict>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>CFBundleDisplayName</key>
+    <string>PS Express</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>adobepsmix</string>
+      <string>adobepsmixpsx</string>
+      <string>fbauth2</string>
+      <string>tumblr</string>
+      <string>instagram</string>
+      <string>whatsapp</string>
+      <string>adobelightroom</string>
+      <string>com.adobe.psfix</string>
+    </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>PS Express adds location information to photos and generating smart captions during sharing.</string>
+    <key>UIApplicationShortcutWidget</key>
+    <string>com.adobe.PSMobile.PSXTodayExtension</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+      <dict>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.jpeg</string>
+        </array>
+        <key>LSHandlerRank</key>
+        <string>Alternate</string>
+        <key>CFBundleTypeName</key>
+        <string>JPEG Image</string>
+      </dict>
+      <dict>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.png</string>
+        </array>
+        <key>LSHandlerRank</key>
+        <string>Alternate</string>
+        <key>CFBundleTypeName</key>
+        <string>PNG Image</string>
+      </dict>
+    </array>
+    <key>DTSDKBuild</key>
+    <string>13C75</string>
+    <key>CFBundleShortVersionString</key>
+    <string>5.1</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>com.adobe.ccsdk.sharedKeychainGroup</key>
+    <string>QFRAMDQVL3.com.adobe.ccsdk.CreativeSDKGroup</string>
+    <key>BuildMachineOSBuild</key>
+    <string>14F1912</string>
+    <key>DTPlatformBuild</key>
+    <string>13C75</string>
+    <key>MinimumOSVersion</key>
+    <string>9.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>UIPrerenderedIcon</key>
+    <true/>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleVersion</key>
+    <string>5.1.31</string>
+    <key>DTXcodeBuild</key>
+    <string>7C1002</string>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIAppFonts</key>
+    <array>
+      <string>AdobeClean-Bold.otf</string>
+      <string>AdobeClean-BoldIt.otf</string>
+      <string>AdobeClean-BoldSemiCn.otf</string>
+      <string>AdobeClean-BoldSemiCnIt.otf</string>
+      <string>AdobeClean-It.otf</string>
+      <string>AdobeClean-Light.otf</string>
+      <string>AdobeClean-LightIt.otf</string>
+      <string>AdobeClean-Regular.otf</string>
+      <string>AdobeClean-SemiCn.otf</string>
+      <string>AdobeClean-SemiCnIt.otf</string>
+    </array>
+    <key>FacebookAppID</key>
+    <string>292065597989</string>
+    <key>UILaunchImages</key>
+    <array>
+      <dict>
+        <key>UILaunchImageSize</key>
+        <string>{320, 480}</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage-700</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageSize</key>
+        <string>{320, 568}</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage-700-568h</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageSize</key>
+        <string>{768, 1024}</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage-700-Portrait</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageSize</key>
+        <string>{768, 1024}</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage-700-Landscape</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+        <key>UILaunchImageOrientation</key>
+        <string>Landscape</string>
+      </dict>
+    </array>
+    <key>UILaunchStoryboardName</key>
+    <string>Launch Screen</string>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+      <integer>2</integer>
+    </array>
+    <key>Application Keywords</key>
+    <array>
+      <string>edit photo</string>
+      <string>photo editor</string>
+      <string>image editor</string>
+      <string>photoshop</string>
+      <string>express</string>
+      <string>Photoshop Express</string>
+      <string>Beautify</string>
+      <string>collage</string>
+      <string>make collage</string>
+      <string>create collage</string>
+      <string>crop</string>
+      <string>crop photo</string>
+      <string>effects</string>
+      <string>bright</string>
+      <string>dim</string>
+      <string>modify</string>
+      <string>edit</string>
+      <string>Images</string>
+      <string>raw photo</string>
+      <string>raw</string>
+      <string>edit raw photo</string>
+      <string>straighten</string>
+      <string>straighten photo</string>
+      <string>rotate</string>
+      <string>rotate photo</string>
+      <string>flip</string>
+      <string>flip photo</string>
+      <string>exposure</string>
+      <string>shadows</string>
+      <string>contrast</string>
+      <string>clarity</string>
+      <string>vibrance</string>
+      <string>looks</string>
+      <string>adjustment</string>
+      <string>adjust photo</string>
+      <string>photo adjustment</string>
+      <string>filters</string>
+      <string>photo filters</string>
+      <string>image filters</string>
+      <string>creative</string>
+      <string>cloud</string>
+      <string>creative cloud</string>
+      <string>dropbox</string>
+      <string>google photos</string>
+      <string>facebook</string>
+      <string>facebook photos</string>
+      <string>sync</string>
+      <string>background</string>
+      <string>face</string>
+      <string>photos</string>
+      <string>camera</string>
+      <string>selfie</string>
+      <string>layout</string>
+      <string>moments</string>
+      <string>artistic</string>
+      <string>style</string>
+      <string>apply style</string>
+      <string>style transfer</string>
+      <string>noise</string>
+      <string>noise removal</string>
+      <string>denoise</string>
+      <string>reduce noise</string>
+      <string>remove noise</string>
+      <string>zoom</string>
+      <string>borders</string>
+      <string>pan and zoom</string>
+      <string>pan</string>
+      <string>art</string>
+      <string>picture</string>
+      <string>upload</string>
+      <string>upload photo</string>
+      <string>share</string>
+      <string>share photo</string>
+      <string>white balance</string>
+      <string>highlights</string>
+      <string>tint</string>
+      <string>frames</string>
+      <string>camera</string>
+      <string>replace</string>
+      <string>resize</string>
+      <string>resize photo</string>
+      <string>fb cover</string>
+      <string>profile picture</string>
+      <string>rotate</string>
+      <string>color</string>
+      <string>colour</string>
+      <string>corrections</string>
+      <string>sharpen</string>
+      <string>defog</string>
+      <string>dehaze</string>
+      <string>temperature</string>
+      <string>red eye</string>
+      <string>red eye removal</string>
+      <string>remove red eye</string>
+      <string>eye</string>
+      <string>spot heal</string>
+      <string>spot</string>
+      <string>snapshot</string>
+      <string>enhance</string>
+      <string>enhance photo</string>
+      <string>auto enhance</string>
+      <string>strip</string>
+      <string>circle</string>
+      <string>bevel</string>
+      <string>vignette</string>
+      <string>portrait</string>
+      <string>landscape</string>
+      <string>blemish</string>
+      <string>blemish removal</string>
+      <string>aspect ratio</string>
+      <string>pixels</string>
+      <string>histogram</string>
+      <string>graphics</string>
+      <string>resolution</string>
+      <string>smoothen</string>
+      <string>texture</string>
+      <string>gradient</string>
+      <string>view</string>
+      <string>edge</string>
+      <string>digital photography</string>
+      <string>tone</string>
+      <string>gamma</string>
+      <string>color balance</string>
+      <string>digital image</string>
+      <string>appearance</string>
+      <string>blur</string>
+      <string>focus</string>
+      <string>autofocus</string>
+      <string>photography</string>
+      <string>compression</string>
+      <string>import photo</string>
+      <string>export photo</string>
+      <string>fringing</string>
+      <string>parallax</string>
+      <string>capture</string>
+      <string>capture photo</string>
+      <string>saturation</string>
+      <string>thumbnail</string>
+      <string>collage maker</string>
+      <string>collages</string>
+      <string>collage making app</string>
+      <string>free photo editor</string>
+      <string>easy photo editor</string>
+      <string>quick photo editor</string>
+      <string>best editing app</string>
+      <string>raw file editor</string>
+      <string>ps</string>
+      <string>pics</string>
+      <string>fix</string>
+      <string>photo tool</string>
+      <string>fun</string>
+      <string>spot healing</string>
+      <string>fix red eye</string>
+    </array>
+    <key>Fabric</key>
+    <dict>
+      <key>Kits</key>
+      <array>
+        <dict>
+          <key>KitName</key>
+          <string>Crashlytics</string>
+          <key>KitInfo</key>
+          <dict/>
+        </dict>
+      </array>
+      <key>APIKey</key>
+      <string>2a0134ab75a4359c3f6fcf10d232d7a41e9f77ed</string>
+    </dict>
+    <key>FacebookDisplayName</key>
+    <string>Adobe Photoshop Express</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.adobe.PSMobile</string>
+    <key>DTXcode</key>
+    <string>0721</string>
+    <key>UIApplicationShortcutItems</key>
+    <array>
+      <dict>
+        <key>UIApplicationShortcutItemTitle</key>
+        <string>Edit Last Photo</string>
+        <key>UIApplicationShortcutItemType</key>
+        <string>com.adobe.PSMobile.editLastPhoto</string>
+        <key>UIApplicationShortcutItemIconFile</key>
+        <string>EditPhotoShortcut</string>
+      </dict>
+      <dict>
+        <key>UIApplicationShortcutItemTitle</key>
+        <string>Make Collage</string>
+        <key>UIApplicationShortcutItemType</key>
+        <string>com.adobe.PSMobile.makeCollage</string>
+        <key>UIApplicationShortcutItemIconFile</key>
+        <string>MakeCollageShortcut</string>
+      </dict>
+    </array>
+    <key>NSLocationUsageDescription</key>
+    <string>PS Express adds location information to photos and generating smart captions during sharing.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <key>CFBundleExecutable</key>
+    <string>PS Express</string>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon29x29</string>
+          <string>AppIcon40x40</string>
+          <string>AppIcon60x60</string>
+          <string>AppIcon76x76</string>
+          <string>AppIcon83.5x83.5</string>
+        </array>
+      </dict>
+    </dict>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>com.apple.security.application-groups</key>
+    <array>
+      <string>group.com.adobe.360.exchange</string>
+    </array>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>com.adobe.photoshopexpress</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.adobe.photoshopexpress</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>com.googleusercontent.apps.780902772217-99rvf6147rleoekt2b2ii6c00vcru5kg</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.314939745202-i90snn80nl1d1rqekmru95l090nmp2vo</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>db-r8y8o61xf1n793x</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>fb-prod</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb292065597989</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>fb-stage</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb441596932579842</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>fb-next</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb422319874513828</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>weixin</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>wx9c9ac7865b82d0ae</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>com.adobe.photoshopexpress</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.adobe.photoshopexpress</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
