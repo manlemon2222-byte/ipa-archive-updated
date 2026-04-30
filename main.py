@@ -654,6 +654,9 @@ def addNewUrl(url: str, resume: bool = False) -> None:
 
     json_file = pathToListJson(archiveId)
     entries = downloadListArchiveOrg(baseUrlId, archiveId, json_file, resume=resume)
+    if entries is None:
+        print(f'[ERROR] Could not fetch metadata for {archiveId}. Aborting.')
+        return
     inserted = DB.insertIpaUrls(baseUrlId, entries)
     
     # If successful, remove from queue
@@ -725,21 +728,33 @@ def getNestedIpasViaViewArchive(url: str, archivePath: str) -> 'list[tuple[str, 
 
 def downloadListArchiveOrg(
     baseUrlId: int, archiveId: str, json_file: Path, *, force: bool = False, resume: bool = False
-) -> 'list[tuple[str, int, str]]':
-    ''' :returns: List of `(path_name, file_size, crc32)` '''
+) -> 'list[tuple[str, int, str]]|None':
+    ''' :returns: List of `(path_name, file_size, crc32)` or None on failure '''
     # store json for later
     if force or not json_file.exists():
         json_file.parent.mkdir(exist_ok=True)
         print(f'load: {archiveId}')
         req = Request(f'https://archive.org/metadata/{archiveId}/files')
         req.add_header('Accept-Encoding', 'deflate, gzip')
-        with urlopen(req) as page:
-            with open(json_file, 'wb') as fp:
-                while True:
-                    block = page.read(8096)
-                    if not block:
-                        break
-                    fp.write(block)
+        
+        import time
+        for attempt in range(3):
+            try:
+                with urlopen(req) as page:
+                    with open(json_file, 'wb') as fp:
+                        while True:
+                            block = page.read(8096)
+                            if not block:
+                                break
+                            fp.write(block)
+                break # Success
+            except Exception as e:
+                if attempt == 2:
+                    print(f'[ERROR] Failed to fetch metadata for {archiveId} after 3 attempts: {e}', file=stderr)
+                    return None
+                print(f'[WARN] Attempt {attempt+1} failed for {archiveId}: {e}. Retrying...', file=stderr)
+                time.sleep(1)
+
     # read saved json from disk
     try:
         with gzip.open(json_file, 'rb') as fp:
@@ -816,8 +831,16 @@ def updateUrl(url_or_uid: 'str|int', proc_i: int, proc_total: int):
 
     old_json_file = pathToListJson(archiveId)
     new_json_file = pathToListJson(archiveId, tmp=True)
-    old_entries = set(downloadListArchiveOrg(baseUrlId, archiveId, old_json_file, resume=True))
-    new_entries = set(downloadListArchiveOrg(baseUrlId, archiveId, new_json_file, resume=True))
+    old_entries_raw = downloadListArchiveOrg(baseUrlId, archiveId, old_json_file, resume=True)
+    new_entries_raw = downloadListArchiveOrg(baseUrlId, archiveId, new_json_file, resume=True)
+    
+    if old_entries_raw is None or new_entries_raw is None:
+        print(f'  [SKIP] Could not fetch metadata for {archiveId}. Skipping update.')
+        DB.markBaseUrlUpdated(baseUrlId)
+        return
+
+    old_entries = set(old_entries_raw)
+    new_entries = set(new_entries_raw)
     old_diff = old_entries - new_entries
     new_diff = new_entries - old_entries
 
@@ -915,6 +938,7 @@ def _procSinglePendingWrapper(args):
 def procSinglePending(
     processed: int, pending: int, uid: int, base_url: str, path_name
 ) -> 'tuple[int, bool]':
+    # ... (code truncated)
     full_path = path_name
     display_path = path_name.replace(NESTED_SEP, ' -> ')
     print(f'[{processed}|{pending} queued]: load[{uid}] {display_path}')
@@ -979,9 +1003,9 @@ def loadIpa(uid: int, url: str, *,
     # RemoteZip does not work on these via the Archive.org bridge.
     if inner_path and not url.lower().endswith('.zip'):
         direct_inner_url = f"{url}/{quote(inner_path)}"
-        with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
-            print(f"  downloading inner ipa from bridge: {inner_path}")
-            try:
+        try:
+            with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
+                print(f"  downloading inner ipa from bridge: {inner_path}")
                 req = Request(direct_inner_url, headers={'User-Agent': 'Mozilla/5.0'})
                 with urlopen(req) as response:
                     data = response.read(1024)
@@ -997,52 +1021,46 @@ def loadIpa(uid: int, url: str, *,
                             f.write(chunk)
                 
                 import zipfile
-                with zipfile.ZipFile(tmp.name) as zip:
-                    return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
-            except Exception as e:
-                print(f"ERROR: [{uid}] could not download/process inner ipa: {e}", file=stderr)
-                return False
+                try:
+                    with zipfile.ZipFile(tmp.name) as zip:
+                        return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
+                except zipfile.BadZipFile:
+                    print(f"ERROR: [{uid}] downloaded file is not a valid zip", file=stderr)
+                    return False
+        except Exception as e:
+            print(f"ERROR: [{uid}] could not download/process inner ipa: {e}", file=stderr)
+            return False
 
     # Handle ZIP archives (RemoteZip is fast here)
-    import time
-    last_err = None
-    for attempt in range(3):
-        try:
-            with RemoteZip(url) as outer_zip:
-                if inner_path:
-                    # Open nested IPA from outer ZIP and save to temp file to ensure seekability
-                    import zipfile
-                    with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
-                        print(f"  extracting nested ipa to temp: {inner_path}")
-                        with outer_zip.open(inner_path) as src:
-                            while True:
-                                buf = src.read(1024*1024)
-                                if not buf: break
-                                tmp.write(buf)
-                        tmp.flush()
-                        with zipfile.ZipFile(tmp.name) as zip:
-                            return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
-                else:
-                    # Regular direct IPA
-                    if USE_ZIP_FILESIZE:
-                        filesize = outer_zip.fp.tell() if outer_zip.fp else 0
-                        with open(basename.with_suffix('.size'), 'w') as fp:
-                            fp.write(str(filesize))
-                    return _processIpaZip(uid, outer_zip, basename, img_path, plist_path, image_only)
-        except Exception as e:
-            last_err = e
-            if '404' in str(e): break # Don't retry 404
-            
-            # Special handling for BadZipFile to help diagnose
-            if "File is not a zip file" in str(e):
-                print(f"  [ERROR] [{uid}] BadZipFile: {url} is not a valid zip.", file=stderr)
-                break
-
-            print(f"  [WARN] connect attempt {attempt+1} failed for {uid}: {e}", file=stderr)
-            time.sleep(1)
-    
-    if last_err:
-        print(f"ERROR: [{uid}] connection failed after retries: {last_err}", file=stderr)
+    try:
+        with RemoteZip(url) as outer_zip:
+            if inner_path:
+                # Open nested IPA from outer ZIP and save to temp file to ensure seekability
+                import zipfile
+                with tempfile.NamedTemporaryFile(suffix='.ipa') as tmp:
+                    print(f"  extracting nested ipa to temp: {inner_path}")
+                    with outer_zip.open(inner_path) as src:
+                        while True:
+                            buf = src.read(1024*1024)
+                            if not buf: break
+                            tmp.write(buf)
+                    tmp.flush()
+                    with zipfile.ZipFile(tmp.name) as zip:
+                        return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
+            else:
+                # Regular direct IPA
+                if USE_ZIP_FILESIZE:
+                    filesize = outer_zip.fp.tell() if outer_zip.fp else 0
+                    with open(basename.with_suffix('.size'), 'w') as fp:
+                        fp.write(str(filesize))
+                return _processIpaZip(uid, outer_zip, basename, img_path, plist_path, image_only)
+    except Exception as e:
+        if '404' in str(e):
+            print(f"ERROR: [{uid}] File not found (404): {url}", file=stderr)
+        elif "File is not a zip file" in str(e):
+            print(f"  [ERROR] [{uid}] BadZipFile: {url} is not a valid zip.", file=stderr)
+        else:
+            print(f"ERROR: [{uid}] connection failed: {e}", file=stderr)
     return False
 
 
