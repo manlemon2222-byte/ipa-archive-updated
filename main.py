@@ -227,13 +227,30 @@ def fix_missing_images(DB: 'CacheDB'):
     # We skip entries where done=4 because those are known to be broken/unfixable
     entries = list(DB.getUniqueImagePks())
     total = len(entries)
-    for i, (pk, img_pk) in enumerate(entries):
-        if i % 1000 == 0:
-            print(f"\rChecked {i}/{total} unique images...", end="")
-        img_path = diskPath(img_pk, '.jpg')
-        if not img_path.exists():
-            # Use the master pk to trigger the reload
-            missing.append(img_pk)
+    
+    # Group by shard for faster filesystem checking
+    shards = {}
+    for pk, img_pk in entries:
+        s = img_pk // 1000
+        if s not in shards:
+            shards[s] = []
+        shards[s].append(img_pk)
+        
+    checked = 0
+    for s, pks in sorted(shards.items()):
+        shard_dir = CACHE_DIR / str(s)
+        if not shard_dir.exists():
+            missing.extend(pks)
+        else:
+            # Batch list the directory for performance
+            existing = {f.name for f in shard_dir.iterdir() if f.suffix == '.jpg'}
+            for img_pk in pks:
+                if f"{img_pk}.jpg" not in existing:
+                    missing.append(img_pk)
+        checked += len(pks)
+        if checked % 100 == 0 or checked == total:
+            print(f"\rChecked {checked}/{total} unique images...", end="")
+
     print(f"\rChecked {total}/{total} unique images. Done.")
     
     if not missing:
@@ -409,11 +426,12 @@ class CacheDB:
         self, baseUrlId: int, entries: 'Iterable[tuple[str, int, str]]'
     ) -> int:
         ''' :entries: must be iterable of `(path_name, filesize, crc32)` '''
+        before = self._db.total_changes
         self._db.executemany('''
         INSERT OR IGNORE INTO idx (base_url, path_name, fsize) VALUES (?,?,?);
         ''', ((baseUrlId, path, size) for path, size, _crc in entries))
         self._db.commit()
-        return self._db.total_changes
+        return self._db.total_changes - before
 
     # Update URL
 
@@ -652,12 +670,21 @@ def addNewUrl(url: str, resume: bool = False) -> None:
     # Add to resume queue
     DB.addToScrapeQueue(url)
 
+    # Track initial count to report progress correctly
+    initial_count = DB._db.execute("SELECT COUNT(*) FROM idx WHERE base_url=?", [baseUrlId]).fetchone()[0]
+
     json_file = pathToListJson(archiveId)
     entries = downloadListArchiveOrg(baseUrlId, archiveId, json_file, resume=resume)
     if entries is None:
         print(f'[ERROR] Could not fetch metadata for {archiveId}. Aborting.')
         return
-    inserted = DB.insertIpaUrls(baseUrlId, entries)
+    
+    # Final insert for any entries not already handled by downloadListArchiveOrg
+    DB.insertIpaUrls(baseUrlId, entries)
+    
+    # Calculate how many were actually added
+    final_count = DB._db.execute("SELECT COUNT(*) FROM idx WHERE base_url=?", [baseUrlId]).fetchone()[0]
+    inserted = final_count - initial_count
     
     # If successful, remove from queue
     DB.removeFromScrapeQueue(url)

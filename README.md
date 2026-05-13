@@ -82,6 +82,7 @@ Similar commands exist on Linux and Windows.
 The column `done` is encoded as follows:
 - `0` (queued, needs processing)
 - `1` (done)
+- `2` (image retry, processing successful but icon was missing)
 - `3` (error, maybe fixable, needs attention)
 - `4` (error, unfixable, ignore in export)
 

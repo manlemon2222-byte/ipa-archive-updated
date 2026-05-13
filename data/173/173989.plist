@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AdwhirlAppKey</key>
+	<string>9a84afbd8c19102cacaeb7ee82c24617</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Pee Monkey 2</string>
+	<key>CFBundleExecutable</key>
+	<string>PeeMonkeyToiletTrainer2</string>
+	<key>CFBundleIdentifier</key>
+	<string>net.exoweb.PeeMonkeyToiletTrainer2</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>PeeMonkeyToiletTrainer2</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.6</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>13</string>
+	<key>DTCompiler</key>
+	<string>4.2</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTPlatformVersion</key>
+	<string>4.0 GM</string>
+	<key>DTSDKName</key>
+	<string>iphoneos4.0</string>
+	<key>DTXcode</key>
+	<string>0323</string>
+	<key>HLPConf</key>
+	<string>hlp.toilettrainer.plist</string>
+	<key>HighScoreServer</key>
+	<string>http://app.happylatte.com/scoreboard/</string>
+	<key>InAppAds</key>
+	<string>http://app.happylatte.com/static/ttadscreen/ads.json</string>
+	<key>InAppNewsServer</key>
+	<string>http://app.happylatte.com/w/toilettrainer2/</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>isFullVersion</key>
+	<true/>
+</dict>
+</plist>
