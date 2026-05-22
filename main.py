@@ -674,7 +674,7 @@ def addNewUrl(url: str, resume: bool = False) -> None:
     initial_count = DB._db.execute("SELECT COUNT(*) FROM idx WHERE base_url=?", [baseUrlId]).fetchone()[0]
 
     json_file = pathToListJson(archiveId)
-    entries = downloadListArchiveOrg(baseUrlId, archiveId, json_file, resume=resume)
+    entries = downloadListArchiveOrg(baseUrlId, archiveId, json_file, force=not resume, resume=resume)
     if entries is None:
         print(f'[ERROR] Could not fetch metadata for {archiveId}. Aborting.')
         return
