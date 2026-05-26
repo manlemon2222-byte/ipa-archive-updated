@@ -129,7 +129,8 @@ def main():
             for pk in args.pk:
                 url = DB.getUrl(pk)
                 print(pk, ': process', url)
-                if loadIpa(pk, url, overwrite=True):
+                success, _img_pk = loadIpa(pk, url, overwrite=True)
+                if success:
                     DB.setDone(pk)
                 else:
                     DB.setError(pk, done=3)
@@ -265,17 +266,23 @@ def fix_missing_images(DB: 'CacheDB'):
             res = DB._db.execute("SELECT done FROM idx WHERE pk=?", [pk]).fetchone()
             state = res[0] if res else 1
             
-            loadIpa(pk, url, overwrite=True, image_only=True)
+            success, img_pk = loadIpa(pk, url, overwrite=True, image_only=True)
             
-            if not diskPath(pk, ".jpg").exists():
+            if success and img_pk != pk:
+                print(f"  [FIX] [{pk}] deduplicated to {img_pk}. Updating database...")
+                DB._db.execute("UPDATE idx SET image_pk=? WHERE image_pk=?", [img_pk, pk])
+                DB._db.commit()
+            
+            # Re-check disk path using the potentially updated img_pk
+            if not diskPath(img_pk, ".jpg").exists():
                 if state == 1:
                     print(f"  [WARN] [{pk}] Still no image. Setting to retry state (done=2).")
-                    DB._db.execute("UPDATE idx SET done=2 WHERE image_pk=?", [pk])
+                    DB._db.execute("UPDATE idx SET done=2 WHERE image_pk=?", [img_pk])
                     DB._db.commit()
                 else:
                     print(f"  [ERROR] [{pk}] Still no image after retry. Marking as permanent error.")
                     # Mark ALL entries sharing this image as permanent error
-                    uids = DB._db.execute("SELECT pk FROM idx WHERE image_pk=?", [pk]).fetchall()
+                    uids = DB._db.execute("SELECT pk FROM idx WHERE image_pk=?", [img_pk]).fetchall()
                     for (uid,) in uids:
                         DB.setPermanentError(uid)
     print("done.")
@@ -632,28 +639,49 @@ class CacheDB:
                         if p.exists():
                             os.remove(p)
 
-        # Coke-style Auto-fix: if extracted metadata has NO overlap with filename
+        # --- ARCHITECTURAL GUARD: UNIVERSAL SENTINEL RULE ---
         res = self._db.execute('SELECT path_name FROM idx WHERE pk=?', [uid]).fetchone()
         path_name = res[0] if res else ""
+        
         if path_name:
-            # Normalize to words (min 2 chars)
-            p_words = set(re.findall(r'[a-z0-9]{2,}', path_name.lower()))
-            t_words = set(re.findall(r'[a-z0-9]{2,}', (title or "").lower()))
-            b_words = set(re.findall(r'[a-z0-9]{2,}', (bundleId or "").lower()))
+            def get_clean_words(text):
+                text = re.sub(r'([a-z])([A-Z])', r'\1 \2', str(text))
+                return re.findall(r'[a-z0-9]{2,}', text.lower())
             
-            # If both Title and Bundle ID are completely foreign to the filename
-            if (t_words and not (t_words & p_words)) and (b_words and not (b_words & p_words)):
-                # Infer from filename (e.g., com.coke.cokecheers-iOS3.0.ipa)
-                # Take the part before the first dash or space
-                fn_part = re.split(r'[-_\s]', path_name)[0]
-                if '.' in fn_part:
-                    bundleId = fn_part
-                    title = fn_part.split('.')[-1].capitalize()
+            def is_hint_match(word, target):
+                if not word or not target: return False
+                it = iter(target.lower())
+                return all(c in it for c in word.lower())
+
+            fn_words = get_clean_words(path_name.split('##')[-1])
+            bid_full = str(bundleId).lower()
+            tl_full = str(title).lower()
+            
+            has_hint = False
+            for w in fn_words:
+                if is_hint_match(w, bid_full) or is_hint_match(w, tl_full):
+                    has_hint = True
+                    break
+            
+            # BLOCK & AUTO-FIX
+            if not has_hint:
+                # 1. Purge corrupted files
+                for ext in ['.plist', '.png', '.jpg']:
+                    p = diskPath(uid, ext)
+                    if p.exists(): p.unlink()
+                
+                # 2. Attempt AUTHENTIC Inference from filename
+                fn = path_name.split('##')[-1].replace('.ipa', '')
+                bid_pattern = re.search(r'([a-z]{2,}\.[a-z0-9]{2,}\.[a-z0-9\.]+)', fn.lower())
+                
+                if bid_pattern:
+                    bundleId = bid_pattern.group(1)
+                    title = bundleId.split('.')[-1].replace('-', ' ').replace('_', ' ').title()
                 else:
-                    title = fn_part.capitalize()
-                    # Keep existing bundleId if it exists, or generate one
-                    if not bundleId:
-                        bundleId = "com.archive." + fn_part.lower()
+                    noise = {'old', 'ios', 'ipa', 'v1', 'v2', 'v3'}
+                    parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
+                    title = (parts[0] if parts else fn).title()
+                    bundleId = f"com.archive.{title.lower()}"
 
         self._db.execute('''
             UPDATE idx SET
@@ -959,8 +987,9 @@ def processPending():
             batch = [(processed + i + 1, pending - i - 1, *x)
                      for i, x in enumerate(batch)]
 
-            for uid, success in executor.map(_procSinglePendingWrapper, batch):
+            for uid, res in executor.map(_procSinglePendingWrapper, batch):
                 processed += 1
+                success, _img_pk = res
                 DB = CacheDB()
                 fsize = onceReadSizeFromFile(uid)
                 if fsize:
@@ -987,7 +1016,7 @@ def _procSinglePendingWrapper(args):
 
 def procSinglePending(
     processed: int, pending: int, uid: int, base_url: str, path_name
-) -> 'tuple[int, bool]':
+) -> 'tuple[int, tuple[bool, int]]':
     # ... (code truncated)
     full_path = path_name
     display_path = path_name.replace(NESTED_SEP, ' -> ')
@@ -1001,7 +1030,7 @@ def procSinglePending(
         return uid, loadIpa(uid, url)
     except Exception as e:
         print(f'ERROR: [{uid}] {e}', file=stderr)
-    return uid, False
+    return uid, (False, uid)
 
 
 def onceReadSizeFromFile(uid: int) -> 'int|None':
@@ -1019,13 +1048,18 @@ def onceReadSizeFromFile(uid: int) -> 'int|None':
 ###############################################
 
 def loadIpa(uid: int, url: str, *,
-            overwrite: bool = False, image_only: bool = False) -> bool:
+            overwrite: bool = True, image_only: bool = False) -> 'tuple[bool, int]':
     basename = diskPath(uid, '')
     basename.parent.mkdir(exist_ok=True, mode=0o755)
     img_path = basename.with_suffix('.png')
     plist_path = basename.with_suffix('.plist')
-    if not overwrite and plist_path.exists():
-        return True
+
+    # --- LAW OF FRESH EXTRACTION ---
+    # Always delete stale metadata to prevent "Sticky Corruption"
+    if not image_only:
+        for ext in ['.plist', '.png', '.jpg']:
+            p = basename.with_suffix(ext)
+            if p.exists(): p.unlink()
 
     # Support both old format (##) and new format (nested slash)
     inner_path = None
@@ -1061,7 +1095,7 @@ def loadIpa(uid: int, url: str, *,
                     data = response.read(1024)
                     if data.startswith(b'<!DOCTYPE html>') or data.startswith(b'<html>'):
                         print(f"ERROR: [{uid}] bridge returned HTML instead of file", file=stderr)
-                        return False
+                        return False, uid
                     
                     with open(tmp.name, 'wb') as f:
                         f.write(data)
@@ -1076,10 +1110,10 @@ def loadIpa(uid: int, url: str, *,
                         return _processIpaZip(uid, zip, basename, img_path, plist_path, image_only)
                 except zipfile.BadZipFile:
                     print(f"ERROR: [{uid}] downloaded file is not a valid zip", file=stderr)
-                    return False
+                    return False, uid
         except Exception as e:
             print(f"ERROR: [{uid}] could not download/process inner ipa: {e}", file=stderr)
-            return False
+            return False, uid
 
     # Handle ZIP archives (RemoteZip is fast here)
     try:
@@ -1111,12 +1145,13 @@ def loadIpa(uid: int, url: str, *,
             print(f"  [ERROR] [{uid}] BadZipFile: {url} is not a valid zip.", file=stderr)
         else:
             print(f"ERROR: [{uid}] connection failed: {e}", file=stderr)
-    return False
+    return False, uid
 
 
-def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) -> bool:
+def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) -> 'tuple[bool, int]':
     app_prefix = None
     artwork = False
+    used_image_pk = uid
     zip_listing = zip.infolist()
     
     # First pass: find Info.plist AND check for duplicates
@@ -1144,7 +1179,8 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                             if existing_img_pk:
                                 print(f'  reusing image from {existing_img_pk}')
                                 artwork = True # Skip further icon extraction
-                                if image_only: return True # Optimization: if only image requested, we are done
+                                used_image_pk = existing_img_pk
+                                if image_only: return True, used_image_pk # Optimization: if only image requested, we are done
                             del db
                     except:
                         pass
@@ -1152,7 +1188,7 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                 if image_only and not artwork:
                     pass # Continue to find icon
                 elif image_only and artwork:
-                    return True
+                    return True, used_image_pk
 
     # Second pass: extract iTunesArtwork if needed
     if not artwork:
@@ -1191,7 +1227,7 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
     if artwork and not os.path.exists(basename.with_suffix('.jpg')) and os.path.exists(img_path):
         processImage(img_path)
 
-    return plist_path.exists()
+    return plist_path.exists(), used_image_pk
 
 
 def extractZipEntry(zip: 'RemoteZip', zipInfo: 'ZipInfo', dest_filename: Path):
