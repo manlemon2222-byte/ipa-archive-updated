@@ -5,40 +5,44 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>KENKEN</string>
+	<string>The Word</string>
 	<key>CFBundleExecutable</key>
-	<string>KENKEN</string>
+	<string>colbert_iPhone</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.capcom.KENKEN</string>
+	<string>com.mtvn.ColbertTheWord</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>KENKEN</string>
+	<string>colbert_iPhone</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2</string>
+	<string>iphoneos3.1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.2</string>
+	<string>3.1.2</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
 </plist>

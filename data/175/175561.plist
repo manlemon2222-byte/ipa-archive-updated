@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iAPODViewer</string>
+	<string>Tetravex</string>
 	<key>CFBundleExecutable</key>
-	<string>iAPODViewer</string>
+	<string>Tetravex</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>uk.co.sendmetospace.iAPODViewer</string>
+	<string>com.futrellsoftware.Tetravex</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iAPODViewer</string>
+	<string>Tetravex</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,24 +23,20 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.0.3</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MMAppID</key>
-	<string>3ef2e9b2ffffffff9b937c81</string>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>(SDK_NAME)</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<false/>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<string>NO</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<string>YES</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackTranslucent</string>
 </dict>
 </plist>

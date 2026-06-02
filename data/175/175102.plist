@@ -5,17 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pro RSS</string>
+	<string>Muddle</string>
 	<key>CFBundleExecutable</key>
-	<string>ProRSSReader</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Muddle</string>
 	<key>CFBundleIdentifier</key>
-	<string>net.oualid.ProRssReader</string>
+	<string>com.muddledgame.Muddle</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ProRSSReader</string>
+	<string>Muddle</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,18 +21,14 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.5.1</string>
+	<string>1.0.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<string>YES</string>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>(SDK_NAME)</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleOpaqueBlack</string>
 </dict>
 </plist>

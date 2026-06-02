@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MyMemoryMad</string>
+	<string>Ask a book</string>
 	<key>CFBundleExecutable</key>
-	<string>MyMemoryMad</string>
+	<string>FortuneTeller</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jajaco.mymemorymad</string>
+	<string>com.ipspirates.askabook</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MyMemoryMad</string>
+	<string>AskABook</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -36,11 +36,7 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
 </plist>

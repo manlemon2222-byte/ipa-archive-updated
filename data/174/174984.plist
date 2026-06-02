@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>PathTracker</string>
+	<string>Leaf T-Bone</string>
 	<key>CFBundleExecutable</key>
-	<string>PathTracker</string>
+	<string>LeafTBone</string>
+	<key>CFBundleIconFile</key>
+	<string>ltr-icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.marketwall.Path-Tracker</string>
+	<string>com.yourcompany.LeafTBone</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>PathTracker</string>
+	<string>LeafTBone</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -21,20 +23,22 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.0.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>SMBuildVersion</key>
+	<string>5365</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
-	<key>SignerIdentity</key>
-	 <string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

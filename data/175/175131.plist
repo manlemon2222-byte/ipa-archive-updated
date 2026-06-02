@@ -3,42 +3,119 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Race Wars</string>
+	<string>Bullfrog</string>
 	<key>CFBundleExecutable</key>
-	<string>Race Wars</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Bullfrog</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.playmesh.100iracing1a</string>
+	<string>com.outerlevel.bullfrogtouch</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Race Wars</string>
+	<string>Bullfrog</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>MinimumOSVersion</key>
 	<string>2.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeLeft</string>
-	<key>UIStatusBarHidden</key>
+	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleOpaqueBlack</string>
+	<key>bftHighscorePostURL</key>
+	<string>http://outerlevel.com/api/bullfrog-touch/submit_highscores.php</string>
+	<key>bftViewHighscoreURL</key>
+	<string>http://outerlevel.com/bullfrog-touch/highscores/</string>
+	<key>kCompanyURL</key>
+	<string>http://www.outerlevel.com</string>
+	<key>sounds</key>
+	<array>
+		<dict>
+			<key>duration</key>
+			<string>3.66</string>
+			<key>key</key>
+			<string>kSoundClock</string>
+			<key>loop</key>
+			<true/>
+			<key>path</key>
+			<string>clock.caf</string>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<string>35.5</string>
+			<key>key</key>
+			<string>kSoundJungleBackground</string>
+			<key>loop</key>
+			<true/>
+			<key>path</key>
+			<string>jungle.caf</string>
+			<key>type</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<string>16.02</string>
+			<key>key</key>
+			<string>kSoundThemeSong</string>
+			<key>loop</key>
+			<true/>
+			<key>path</key>
+			<string>BullfrogTheme.caf</string>
+			<key>type</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<string>0.24</string>
+			<key>key</key>
+			<string>kSoundBugEaten</string>
+			<key>loop</key>
+			<false/>
+			<key>path</key>
+			<string>chomp.caf</string>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<string>2.3</string>
+			<key>key</key>
+			<string>kSoundMosquito</string>
+			<key>loop</key>
+			<true/>
+			<key>path</key>
+			<string>mosquito.caf</string>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<real>0.46999999999999997</real>
+			<key>key</key>
+			<string>kSoundPlayerAttack</string>
+			<key>loop</key>
+			<false/>
+			<key>path</key>
+			<string>whip.caf</string>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+	</array>
 </dict>
 </plist>

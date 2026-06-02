@@ -3,17 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>LightUp</string>
+	<string>Tap Memory</string>
 	<key>CFBundleExecutable</key>
-	<string>LightUpManiak</string>
+	<string>Tap Memory</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.puzzlemaniak.lightup</string>
+	<string>com.corykilger.tapmemory</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>LightUpManiak</string>
+	<string>Tap Memory</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -25,12 +27,18 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
 </plist>

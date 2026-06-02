@@ -5,38 +5,44 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>body2</string>
+	<string>Forest Fire</string>
 	<key>CFBundleExecutable</key>
-	<string>mybody</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>ForestFire</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.elsalvadorguia.body2</string>
+	<string>XenGamesLimitedForestFire</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>mybody</string>
+	<string>ForestFire</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>1.0 iPhoneCake.com</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2.1</string>
+	<string>iphoneos2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.2.1</string>
+	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon key</key>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>

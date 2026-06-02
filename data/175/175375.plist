@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>fr_CA</string>
 	<key>CFBundleDisplayName</key>
-	<string>TouchScan</string>
+	<string>STM mobile</string>
 	<key>CFBundleExecutable</key>
-	<string>TouchScan</string>
+	<string>STM mobile</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>de.software-diner.TouchScan</string>
+	<string>com.iancloutier.STM-mobile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TouchScan</string>
+	<string>STM mobile</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -28,10 +28,8 @@
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
+	<key>UIRequiresPersistentWiFi</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 </dict>

@@ -3,47 +3,42 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Tap Tap</string>
+	<string>Race Wars</string>
 	<key>CFBundleExecutable</key>
-	<string>TapTap</string>
+	<string>Race Wars</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.tapulous.TapTap</string>
+	<string>com.playmesh.100iracing1a</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Tap Tap</string>
+	<string>Race Wars</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.tapulous.TapTapURL</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>ttrcmd</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>1.2</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>iphoneos2.0</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MinimumOSVersion</key>
 	<string>2.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeLeft</string>
+	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackTranslucent</string>
 </dict>
 </plist>

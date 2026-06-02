@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Picoli</string>
+	<string>Loopy Lab</string>
 	<key>CFBundleExecutable</key>
-	<string>Picoli</string>
+	<string>Loopy Lab</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>de.alazar.picoli</string>
+	<string>com.bastossings.LoopyLab</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Picoli</string>
+	<string>Loopy Lab</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,14 +27,18 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

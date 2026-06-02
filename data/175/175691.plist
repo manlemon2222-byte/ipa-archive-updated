@@ -3,36 +3,42 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>iXboxLive</string>
+	<string>WeatherBug</string>
 	<key>CFBundleExecutable</key>
-	<string>ixboxlive</string>
+	<string>WeatherBug</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>eliteIcon_57x57.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>net.npike.ixboxlive</string>
+	<string>com.aws.weatherbug.elite</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ixboxlive</string>
+	<string>WeatherBug</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.0.7</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<string>true</string>
 </dict>
 </plist>

@@ -5,15 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>WiFinder</string>
+	<string>WHackGroundHog</string>
 	<key>CFBundleExecutable</key>
-	<string>WiFinder</string>
+	<string>WHackGroundHog</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.WiFinder</string>
+	<string>com.yourcompany.WHackGroundHog</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>WiFinder</string>
+	<string>WHackGroundHog</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -30,6 +32,8 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 </dict>

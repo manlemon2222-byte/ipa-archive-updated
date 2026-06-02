@@ -3,35 +3,39 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitness</string>
+	<string>Space</string>
 	<key>CFBundleExecutable</key>
-	<string>Fitness</string>
+	<string>IsoundsSpace</string>
 	<key>CFBundleIconFile</key>
-	<string>fitness.png</string>
+	<string>isounds.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.aquaeagle.absolutefitness</string>
+	<string>com.yourcompany.IsoundsSpace</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Fitness</string>
+	<string>IsoundsSpace</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>iphoneos2.2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>2.2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 </dict>

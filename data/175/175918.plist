@@ -3,47 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>SoundMeter</string>
+	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>SoundMeter</string>
+	<string>videorecorder3g</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.faberacoustical.soundmeter</string>
+	<string>com.dreamcatcher.videorecorder3g</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>SoundMeter</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleResourceSpecification</key>
-	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.faberacoustical.soundmeter</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>soundmeter</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>DTPlatformName</key>
-	<string>iphoneos</string>
-	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSMainNibFile</key>
-	<string>SoundMeterWindow</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleOpaqueBlack</string>
+	<string>2.0.1</string>
 	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
+    <string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

@@ -5,41 +5,43 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Ultranium</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
+	<string>SixPack Pro</string>
 	<key>CFBundleExecutable</key>
-	<string>Ultranium</string>
+	<string>SixPack Pro</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jadegame.ultranium4</string>
+	<string>V2VBAEJZ7S.WorkoutWarrior</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Ultranium</string>
+	<string>SixPack Pro</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.3</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>WrkW</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.3</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>LSUIPresentationMode</key>
-	<integer>0</integer>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<key>MinimumOSVersion</key>
+	<string>2.2.1</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<string>1</string>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

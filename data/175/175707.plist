@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>newtonica</string>
+	<string>WiFiFoFum</string>
 	<key>CFBundleExecutable</key>
-	<string>newtonica</string>
+	<string>WiFiFoFum</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.fieldsystem.newtonica</string>
+	<string>com.aspecto-software.WiFiFoFum</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>newtonica</string>
+	<string>WiFiFoFum</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -24,6 +24,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>CrackedBy</key>
+	<string>xCrack 0.4</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -34,7 +36,5 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

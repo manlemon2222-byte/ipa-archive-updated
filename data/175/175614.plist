@@ -3,36 +3,44 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>iLoveControl</string>
+	<string>TraffTrouble</string>
 	<key>CFBundleExecutable</key>
-	<string>iLoveControl</string>
+	<string>TraffTrouble</string>
 	<key>CFBundleIconFile</key>
-	<string>ehaIcon.png</string>
+	<string>57_icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.iLUVC.iLoveControl</string>
+	<string>com.photoncreations.TraffMayhem</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iLoveControl</string>
+	<string>TraffTrouble</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>LUVC</string>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.2</string>
-	<key>CrackedBy</key>
-	<string>xCrack 0.4</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

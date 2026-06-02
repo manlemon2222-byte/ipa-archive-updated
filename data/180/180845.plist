@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Thai Dict Library</string>
+	<key>CFBundleExecutable</key>
+	<string>Dr.Wit Library</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>th.co.cn.drwitlib</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Dr.Wit Library</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.3.1</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.2</string>
+	<key>Dict1</key>
+	<string>ET-Library,Dr.Wit (Eng-Thai Lib Ed.)</string>
+	<key>Dict2</key>
+	<string>TE-Library,Dr.Wit (Thai-Eng Lib Ed.)</string>
+	<key>Dict3</key>
+	<string>TT-Library,Dr.Wit (Thai-Thai Lib Ed.)</string>
+	<key>DictSubtitle</key>
+	<string>(Thai-English-Thai Dictionary)</string>
+	<key>DictTitle</key>
+	<string>Dr.Wit's Library Edition</string>
+	<key>Dicts</key>
+	<string>3</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>Thai Keyboard</key>
+	<string>1</string>
+</dict>
+</plist>

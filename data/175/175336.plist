@@ -5,35 +5,39 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>SupermarketMania</string>
+	<string>Red Bull FMX</string>
 	<key>CFBundleExecutable</key>
-	<string>SupermarketMania</string>
+	<string>XFighters-0-4-0</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.g5e.smm</string>
+	<string>com.iplay.XFighters-0-4-0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>SupermarketMania</string>
+	<string>XFighters-0-4-0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.4.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>iphoneos3.0</string>
 	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>3.0</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

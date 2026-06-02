@@ -5,37 +5,29 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>VideoPoker</string>
+	<string>SplashID</string>
 	<key>CFBundleExecutable</key>
-	<string>VideoPoker</string>
+	<string>SplashID</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.nicoteam.videopoker</string>
+	<string>com.splashdata.splashid</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>VideoPoker</string>
+	<string>SplashID</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.000</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>SpId</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>4.04</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 </dict>

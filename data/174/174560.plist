@@ -3,43 +3,39 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ja</string>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>arcticclock</string>
 	<key>CFBundleExecutable</key>
-	<string>BombermanTouch</string>
+	<string>arcticclock</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>jp.co.hudson.BombermanTouch2</string>
+	<string>com.yourcompany.arcticclock</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>BombermanTouch</string>
+	<string>arcticclock</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>3.0</string>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
-	<key>UIPrerenderedIcon</key>
-	<false/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

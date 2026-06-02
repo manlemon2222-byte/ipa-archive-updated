@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Ouch!</string>
+	<string>JumbleXmas</string>
 	<key>CFBundleExecutable</key>
-	<string>Ouch!</string>
+	<string>JumbleXmas</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.games.hondune.ouch</string>
+	<string>jumblexmas</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Ouch!</string>
+	<string>JumbleXmas</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -29,18 +29,16 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2</string>
+	<string>iphoneos2.1</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>YES</string>
 	<key>MinimumOSVersion</key>
-	<string>2.2</string>
+	<string>2.1</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Cavebear</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

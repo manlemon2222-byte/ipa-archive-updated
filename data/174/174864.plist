@@ -5,42 +5,36 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Mini Taxi</string>
+	<string>Gaia</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
 	<key>CFBundleExecutable</key>
-	<string>MiniTaxi</string>
+	<string>Gaia</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.patrickcorrieri.miniracers</string>
+	<string>com.quicksandsw.gaia</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MiniTaxi</string>
+	<string>Gaia</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2.1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.2.1</string>
+	<string>(SDK_NAME)</string>
+	<key>NSMainNibFile</key>
+	<string>main</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<string>true</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<string>YES</string>
 </dict>
 </plist>

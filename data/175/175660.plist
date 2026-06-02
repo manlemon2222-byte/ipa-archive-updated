@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iSnap</string>
+	<string>geneBlender</string>
 	<key>CFBundleExecutable</key>
-	<string>iSnap</string>
+	<string>geneBlender</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>icon2.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.phelios.iSnap</string>
+	<string>com.mcMike.geneBlender</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iSnap</string>
+	<string>geneBlender</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -29,14 +29,10 @@
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>YES</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

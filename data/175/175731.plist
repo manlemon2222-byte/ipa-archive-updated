@@ -5,17 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MobileFamilyTree</string>
+	<string>Yetisports</string>
 	<key>CFBundleExecutable</key>
-	<string>MobileFamilyTree</string>
-	<key>CFBundleIconFile</key>
-	<string>AppIcon.png</string>
+	<string>Yetisports</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.synium.mobilefamilytree</string>
+	<string>org.root9.Yetisports</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MobileFamilyTree</string>
+	<string>Yetisports</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,14 +21,24 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.11</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
+	<string>iphoneos2.2</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

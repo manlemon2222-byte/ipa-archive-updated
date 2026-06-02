@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Masyu</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
+	<string>FoxieHunny</string>
 	<key>CFBundleExecutable</key>
-	<string>Masyu</string>
+	<string>FoxieHunny</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.tootsweet.masyu</string>
+	<string>com.FusionCreativeStudios.FoxieHunny</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Masyu</string>
+	<string>FoxieHunny</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,16 +23,18 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.0</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<false/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

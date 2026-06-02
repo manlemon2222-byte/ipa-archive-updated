@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>VirtualDeck</string>
+	<string>SoLuna</string>
 	<key>CFBundleExecutable</key>
-	<string>VirtualDeck</string>
+	<string>SoLuna</string>
+	<key>CFBundleIconFile</key>
+	<string>icon_small.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.quickdecay.VirtualDeck</string>
+	<string>com.DannyFlippo.SoLuna</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>VirtualDeck</string>
+	<string>SoLuna</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -21,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>1.0.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -30,9 +32,9 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<key>UIPrerenderedIcon</key>
+	<string>NO</string>
+<key>SignerIdentity</key>
+<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

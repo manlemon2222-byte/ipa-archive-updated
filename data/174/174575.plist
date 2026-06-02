@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MyMemoryMad</string>
+	<string>Fitness</string>
 	<key>CFBundleExecutable</key>
-	<string>MyMemoryMad</string>
+	<string>Fitness</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>fitness.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jajaco.mymemorymad</string>
+	<string>com.aquaeagle.absolutefitness</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MyMemoryMad</string>
+	<string>Fitness</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>2.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -32,15 +32,7 @@
 	<true/>
 	<key>MinimumOSVersion</key>
 	<string>2.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

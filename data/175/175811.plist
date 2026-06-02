@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>iSurvive - Survival Reference Manual: SURVIVAL, EVASION, AND RECOVERY</string>
+	<string>iMemory</string>
 	<key>CFBundleExecutable</key>
-	<string>Book</string>
+	<string>iMemory</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.dmbc.iSurviveSurvivalReferenceManual</string>
+	<string>com.playmesh.imemory</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Book</string>
+	<string>iMemory</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,18 +23,20 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2</string>
+	<string>iphoneos2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.2</string>
+	<string>2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

@@ -3,19 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iAnimalKingdom</string>
+	<string>moleskinery+</string>
 	<key>CFBundleExecutable</key>
-	<string>mobiMovingAnimals</string>
-	<key>CFBundleIconFile</key>
-	<string>icon_small.png</string>
+	<string>moleskineryPlus</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mobidham.aniking</string>
+	<string>com.databinge.moleskineryPlus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>mobiMovingAnimals</string>
+	<string>moleskineryPlus</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,18 +21,18 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleOpaqueBlack</string>
 </dict>
 </plist>

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>WorldWiki+</string>
+	<string>Starsmasher</string>
 	<key>CFBundleExecutable</key>
-	<string>WorldWikiPlus</string>
+	<string>Starfield</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.techlumina.WorldWikiPlus</string>
+	<string>com.espressosoft.Starfield</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>WorldWikiPlus</string>
+	<string>Starfield</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -25,14 +27,16 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+<key>SignerIdentity</key>
+<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

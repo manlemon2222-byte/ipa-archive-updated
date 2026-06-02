@@ -3,52 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Shazam</string>
+	<string>Parks Envi</string>
 	<key>CFBundleExecutable</key>
-	<string>Shazam</string>
+	<string>Parks Envi</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Parks Envi 1.0.2, ©2008 Open Door Networks, Inc. @2008 Project A, Inc. All Rights Reserved.</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>iconParks.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.shazam.Shazam</string>
+	<string>com.opendoor.parksenvi</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>Shazam</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.5.3</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.shazam.Shazam</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>shazamid</string>
-				<string>shazam</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>44</string>
+	<string>1.0.2</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
-	<key>MinimumOSVersion</key>
-	<string>2.1</string>
+	<string>(SDK_NAME)</string>
 	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>iEnvision</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleOpaqueBlack</string>
+	<string>UIStatusBarStyleDefault</string>
 </dict>
 </plist>

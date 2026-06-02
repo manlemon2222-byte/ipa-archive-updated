@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>OmniTuner</string>
+	<string>JewelQuestII</string>
 	<key>CFBundleExecutable</key>
-	<string>OmniTuner</string>
+	<string>JewelQuestII</string>
 	<key>CFBundleIconFile</key>
-	<string>icon</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mauvilasoftware.omnituner</string>
+	<string>com.iplay.JewelQuestII</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>OmniTuner</string>
+	<string>JewelQuestII</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -28,9 +28,13 @@
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>UIPrerenderedIcon</key>
+	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

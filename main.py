@@ -46,6 +46,12 @@ re_archive_url = re.compile(
 CACHE_DIR = Path(__file__).parent / 'data'
 CACHE_DIR.mkdir(exist_ok=True)
 
+# Load Special Exceptions (Mappings of Bundle ID -> image_pk)
+EXCEPTIONS_FILE = CACHE_DIR / 'exceptions.json'
+EXCEPTIONS = {}
+if EXCEPTIONS_FILE.exists():
+    with open(EXCEPTIONS_FILE, 'r') as f:
+        EXCEPTIONS = json.load(f)
 
 def main():
     CacheDB().init()
@@ -92,6 +98,9 @@ def main():
     cmd = cli.add_parser('clear-queue', help='DELETE pending entries from the database')
     cmd.add_argument('queue_type', choices=['run', 'add'], metavar='type', 
                      help='run: Processing queue (done=0), add: Scraping queue')
+
+    cmd = cli.add_parser('special', help='Consolidate all images for a bundle ID to the first one')
+    cmd.add_argument('bundle_id', help='The Bundle ID to consolidate')
 
     args = parser.parse_args()
 
@@ -220,6 +229,55 @@ def main():
         count = CacheDB().clearQueue(type=args.queue_type)
         print(f'Successfully cleared {count} {args.queue_type} entries from the database.')
 
+    elif args.cmd == 'special':
+        DB = CacheDB()
+        bid = args.bundle_id
+        print(f"Consolidating images for: {bid}")
+        
+        # Find the first entry that has an image
+        res = DB._db.execute("""
+            SELECT image_pk FROM idx 
+            WHERE bundle_id=? AND done=1 AND image_pk IS NOT NULL 
+            ORDER BY pk ASC LIMIT 1
+        """, [bid]).fetchone()
+        
+        if not res:
+            print(f"Error: No processed entries (done=1) found for {bid} with an image.")
+            return
+            
+        master_pk = res[0]
+        if not diskPath(master_pk, '.jpg').exists():
+            print(f"Error: Master image {master_pk}.jpg not found on disk.")
+            return
+            
+        print(f"Master Image PK identified: {master_pk}")
+        
+        # Update JSON
+        EXCEPTIONS[bid] = master_pk
+        with open(EXCEPTIONS_FILE, 'w') as f:
+            json.dump(EXCEPTIONS, f, indent=4)
+        print(f"Updated exceptions.json")
+        
+        # Update Database
+        cur = DB._db.execute("UPDATE idx SET image_pk=? WHERE bundle_id=?", [master_pk, bid])
+        count = cur.rowcount
+        print(f"Updated {count} entries in database.")
+        DB._db.commit()
+        
+        # Cleanup orphaned files
+        cur = DB._db.execute("SELECT pk FROM idx WHERE bundle_id=?", [bid])
+        pks = [row[0] for row in cur.fetchall()]
+        deleted_count = 0
+        for pk in pks:
+            if pk == master_pk: continue
+            for ext in ['.jpg', '.png']:
+                p = diskPath(pk, ext)
+                if p.exists():
+                    p.unlink()
+                    deleted_count += 1
+        print(f"Deleted {deleted_count} orphaned icon files.")
+        print("done.")
+
 
 def fix_missing_images(DB: 'CacheDB'):
     missing = []
@@ -292,10 +350,57 @@ def fix_missing_images(DB: 'CacheDB'):
 # Database
 ###############################################
 
+###############################################
+# Database
+###############################################
+
+# --- PRE-COMPILED REGEX FOR INSTANT SPEED ---
+RE_HASH = re.compile(r'-[0-9a-f]{32}')
+RE_BRACKETS = re.compile(r'[\(\[].*?[\)\]]')
+RE_VERSION = re.compile(r'[-.]v?\d+(\.\d+)*')
+RE_CAMEL = re.compile(r'([a-z])([A-Z])')
+RE_WORDS = re.compile(r'[a-z0-9]{2,}')
+RE_BID = re.compile(r'([a-z]{2,}\.[a-z0-9]{2,}\.[a-z0-9\.]+)')
+
+def get_clean_words(text):
+    """Optimized word extractor"""
+    text = RE_CAMEL.sub(r'\1 \2', str(text))
+    return RE_WORDS.findall(text.lower())
+
+def is_hint_match(word, target):
+    """Optimized fuzzy matcher"""
+    if not word or not target: return False
+    it = iter(target.lower())
+    return all(c in it for c in word.lower())
+
+def prettify_title(title: str, bundle_id: str, path_name: str) -> str:
+    """Ultra-fast local title polisher"""
+    if not title or title.lower() in ["cfbundledisplayname", "cfbundlename", "templete", "null", "unknown"]:
+        source = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
+        if len(source) < 3 and bundle_id:
+            source = bundle_id.split('.')[-1]
+    elif title.lower().startswith(('com.', 'net.', 'org.')):
+        source = title.split('.')[-1]
+    else:
+        source = title
+
+    # Clean noise using pre-compiled regex
+    source = RE_HASH.sub('', source)
+    source = RE_BRACKETS.sub('', source)
+    source = RE_VERSION.sub('', source)
+    
+    pretty = source.replace('.', ' ').replace('-', ' ').replace('_', ' ')
+    pretty = ' '.join(pretty.split()).title()
+    
+    if len(pretty) < 2 and bundle_id:
+        pretty = str(bundle_id).split('.')[-1].title()
+    return pretty
+
 class CacheDB:
     def __init__(self) -> None:
-        self._db = sqlite3.connect(CACHE_DIR / 'ipa_cache.db')
-        self._db.execute('pragma busy_timeout=5000')
+        self._db = sqlite3.connect(CACHE_DIR / 'ipa_cache.db', timeout=60.0)
+        self._db.execute('PRAGMA journal_mode=WAL;')
+        self._db.execute('PRAGMA busy_timeout=60000;')
 
     def init(self):
         self._db.execute('''
@@ -406,6 +511,12 @@ class CacheDB:
         return base + '/' + quote(path)
 
     def hasImage(self, bundle_id: str, version: str) -> 'int|None':
+        # --- SPECIAL SITUATION: Configuration Exceptions ---
+        if bundle_id in EXCEPTIONS:
+            target_pk = EXCEPTIONS[bundle_id]
+            if diskPath(target_pk, '.jpg').exists():
+                return target_pk
+
         if not bundle_id or not version:
             return None
         res = self._db.execute('''
@@ -622,37 +733,11 @@ class CacheDB:
         if not platforms and minOS[0] in [0, 1, 2, 3]:
             platforms = 1 << 1  # fallback to iPhone for old versions
 
-        # Find existing image for same bundle_id and version
-        image_pk = uid
-        if bundleId and version:
-            res = self._db.execute('''
-                SELECT image_pk FROM idx 
-                WHERE bundle_id=? AND version=? AND image_pk IS NOT NULL 
-                LIMIT 1''', [bundleId, version]).fetchone()
-            if res:
-                potential_img_pk = res[0]
-                if diskPath(potential_img_pk, '.jpg').exists():
-                    image_pk = potential_img_pk
-                    # If we found a duplicate, we can delete our own image if it exists
-                    for ext in ['.jpg', '.png']:
-                        p = diskPath(uid, ext)
-                        if p.exists():
-                            os.remove(p)
-
         # --- ARCHITECTURAL GUARD: UNIVERSAL SENTINEL RULE ---
         res = self._db.execute('SELECT path_name FROM idx WHERE pk=?', [uid]).fetchone()
         path_name = res[0] if res else ""
         
         if path_name:
-            def get_clean_words(text):
-                text = re.sub(r'([a-z])([A-Z])', r'\1 \2', str(text))
-                return re.findall(r'[a-z0-9]{2,}', text.lower())
-            
-            def is_hint_match(word, target):
-                if not word or not target: return False
-                it = iter(target.lower())
-                return all(c in it for c in word.lower())
-
             fn_words = get_clean_words(path_name.split('##')[-1])
             bid_full = str(bundleId).lower()
             tl_full = str(title).lower()
@@ -672,7 +757,7 @@ class CacheDB:
                 
                 # 2. Attempt AUTHENTIC Inference from filename
                 fn = path_name.split('##')[-1].replace('.ipa', '')
-                bid_pattern = re.search(r'([a-z]{2,}\.[a-z0-9]{2,}\.[a-z0-9\.]+)', fn.lower())
+                bid_pattern = RE_BID.search(fn.lower())
                 
                 if bid_pattern:
                     bundleId = bid_pattern.group(1)
@@ -682,6 +767,38 @@ class CacheDB:
                     parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
                     title = (parts[0] if parts else fn).title()
                     bundleId = f"com.archive.{title.lower()}"
+
+        # --- SMART TITLE CLEANING ---
+        title = prettify_title(title, bundleId, path_name)
+
+        # --- IMAGE DEDUPLICATION & EXCEPTIONS ---
+        image_pk = uid
+        # SPECIAL SITUATION: Configuration Exceptions
+        if bundleId in EXCEPTIONS:
+            image_pk = EXCEPTIONS[bundleId]
+            # Delete local icon if it exists to save space
+            for ext in ['.jpg', '.png']:
+                p = diskPath(uid, ext)
+                if p.exists(): p.unlink()
+        elif (title and ("Major Magnet" in str(title) or "Major Planet" in str(title))):
+            # Fallback for Major Magnet name-based matching if BID is unknown
+            image_pk = 71210
+            for ext in ['.jpg', '.png']:
+                p = diskPath(uid, ext)
+                if p.exists(): p.unlink()
+        elif bundleId and version:
+            res = self._db.execute('''
+                SELECT image_pk FROM idx 
+                WHERE bundle_id=? AND version=? AND image_pk IS NOT NULL 
+                LIMIT 1''', [bundleId, version]).fetchone()
+            if res:
+                potential_img_pk = res[0]
+                if diskPath(potential_img_pk, '.jpg').exists():
+                    image_pk = potential_img_pk
+                    # If we found a duplicate, we can delete our own image if it exists
+                    for ext in ['.jpg', '.png']:
+                        p = diskPath(uid, ext)
+                        if p.exists(): p.unlink()
 
         self._db.execute('''
             UPDATE idx SET

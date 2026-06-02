@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>reMovem</string>
+	<string>WordFu</string>
 	<key>CFBundleExecutable</key>
-	<string>reMovem</string>
+	<string>WordFu</string>
 	<key>CFBundleIconFile</key>
-	<string>JawBreaker.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>net.mundue.reMovem</string>
+	<string>com.ngmoco.WordFu</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>reMovem</string>
+	<string>WordFu</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,16 +23,20 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1</string>
+	<string>2.00</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>iphoneos2.2</string>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
 	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>WordFuWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

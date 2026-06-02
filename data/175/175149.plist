@@ -5,23 +5,32 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Reign</string>
+	<string>SoundMeter</string>
 	<key>CFBundleExecutable</key>
-	<string>ros</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>SoundMeter</string>
 	<key>CFBundleIdentifier</key>
-	<string>CCU8RRT36N.punch-entertainment.com</string>
+	<string>com.faberacoustical.soundmeter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ros</string>
+	<string>SoundMeter</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.faberacoustical.soundmeter</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>soundmeter</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>DTPlatformName</key>
@@ -31,12 +40,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>SoundMeterWindow</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleOpaqueBlack</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

@@ -2,22 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iJezzball</string>
+	<string>TouchScan</string>
 	<key>CFBundleExecutable</key>
-	<string>iJezzball</string>
+	<string>TouchScan</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pixiotech.iJezzball</string>
+	<string>de.software-diner.TouchScan</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iJezzball</string>
+	<string>TouchScan</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -30,7 +28,11 @@
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>UIStatusBarHidden</key>
+	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

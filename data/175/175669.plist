@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
-	<string>iTanks</string>
+	<string>VideoPoker</string>
 	<key>CFBundleExecutable</key>
-	<string>iTanks</string>
+	<string>VideoPoker</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ingconti.iTanks</string>
+	<string>com.minimominino.videopoker</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iTanks</string>
+	<string>VideoPoker</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -34,5 +34,7 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

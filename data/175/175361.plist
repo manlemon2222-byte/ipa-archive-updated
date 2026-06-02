@@ -5,45 +5,44 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Tap Tap</string>
+	<string>Ronnie</string>
 	<key>CFBundleExecutable</key>
-	<string>TapTap</string>
+	<string>Ronnie</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.tapulous.TapTap</string>
+	<string>com.iplay.RonnieOSSnooker</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Tap Tap</string>
+	<string>Ronnie</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
+	<key>CFBundleSupportedPlatforms</key>
 	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.tapulous.TapTapURL</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>ttrcmd</string>
-			</array>
-		</dict>
+		<string>iPhoneOS</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>1.2.6</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>iphoneos2.2</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackTranslucent</string>
 </dict>
 </plist>

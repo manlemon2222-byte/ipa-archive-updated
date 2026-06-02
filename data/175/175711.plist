@@ -5,17 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Paint</string>
+	<string>WinAdmin</string>
 	<key>CFBundleExecutable</key>
-	<string>Paint</string>
-	<key>CFBundleIconFile</key>
-	<string>paintsmall.png</string>
+	<string>WinAdmin</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.alterme.Paint</string>
+	<string>com.iphonewinadmin.winadmin</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Paint</string>
+	<string>WinAdmin</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,20 +21,16 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
 	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>MainNIB</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

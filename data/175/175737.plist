@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Convert</string>
+	<string>ZenGarden</string>
 	<key>CFBundleExecutable</key>
-	<string>Convert</string>
-	<key>CFBundleIconFile</key>
-	<string>appicon_rectangular.png</string>
+	<string>ZenGarden</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.taptaptap.Convert</string>
+	<string>com.peerium.ZenGarden</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Convert</string>
+	<string>ZenGarden</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
+<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

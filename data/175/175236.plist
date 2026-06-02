@@ -3,36 +3,42 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Sketches</string>
+	<string>PhotoForge</string>
 	<key>CFBundleExecutable</key>
-	<string>Sketches</string>
+	<string>PhotoForge</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.latenitesoft.sketches</string>
+	<string>com.ghostbird.PhotoForge</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Sketches</string>
+	<string>PhotoForge</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>LNSF</string>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.8</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<string>1</string>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleOpaqueBlack</string>
+	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

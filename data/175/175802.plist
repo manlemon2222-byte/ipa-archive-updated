@@ -3,19 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>AirCams</string>
+	<string>iLive</string>
 	<key>CFBundleExecutable</key>
-	<string>AirCams</string>
-	<key>CFBundleIconFile</key>
-	<string>icon57.png</string>
+	<string>iLive</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.karimdhanani.airportcams</string>
+	<string>com.GeekyGoodness.iLive</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>AirCams</string>
+	<string>iLive</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,11 +25,9 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.2</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>

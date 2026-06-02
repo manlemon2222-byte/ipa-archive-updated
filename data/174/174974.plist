@@ -3,55 +3,39 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Nightclub</string>
+	<string>KQ2</string>
 	<key>CFBundleExecutable</key>
-	<string>iLuxPREMIUM</string>
+	<string>KQ2</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.digitalchocolate.iLux.PREMIUM</string>
+	<string>com.kylesquest.KQ2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iLuxPREMIUM</string>
+	<string>KQ2</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.1</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
-	<key>FONDUE_URL</key>
-	<string>http://fondue.digitalchocolate.com</string>
-	<key>GET MORE GAMES URL</key>
-	<string>http://www.digitalchocolate.com/iphone/</string>
-	<key>GET PREMIUM URL</key>
-	<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=[Apple ID for the game]&amp;mt=8</string>
-	<key>ICRM_GAME_ID</key>
-	<string>iLux_Full</string>
-	<key>ICRM_GAME_VERSION</key>
-	<string>1.0.1</string>
-	<key>ICRM_URL</key>
-	<string>http://icrm.digitalchocolate.com</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

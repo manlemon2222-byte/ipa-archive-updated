@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>TouchPong</string>
+	<string>Siddur</string>
 	<key>CFBundleExecutable</key>
-	<string>TouchPong</string>
+	<string>siddur</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>iphoneicon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>de.melti.free.TouchPong</string>
+	<string>com.rustybrick.siddur</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TouchPong</string>
+	<string>Siddur</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.5</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -33,8 +33,6 @@
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
+   	<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

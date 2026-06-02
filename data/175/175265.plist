@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en_US</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Sonic 1</string>
+	<string>Pocket Tanks</string>
 	<key>CFBundleExecutable</key>
-	<string>Sonic 1</string>
+	<string>Pocket Tanks</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.sega.sonic1</string>
+	<string>com.blitwise.ptdeluxehd</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Sonic 1</string>
+	<string>Pocket Tanks</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>SEGA</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -31,13 +31,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.2.1</string>
+	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

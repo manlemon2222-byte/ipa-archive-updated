@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Lucky 11s</string>
+	<string>Fizz Weather</string>
 	<key>CFBundleExecutable</key>
-	<string>LuckyElevens</string>
-	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>Fizz Weather</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.meritgames.Lucky11s</string>
+	<string>fizzsoftware.com.fizzweather</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>LuckyElevens</string>
+	<string>Fizz Weather</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,18 +25,12 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.1</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

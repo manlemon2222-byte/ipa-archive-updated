@@ -5,23 +5,25 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Tetris</string>
+	<string>Warfare Inc.</string>
 	<key>CFBundleExecutable</key>
-	<string>tetristouch</string>
+	<string>wi</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ea.tetris</string>
+	<string>com.spiffcode.wi</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>tetristouch</string>
+	<string>Warfare Incorporated</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>WARI</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.86</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -29,8 +31,6 @@
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
 </plist>

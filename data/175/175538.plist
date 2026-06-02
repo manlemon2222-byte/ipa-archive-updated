@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>XRing</string>
+	<string>Take A Note</string>
 	<key>CFBundleExecutable</key>
-	<string>XRing</string>
+	<string>Take-a-Note</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.robotink.XRing</string>
+	<string>com.readdle.Takeanote</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>XRing</string>
+	<string>Take-a-Note</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,14 +27,18 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
-	<false/>
+	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

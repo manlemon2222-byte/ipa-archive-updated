@@ -5,33 +5,31 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Spots</string>
+	<string>Pinch 'n Pop!</string>
 	<key>CFBundleExecutable</key>
-	<string>Spots</string>
+	<string>Pinch 'n Pop!</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.savoysoftware.Spots</string>
+	<string>com.chaoticbox.PinchnPop</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Spots</string>
+	<string>Pinch 'n Pop!</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.8</string>
+	<string>1.1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
+	<string>iphoneos2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -40,15 +38,9 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>SvBuildTime</key>
-	<string>2009-08-25 00:58:14</string>
-	<key>SvSvnPath</key>
-	<string>/releases/1.8</string>
-	<key>SvSvnVersion</key>
-	<string>642</string>
 	<key>UIPrerenderedIcon</key>
-	<string>YES</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

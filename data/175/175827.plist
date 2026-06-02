@@ -5,25 +5,25 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iPingpong</string>
+	<string>iParrot</string>
 	<key>CFBundleExecutable</key>
-	<string>iPingpong</string>
+	<string>iParrot</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.chillingo.iPingpong</string>
+	<string>cole.harris.iparrot</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iPingpong</string>
+	<string>iParrot</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>cole harris</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -34,7 +34,5 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>

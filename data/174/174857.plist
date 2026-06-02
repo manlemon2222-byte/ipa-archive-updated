@@ -5,19 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MetalAngel</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
+	<string>G-Park</string>
 	<key>CFBundleExecutable</key>
-	<string>MetalAngel</string>
+	<string>G-Park</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jadegame.metalangel</string>
+	<string>com.posimotion.g-park</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MetalAngel</string>
+	<string>G-Park</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -32,14 +30,12 @@
 	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>LSUIPresentationMode</key>
-	<integer>0</integer>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
-	<string>0</string>
-	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 </dict>

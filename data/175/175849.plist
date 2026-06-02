@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>AdLibs</string>
+	<string>iSnap</string>
 	<key>CFBundleExecutable</key>
-	<string>AdLibs</string>
+	<string>iSnap</string>
 	<key>CFBundleIconFile</key>
-	<string>libs_icon_small.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.AdLibs</string>
+	<string>com.phelios.iSnap</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>AdLibs</string>
+	<string>iSnap</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -34,5 +34,9 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

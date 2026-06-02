@@ -3,27 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>MonsterTN</string>
+	<string>iSchnauzer</string>
 	<key>CFBundleExecutable</key>
-	<string>MonsterTN</string>
+	<string>iSchnauzer</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.redlynx.MonsterTN</string>
+	<string>com.masq.ischnauzer</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MonsterTN</string>
+	<string>iSchnauzer</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>0.2.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -34,8 +36,10 @@
 	<string>2.0</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeLeft</string>
 	<key>UIPrerenderedIcon</key>
-	<string>true</string>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

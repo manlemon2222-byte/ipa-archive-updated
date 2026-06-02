@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pinball</string>
+	<string>Mixing Faces</string>
 	<key>CFBundleExecutable</key>
-	<string>Pinball</string>
+	<string>Mixing Faces</string>
 	<key>CFBundleIconFile</key>
-	<string>Pinball.png</string>
+	<string>icongreen.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.tinydiversions.Pinball</string>
+	<string>com.leonterlinden.mixingfaces</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Pinball</string>
+	<string>Mixing Faces</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,14 +27,14 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2</string>
-	<key>MinimumOSVersion</key>
-	<string>2.2</string>
+	<string>(SDK_NAME)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSMainNibFile</key>
-	<string>Pinball</string>
+	<string>MainWindow</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

@@ -5,55 +5,40 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Quickoffice</string>
+	<string>NeonFL</string>
 	<key>CFBundleExecutable</key>
-	<string>Quickoffice</string>
+	<string>NeonFL</string>
 	<key>CFBundleIconFile</key>
-	<string>Quickoffice.png</string>
+	<string>57-57.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.quickoffice.quickoffice</string>
+	<string>com.giudicelli.neonflashlight</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>NeonFL</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>QOfc</string>
+	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>iPhoneOS</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.quickoffice.mobilefilespro.quickofficedoc</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>quickofficedoc</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.3.0</string>
+	<string>1.4.9</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
+	<string>iphoneos2.1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MinimumOSVersion</key>
-	<string>3.0</string>
-	<key>QOAppExternalInfoWebsiteURL</key>
-	<string>http://www.quickoffice.com/quickoffice_iphone/</string>
-	<key>QOAppFullName</key>
-	<string>Quickoffice</string>
-	<key>QOAppIdentifier</key>
-	<string>qo</string>
-	<key>QOAppName</key>
-	<string>Quickoffice</string>
+	<string>2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 </dict>
 </plist>

@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Elasticity</string>
+	<string>iGraffiti</string>
 	<key>CFBundleExecutable</key>
-	<string>Elasticity</string>
+	<string>iGraffiti</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.xenquinsw.elasticity</string>
+	<string>com.stone.iGraffiti</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>Elasticity</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
-	<key>CFBundleSignature</key>
-	<string>Elty</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.stone.iGraffiti</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>iGraffiti</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>(SDK_NAME)</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleTransparentBlack</string>
 	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	 <string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

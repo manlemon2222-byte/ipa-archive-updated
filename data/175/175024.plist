@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pingamajig</string>
+	<string>Lucky 11s</string>
 	<key>CFBundleExecutable</key>
-	<string>Pingamajig</string>
+	<string>LuckyElevens</string>
 	<key>CFBundleIconFile</key>
-	<string>icon</string>
+	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pingysoft.Pingamajig</string>
+	<string>com.meritgames.Lucky11s</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Pingamajig</string>
+	<string>LuckyElevens</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,12 +27,18 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

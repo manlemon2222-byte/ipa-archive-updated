@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>IQTest</string>
+	<string>Exposure</string>
 	<key>CFBundleExecutable</key>
-	<string>IQTest</string>
+	<string>Exposure</string>
 	<key>CFBundleIconFile</key>
-	<string>iq_test_icon.png</string>
+	<string>Exposure.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.macphun.iqtest</string>
+	<string>com.connectedflow.iphone.exposurepremium</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>IQTest</string>
+	<string>Exposure</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,20 +23,19 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.4.0</string>
+	<string>1.0.2</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>(SDK_NAME)</string>
+	<key>EXFlickrKitGitRevision</key>
+	<string>0</string>
+	<key>EXGitRevision</key>
+	<string>3a18833
+</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 </dict>
 </plist>

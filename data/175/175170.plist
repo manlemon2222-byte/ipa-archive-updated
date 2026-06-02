@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rolando</string>
+	<string>OfficeWars</string>
 	<key>CFBundleExecutable</key>
-	<string>Rolando</string>
+	<string>OfficeWars</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>aIcon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ngmoco.rolando</string>
+	<string>com.andythedesigner.Officewars</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Rolando</string>
+	<string>OfficeWars</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,9 +27,11 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
+	<string>iphoneos2.2.1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.1</string>
+	<string>2.2.1</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>

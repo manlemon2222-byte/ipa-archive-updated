@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>no</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Trafikk</string>
+	<string>Sleep Cycle</string>
 	<key>CFBundleExecutable</key>
-	<string>NAF</string>
+	<string>GoodMorning</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.apps.naf</string>
+	<string>com.lexwarelabs.goodmorning</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>NAF</string>
+	<string>GoodMorning</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>

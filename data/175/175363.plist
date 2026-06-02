@@ -3,40 +3,38 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>TattooMania</string>
+	<string>Rooms</string>
 	<key>CFBundleExecutable</key>
-	<string>TattooMania</string>
+	<string>Rooms</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.handy-games.TattooMania</string>
+	<string>de.derflash.rooms</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TattooMania</string>
+	<string>Rooms</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
+	<string>bjTE</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.5</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.2.1</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<false/>
 </dict>
 </plist>

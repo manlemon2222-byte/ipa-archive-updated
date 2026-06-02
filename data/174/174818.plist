@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>LocalEats</string>
+	<string>FileMagnet</string>
 	<key>CFBundleExecutable</key>
-	<string>LocalEats</string>
+	<string>FileMagnet</string>
 	<key>CFBundleIconFile</key>
-	<string>wtle_app_icon_2.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.wherethelocalseat.iphone.ieat</string>
+	<string>com.magnetism.FileMagnet</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>LocalEats</string>
+	<string>FileMagnet</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,14 +23,16 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.3.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 </dict>
 </plist>

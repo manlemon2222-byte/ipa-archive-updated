@@ -2,54 +2,49 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>APPInternalVersion</key>
+	<string>1.10</string>
+	<key>APPProVersion</key>
+	<string>16</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>FTPOnTheGo</string>
+	<string>iMob 400</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
 	<key>CFBundleExecutable</key>
-	<string>FTPOnTheGo</string>
+	<string>iMob 400</string>
 	<key>CFBundleIconFile</key>
-	<string>ftp-icon-200.png</string>
+	<string>imob_400_57.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ftponthego</string>
+	<string>com.addmired.imobrespect4</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FTPOnTheGo</string>
+	<string>iMob 400</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.10</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.ftponthego</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>ftp</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>1.10</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>2.2</string>
 	<key>NSMainNibFile</key>
-	<string>MainWindowTabs</string>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
 </plist>

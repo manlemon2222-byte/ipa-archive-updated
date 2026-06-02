@@ -3,31 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
-	<string>Monster</string>
+	<string>Golden Axe</string>
 	<key>CFBundleExecutable</key>
-	<string>Monster</string>
-	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>Golden Axe</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.matmi.monster</string>
+	<string>com.sega.GoldenAxe</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Monster</string>
+	<string>Golden Axe</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>DWANEO v1.0.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -40,6 +34,8 @@
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

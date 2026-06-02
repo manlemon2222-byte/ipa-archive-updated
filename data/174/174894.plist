@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MotoRacing</string>
+	<string>GuitarToolkit</string>
 	<key>CFBundleExecutable</key>
-	<string>MotoRacing</string>
+	<string>GuitarToolkit</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.darxun.motoracinggp</string>
+	<string>com.agilepartners.GuitarToolkit</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MotoRacing</string>
+	<string>GuitarToolkit</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,20 +23,16 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>(SDK_NAME)</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<string>YES</string>
 	<key>UIStatusBarHidden</key>
-	<true/>
+	<string>NO</string>
 </dict>
 </plist>

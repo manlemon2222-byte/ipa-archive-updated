@@ -3,42 +3,40 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>NeonFL</string>
+	<string>IM+</string>
 	<key>CFBundleExecutable</key>
-	<string>NeonFL</string>
+	<string>IMPlusFull</string>
 	<key>CFBundleIconFile</key>
-	<string>57-57.png</string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.giudicelli.neonflashlight</string>
+	<string>com.shapeservices.implusfull</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>NeonFL</string>
+	<string>IMPlusFull</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>iPhoneOS</string>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>1.4.9</string>
+	<string>2.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>iphoneos2.2</string>
+	<key>IMPBundleShortName</key>
+	<string>im</string>
 	<key>MinimumOSVersion</key>
-	<string>2.1</string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>2.2</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<false/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>

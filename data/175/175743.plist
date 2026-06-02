@@ -5,15 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Dictionary</string>
+	<string>Zones</string>
 	<key>CFBundleExecutable</key>
-	<string>Advanced English Dictionary</string>
+	<string>Zones</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jdictionarymobile.aed</string>
+	<string>com.kupuk.Zones</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Advanced English Dictionary</string>
+	<string>Zones</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>

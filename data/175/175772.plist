@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iDownload</string>
+	<string>iDo</string>
 	<key>CFBundleExecutable</key>
-	<string>iDownload</string>
+	<string>iDo</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>iDo.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.silicon-studios.idownload</string>
+	<string>com.DavidScreve.iDo</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>iDownload</string>
+	<string>iDo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
-	<string>SLCN</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>5</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
@@ -33,18 +33,10 @@
 	<key>MinimumOSVersion</key>
 	<string>2.0</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2008 Silicon Studios</string>
+	<string>Copyright © 2008 David Screve. All Rights Reserved</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
-	<false/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

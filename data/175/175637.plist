@@ -3,44 +3,50 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Parking</string>
+	<string>Twittelator_</string>
 	<key>CFBundleExecutable</key>
-	<string>Parking</string>
+	<string>Twittelator_</string>
 	<key>CFBundleIconFile</key>
-	<string>parking_metericon4.png</string>
+	<string>twitter_pro_icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bluetechnologysolutions.iparkingbuddy</string>
+	<string>com.stone.Twittelator2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Parking</string>
+	<string>Twittelator_</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
+	<key>CFBundleURLTypes</key>
 	<array>
-		<string>iPhoneOS</string>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.stone.Twittelator_</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twit</string>
+				<string>twittelator</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.2</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos3.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>MinimumOSVersion</key>
-	<string>3.0</string>
+	<string>(SDK_NAME)</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleOpaqueBlack</string>
 </dict>
 </plist>

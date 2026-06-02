@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AntiCrackURL</key>
+	<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=324898962&amp;mt=8</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Arctic Shuffle</string>
+	<key>CFBundleExecutable</key>
+	<string>ArcticShuffle2</string>
+	<key>CFBundleIconFile</key>
+	<string>icon_57x57.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.zincroe.arcticshuffle2</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>ArcticShuffle2</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>2.2.612</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos3.0</string>
+	<key>FullVersionAppStoreURL</key>
+	<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=324898962&amp;mt=8</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LiteVersion</key>
+	<false/>
+	<key>LiteVersionAppStoreURL</key>
+	<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=325424082&amp;mt=8</string>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>MoreGamesURL</key>
+	<string>http://iphone.zincroe.com</string>
+	<key>NSMainNibFile</key>
+	<string>Window</string>
+	<key>NumberOfDaysBeforeAskingToRate</key>
+	<integer>5</integer>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>

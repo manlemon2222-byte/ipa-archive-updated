@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rockfall</string>
+	<string>Brick 3D</string>
 	<key>CFBundleExecutable</key>
-	<string>Rockfall</string>
+	<string>iDCWall</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>icon_57x57.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pyrofersprojects.Rockfall</string>
+	<string>com.digitalchocolate.iwall</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Rockfall</string>
+	<string>iDCWall</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,17 +23,21 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.92</string>
+	<string>1.0.1</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

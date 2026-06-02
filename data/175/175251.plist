@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Snowboard</string>
+	<string>Pinball</string>
 	<key>CFBundleExecutable</key>
-	<string>Snowboard</string>
+	<string>Pinball</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>Pinball.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ezone.Snowboard</string>
+	<string>com.tinydiversions.Pinball</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Snowboard</string>
+	<string>Pinball</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -23,18 +23,18 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>1.0</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>iphoneos2.2</string>
 	<key>MinimumOSVersion</key>
-	<string>2.0</string>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>Pinball</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>

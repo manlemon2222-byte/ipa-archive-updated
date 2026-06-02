@@ -2,26 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key></key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>RastaMonkey</string>
+	<string>wolf3d</string>
 	<key>CFBundleExecutable</key>
-	<string>RastaMonkey</string>
+	<string>wolf3d</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>wolf3d_icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Nitako.RastaMonkey</string>
+	<string>com.idsoftware.wolf3d</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>RastaMonkey</string>
+	<string>wolf3d</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
 	<string>ResourceRules.plist</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>DTPlatformName</key>
@@ -32,8 +38,12 @@
 	<true/>
 	<key>MinimumOSVersion</key>
 	<string>2.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
 	<key>SignerIdentity</key>
 	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeLeft</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>

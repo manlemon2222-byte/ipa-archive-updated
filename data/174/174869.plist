@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Chat</string>
+	<string>Games</string>
 	<key>CFBundleExecutable</key>
-	<string>MobileChat</string>
+	<string>Games</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>Games.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.twenty08.MobileChat</string>
+	<string>com.dseffects.Games</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MobileChat</string>
+	<string>Games</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,12 +27,14 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>(SDK_NAME)</string>
+	<string>iphoneos2.0</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>UIPrerenderedIcon</key>
-	<false/>
 	<key>SignerIdentity</key>
-<string>Apple iPhone OS Application Signing</string>
+	<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

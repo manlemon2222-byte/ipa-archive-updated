@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Aroma Coffee</string>
+	<string>iSoundLike</string>
 	<key>CFBundleExecutable</key>
-	<string>Coffee</string>
+	<string>iSoundLikeHalloween</string>
 	<key>CFBundleIconFile</key>
-	<string>ICON_57X57.png</string>
+	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>cde.Coffee</string>
+	<string>com.funmobility.iSoundLikeHalloween</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Coffee</string>
+	<string>iSoundLikeHalloween</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -27,16 +27,14 @@
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
-	<string>iphoneos2.1</string>
+	<string>(SDK_NAME)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>2.1</string>
-	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackTranslucent</string>
+      <key>SignerIdentity</key>
+      <string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

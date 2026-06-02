@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Otis</string>
+	<string>A Journey to the Interior of the Earth</string>
 	<key>CFBundleExecutable</key>
-	<string>MobileOtis</string>
+	<string>Verne_JourneyToCenterOfEarth</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.wonderwarp.mobileotis</string>
+	<string>com.appengines.book.AJourneytotheInterioroftheEarth</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>MobileOtis</string>
+	<string>AJourneytotheInterioroftheEarth</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleResourceSpecification</key>
@@ -28,13 +28,11 @@
 	<string>iphoneos</string>
 	<key>DTSDKName</key>
 	<string>(SDK_NAME)</string>
-	<key>SignerIdentity</key>
-	<string>Apple iPhone OS Application Signing</string>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationPortrait</string>
-	<key>UIPrerenderedIcon</key>
-	<string>1</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleOpaqueBlack</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+      <key>SignerIdentity</key>
+      <string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>
