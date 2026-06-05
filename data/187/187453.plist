@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>fr_FR</string>
+	<key>CFBundleDisplayName</key>
+	<string>Paris 3D</string>
+	<key>CFBundleExecutable</key>
+	<string>Paris3D</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.newscape.paris3d</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Paris3D</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.newscape.Mobile3DCity</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mobile3dcity</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos3.0</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
+</dict>
+</plist>
