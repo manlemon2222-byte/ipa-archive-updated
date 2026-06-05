@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AdmobID</key>
+	<string>a148cd3fdd5ddf3</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Pingle</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
+	<key>CFBundleExecutable</key>
+	<string>pingle</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.curioussquid.Pingle</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Pingle</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.05</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>org.esquimaux.iphone.pingle</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pingle</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>fm.ping</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pingfm</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>166</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MMAppID</key>
+	<string>5d47b976132df7e</string>
+	<key>MinimumOSVersion</key>
+	<string>2.1</string>
+	<key>MobclixID</key>
+	<string>14fb1ce7-63f1-4bd6-8f20-632f1ad961c7</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>PinchmediaID</key>
+	<string>18f4fd8044966baae7d3ece6a0683da7</string>
+	<key>PingFMAPIKey</key>
+	<string>0fa87e56ed0af70cd7acd034be6da23c</string>
+	<key>PurpletalkID</key>
+	<string>7de2c21338f70ea94cc2711788f54697</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>YahooMapsAppID</key>
+	<string>0NXLa2jV34GqVVZaZgZjL5iW115XQMVRUUIpcBuR_EPNVrdTVDY0wNqgYXpOhtCQqy3HOr4-</string>
+</dict>
+</plist>

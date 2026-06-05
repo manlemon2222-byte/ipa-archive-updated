@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AdMobKey</key>
+	<string>a14a3acae2ab425</string>
+	<key>AppId</key>
+	<string>8</string>
+	<key>AudioPackKey</key>
+	<string>Data</string>
+	<key>Brand</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Soulja Boy</string>
+	<key>CFBundleExecutable</key>
+	<string>SouljaBoy</string>
+	<key>CFBundleIconFile</key>
+	<string>souljaboy_icon57.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.moderati.romplr.souljaboy</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SouljaBoy</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.4</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.2</string>
+	<key>DefaultBundleId</key>
+	<string>19</string>
+	<key>DefaultImageBundleId</key>
+	<string>4</string>
+	<key>FlurryKey</key>
+	<string>P3WPCTPP2I1HRLAX763E</string>
+	<key>ImagePackKey</key>
+	<string>Images</string>
+	<key>ImageVersion</key>
+	<real>1.1599999999999999</real>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
+	<key>MixKitId</key>
+	<integer>19</integer>
+	<key>MixKitName</key>
+	<string>Soulja Boy Tell 'Em - "Turn My Swag On"</string>
+	<key>SettingsFileName</key>
+	<string>DataSouljaboy</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>

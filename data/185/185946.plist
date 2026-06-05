@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>FlipDown</string>
+	<key>CFBundleExecutable</key>
+	<string>FlipDown</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.interhive.flipdown</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>FlipDown</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0.2</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos3.0</string>
+	<key>FlipDownDefaultMainTableBackground</key>
+	<string>HillAndSky</string>
+	<key>FlipDownDefaultMainTableTitleBackgroundColor</key>
+	<string>ffffff3f</string>
+	<key>FlipDownDefaultMainTableTitleBackgroundShouldInset</key>
+	<string>YES</string>
+	<key>FlipDownMaxLogCacheUpload</key>
+	<string>1048576</string>
+	<key>FlipDownSingleEventViewDrawsDisplayStyle</key>
+	<string>NO</string>
+	<key>ImageSearchPaths</key>
+	<array>
+		<string>Images</string>
+		<string>Themes</string>
+	</array>
+	<key>Info_FlipDown_Distribution</key>
+	<string>Info_FlipDown_Distribution</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LoadPinchAnalytics</key>
+	<string>YES</string>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<string>YES</string>
+	<key>iP7InternetConnectionURLCheck</key>
+	<string>http://tycho.usno.navy.mil/cgi-bin/timer.pl</string>
+</dict>
+</plist>

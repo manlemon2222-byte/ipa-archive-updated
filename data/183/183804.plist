@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ATSApplicationFontsPath</key>
+	<string>./</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>SpongeDude</string>
+	<key>CFBundleExecutable</key>
+	<string>SpongeDude</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.wunderwerk.spongedude</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.1</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.2.1</string>
+	<key>LSEnvironment</key>
+	<dict>
+		<key>MallocCheckHeap
+MallocCheckHeap
+MallocCheckHeap</key>
+		<string>1</string>
+		<key>MallocGuardEdges
+MallocGuardEdges
+MallocGuardEdges</key>
+		<string>1</string>
+		<key>MallocStackLogging</key>
+		<string>1</string>
+	</dict>
+	<key>MinimumOSVersion</key>
+	<string>2.2.1</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<string>true true</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>

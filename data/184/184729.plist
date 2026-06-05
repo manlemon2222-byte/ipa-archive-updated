@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Spellbook</string>
+	<key>CFBundleExecutable</key>
+	<string>SpellbookMaster</string>
+	<key>CFBundleIconFile</key>
+	<string>iPhone-icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>fi.fidisk.petteri.kamppuri.SpellbookMaster</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SpellbookMaster</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.2</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.2</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos3.0</string>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>SpellDescriptionURLs</key>
+	<array>
+		<string>http://www.wizards.com/d20/files/v35/SpellsA-B.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsC.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsD-E.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsF-G.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsH-L.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsM-O.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsP-R.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsS.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellsT-Z.rtf</string>
+	</array>
+	<key>SpellListURLs</key>
+	<array>
+		<string>http://www.wizards.com/d20/files/v35/SpellListI.rtf</string>
+		<string>http://www.wizards.com/d20/files/v35/SpellListII.rtf</string>
+	</array>
+</dict>
+</plist>

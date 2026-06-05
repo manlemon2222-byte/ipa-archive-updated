@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ADS_ENABLED</key>
+	<string>0</string>
+	<key>ADS_KEYWORDS</key>
+	<string>celebrity gossip hollywood los angeles stars movies chris brown rhiana</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>iGossip</string>
+	<key>CFBundleExecutable</key>
+	<string>iGossip</string>
+	<key>CFBundleIdentifier</key>
+	<string>iGossip</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>iGossip</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>2.1</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.2.1</string>
+	<key>FEEDS_DOWNLOAD_URL</key>
+	<string>http://www.iadvise.me/apps/igossip.xml</string>
+	<key>KUCHBI_API_KEY</key>
+	<string>aa1ad13c-640b-4922-bb56-bc513e5992af</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SHOW_FEEDBACK</key>
+	<string>1</string>
+	<key>SUPPORT_EMAIL</key>
+	<string>support@lucidone.com</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+</dict>
+</plist>
