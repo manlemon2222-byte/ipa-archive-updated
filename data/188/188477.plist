@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuyMoreURL</key>
+	<string>http://www.digitalchocolate.com/iphone?utm_source=iPhone_Babysitter2Go_Full&amp;utm_medium=GMGbutton&amp;utm_content=mainmenu&amp;utm_campaign=iPhone_Babysitter2Go_Full</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>BabySitter</string>
+	<key>CFBundleExecutable</key>
+	<string>BabySitter</string>
+	<key>CFBundleIconFile</key>
+	<string>Dchoc_BabySitter_Icon_57x57.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.digitalchocolate.BabySitter</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>BabySitter</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0.1 iPhoneCake.com</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos3.0</string>
+	<key>GetPremiumURL</key>
+	<string>http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1095&amp;mt=8</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>
