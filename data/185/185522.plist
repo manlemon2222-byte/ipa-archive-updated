@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Full Throttle</string>
+	<key>CFBundleExecutable</key>
+	<string>CarSounds</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.CarSounds</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>CarSounds</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.2</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>2.2</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>Rides</key>
+	<array>
+		<dict>
+			<key>duration</key>
+			<real>0.65000000000000002</real>
+			<key>engine sound</key>
+			<string>corvettare-rev.caf</string>
+			<key>engine sound2</key>
+			<string>corvettare-rev2.caf</string>
+			<key>idle sound</key>
+			<string>corvettare-idle.caf</string>
+			<key>ride image</key>
+			<string>corvettare.png</string>
+			<key>ride name</key>
+			<string>Corvettare</string>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<real>0.65000000000000002</real>
+			<key>engine sound</key>
+			<string>froscher-rev.caf</string>
+			<key>engine sound2</key>
+			<string>froscher-rev2.caf</string>
+			<key>idle sound</key>
+			<string>froscher-idle.caf</string>
+			<key>ride image</key>
+			<string>froscher.png</string>
+			<key>ride name</key>
+			<string>Froscher</string>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<real>0.65000000000000002</real>
+			<key>engine sound</key>
+			<string>shibutani-rev.caf</string>
+			<key>engine sound2</key>
+			<string>shibutani-rev2.caf</string>
+			<key>idle sound</key>
+			<string>shibutani-idle.caf</string>
+			<key>ride image</key>
+			<string>shibutani.png</string>
+			<key>ride name</key>
+			<string>Shibutani</string>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<real>0.65000000000000002</real>
+			<key>engine sound</key>
+			<string>evoluzione-rev.caf</string>
+			<key>engine sound2</key>
+			<string>evoluzione-rev2.caf</string>
+			<key>idle sound</key>
+			<string>evoluzione-idle.caf</string>
+			<key>ride image</key>
+			<string>evoluzione.png</string>
+			<key>ride name</key>
+			<string>Evoluzione</string>
+		</dict>
+		<dict>
+			<key>duration</key>
+			<real>0.65000000000000002</real>
+			<key>engine sound</key>
+			<string>sportsol-rev.caf</string>
+			<key>engine sound2</key>
+			<string>sportsol-rev2.caf</string>
+			<key>idle sound</key>
+			<string>sportsol-idle.caf</string>
+			<key>ride image</key>
+			<string>sportsol.png</string>
+			<key>ride name</key>
+			<string>Sportsol</string>
+		</dict>
+	</array>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>

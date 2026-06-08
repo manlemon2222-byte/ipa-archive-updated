@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>dB</string>
+	<key>CFBundleExecutable</key>
+	<string>dB</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.faberacoustical.db</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>dB</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleShortVersionString</key>
+	<string>447</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0.3</string>
+	<key>DTCompiler</key>
+	<string>4.2</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTPlatformVersion</key>
+	<string>4.0 GM</string>
+	<key>DTSDKName</key>
+	<string>iphoneos4.0</string>
+	<key>DTXcode</key>
+	<string>0323</string>
+	<key>MinimumOSVersion</key>
+	<string>3.1.3</string>
+	<key>NSMainNibFile</key>
+	<string>dBMainWindow</string>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<string>YES</string>
+</dict>
+</plist>

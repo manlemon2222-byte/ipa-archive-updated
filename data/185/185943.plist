@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AudioURL</key>
+	<string>http://assets.languagepod101.com/dictionary/japanese/spx/</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>JPDictionary</string>
+	<key>CFBundleExecutable</key>
+	<string>JPDictionary</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.innovativelanguage.jpdictionary</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>JPDictionary</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.1</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTSDKName</key>
+	<string>iphoneos2.1</string>
+	<key>DefaultOurAppsCategory</key>
+	<string>Japanese</string>
+	<key>GlobalOurAppsXML</key>
+	<string>http://languagepod101.com/iphone/icons/applications.xml</string>
+	<key>HelpLocalFile</key>
+	<string>localHelp.html</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>Language</key>
+	<string>Japanese</string>
+	<key>LocalOurAppsXML</key>
+	<string>OurApps.xml</string>
+	<key>MinimumOSVersion</key>
+	<string>2.1</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
+	<key>StartPageGlobalURL</key>
+	<string>http://www.languagepod101.com/gengo_jpdict/FrontPage.xml</string>
+	<key>StartPageLocalFile</key>
+	<string>localStartPage.xml</string>
+	<key>StorageFileName</key>
+	<string>JPDictionary.storage</string>
+</dict>
+</plist>
