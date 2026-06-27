@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>armv7</string>
+      <string>bluetooth-le</string>
+    </array>
+    <key>UIRequiresFullScreen</key>
+    <true/>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>DTPlatformVersion</key>
+    <string>14.4</string>
+    <key>CFBundleName</key>
+    <string>MiP</string>
+    <key>DTSDKName</key>
+    <string>iphoneos14.4</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Access Photo Library to save video</string>
+    <key>UIMainStoryboardFile~ipad</key>
+    <string>MainStoryboard_iPad</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon - Mip20x20</string>
+          <string>AppIcon - Mip29x29</string>
+          <string>AppIcon - Mip40x40</string>
+          <string>AppIcon - Mip60x60</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon - Mip</string>
+      </dict>
+    </dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Play with BLE compatible MiP</string>
+    <key>CFBundleDisplayName</key>
+    <string>MiP</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>bluetooth-central</string>
+    </array>
+    <key>DTSDKBuild</key>
+    <string>18D46</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Access microphone to record video</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.2.4</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>BuildMachineOSBuild</key>
+    <string>19H512</string>
+    <key>DTPlatformBuild</key>
+    <string>18D46</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTXcodeBuild</key>
+    <string>12D4e</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>MinimumOSVersion</key>
+    <string>12.0</string>
+    <key>CFBundleVersion</key>
+    <string>1.2.10</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>Play with BLE compatible MiP</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Access Photo Library to save video</string>
+    <key>UIAppFonts</key>
+    <array>
+      <string>JCaoCuYuan.ttf</string>
+      <string>GBYenRound-Heavy.ttf</string>
+      <string>BPreplay.otf</string>
+      <string>BPreplay-bold.otf</string>
+      <string>BPreplay-bold-italics.otf</string>
+      <string>tondo_v0_1_by_ficod.ttf</string>
+      <string>A-OTF-UDShinMGoPro-Bold.otf</string>
+      <string>Dunkin.ttf</string>
+      <string>Comfortaa-Bold.ttf</string>
+      <string>Dunkin Bold.ttf</string>
+    </array>
+    <key>UILaunchImageFile</key>
+    <string>LaunchImage - Mip</string>
+    <key>UILaunchImages</key>
+    <array>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-1200-Portrait-2688h</string>
+        <key>UILaunchImageSize</key>
+        <string>{414, 896}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>12.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-1200-Portrait-1792h</string>
+        <key>UILaunchImageSize</key>
+        <string>{414, 896}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>12.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-1100-Portrait-2436h</string>
+        <key>UILaunchImageSize</key>
+        <string>{375, 812}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>11.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-800-Portrait-736h</string>
+        <key>UILaunchImageSize</key>
+        <string>{414, 736}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>8.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-800-667h</string>
+        <key>UILaunchImageSize</key>
+        <string>{375, 667}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>8.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-700</string>
+        <key>UILaunchImageSize</key>
+        <string>{320, 480}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Portrait</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-700-568h</string>
+        <key>UILaunchImageSize</key>
+        <string>{320, 568}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+      </dict>
+      <dict>
+        <key>UILaunchImageOrientation</key>
+        <string>Landscape</string>
+        <key>UILaunchImageName</key>
+        <string>LaunchImage - Mip-700-Landscape</string>
+        <key>UILaunchImageSize</key>
+        <string>{768, 1024}</string>
+        <key>UILaunchImageMinimumOSVersion</key>
+        <string>7.0</string>
+      </dict>
+    </array>
+    <key>UIPrerenderedIcon</key>
+    <true/>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+      <integer>2</integer>
+    </array>
+    <key>UILaunchStoryboardName</key>
+    <string>Launch Screen</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Access microphone to record video</string>
+    <key>Fabric</key>
+    <dict>
+      <key>Kits</key>
+      <array>
+        <dict>
+          <key>KitInfo</key>
+          <dict/>
+          <key>KitName</key>
+          <string>Crashlytics</string>
+        </dict>
+      </array>
+      <key>APIKey</key>
+      <string>d9f43412b154a51e71490ab4b0da4ede2cd4b7fe</string>
+    </dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.wowwee.mip</string>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Pick your BGM in Dance mode</string>
+    <key>DTXcode</key>
+    <string>1240</string>
+    <key>CFBundleExecutable</key>
+    <string>MIP</string>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon - Mip20x20</string>
+          <string>AppIcon - Mip29x29</string>
+          <string>AppIcon - Mip40x40</string>
+          <string>AppIcon - Mip60x60</string>
+          <string>AppIcon - Mip76x76</string>
+          <string>AppIcon - Mip83.5x83.5</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon - Mip</string>
+      </dict>
+    </dict>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>UIMainStoryboardFile</key>
+    <string>MainStoryboard_iPhone</string>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTAppStoreToolsBuild</key>
+    <string>12E262</string>
+    <key>UISupportedDevices</key>
+    <array>
+      <string>iPhone10,1</string>
+      <string>iPhone10,4</string>
+      <string>iPhone6,1</string>
+      <string>iPhone6,2</string>
+      <string>iPhone7,2</string>
+      <string>iPhone8,1</string>
+      <string>iPhone8,4</string>
+      <string>iPhone9,1</string>
+      <string>iPhone9,3</string>
+      <string>iPod7,1</string>
+      <string>iPod9,1</string>
+    </array>
+  </dict>
+</plist>
