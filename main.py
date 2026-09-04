@@ -14,7 +14,10 @@ import os
 import re
 import subprocess
 import tempfile
+import hashlib
 from PIL import Image, PngImagePlugin, ImageFile
+
+KNOWN_BAD_ARTWORK_MD5 = {'bd660e3972f60fc1934c5faf4b61e6da'}
 
 # Increase limit for large metadata chunks
 PngImagePlugin.MAX_TEXT_CHUNK = 100 * 1024 * 1024 # 100MB
@@ -304,8 +307,18 @@ def fix_missing_images(DB: 'CacheDB'):
             # Batch list the directory for performance
             existing = {f.name for f in shard_dir.iterdir() if f.suffix == '.jpg'}
             for img_pk in pks:
+                jpg_file = shard_dir / f"{img_pk}.jpg"
                 if f"{img_pk}.jpg" not in existing:
                     missing.append(img_pk)
+                elif jpg_file.exists():
+                    try:
+                        with open(jpg_file, 'rb') as f:
+                            if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
+                                print(f"\n[BAD ARTWORK] [{img_pk}] Found generic bad artwork. Re-extracting icon...")
+                                jpg_file.unlink()
+                                missing.append(img_pk)
+                    except Exception:
+                        pass
         checked += len(pks)
         if checked % 100 == 0 or checked == total:
             print(f"\rChecked {checked}/{total} unique images...", end="")
@@ -525,7 +538,15 @@ class CacheDB:
             LIMIT 1''', [bundle_id, version]).fetchone()
         if res:
             pk = res[0]
-            if diskPath(pk, '.jpg').exists():
+            jpg_file = diskPath(pk, '.jpg')
+            if jpg_file.exists():
+                try:
+                    with open(jpg_file, 'rb') as f:
+                        if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
+                            jpg_file.unlink()
+                            return None
+                except Exception:
+                    pass
                 return pk
         return None
 
@@ -1307,20 +1328,7 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                 elif image_only and artwork:
                     return True, used_image_pk
 
-    # Second pass: extract iTunesArtwork if needed
-    if not artwork:
-        for entry in zip_listing:
-            fn = entry.filename.lstrip('/')
-            if fn.lower() == 'itunesartwork' and entry.file_size > 0:
-                extractZipEntry(zip, entry, img_path)
-                if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
-                    if processImage(img_path):
-                        artwork = True
-                        break
-                    else:
-                        img_path.unlink() # Cleanup
-
-    # if no iTunesArtwork found, load file referenced in plist
+    # Second pass: load icon files referenced in Info.plist (highest authenticity app icons)
     if not artwork and app_prefix and plist_path.exists():
         with open(plist_path, 'rb') as fp:
             try:
@@ -1336,9 +1344,34 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                                 artwork = True
                                 break
                             else:
-                                img_path.unlink() # Cleanup
+                                if img_path.exists(): img_path.unlink() # Cleanup
             except Exception as e:
                 print(f'ERROR: [{uid}] failed to parse plist or find icon: {e}', file=stderr)
+
+    # Third pass: extract iTunesArtwork inside app_prefix if no plist icon was found
+    if not artwork and app_prefix:
+        app_prefix_lower = app_prefix.lower().rstrip('/') + '/'
+        for entry in zip_listing:
+            fn = entry.filename.lstrip('/')
+            fn_lower = fn.lower()
+            # Require iTunesArtwork to be inside the app bundle directory to avoid root-level zip leakage
+            if fn_lower.startswith(app_prefix_lower) and fn_lower.endswith('itunesartwork') and entry.file_size > 0:
+                extractZipEntry(zip, entry, img_path)
+                if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
+                    if processImage(img_path):
+                        # Verify the processed image is not a known generic bad artwork
+                        jpg_candidate = img_path.with_suffix('.jpg')
+                        if jpg_candidate.exists():
+                            with open(jpg_candidate, 'rb') as f:
+                                if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
+                                    print(f'  [WARN] [{uid}] Rejected generic bad iTunesArtwork MD5, removing...')
+                                    jpg_candidate.unlink()
+                                    artwork = False
+                                    continue
+                        artwork = True
+                        break
+                    else:
+                        if img_path.exists(): img_path.unlink() # Cleanup
     
     # If artwork was found via iTunesArtwork in first pass, process it
     if artwork and not os.path.exists(basename.with_suffix('.jpg')) and os.path.exists(img_path):
@@ -1378,28 +1411,32 @@ def extractZipEntry(zip: 'RemoteZip', zipInfo: 'ZipInfo', dest_filename: Path):
 
 def processImage(png_path: Path) -> bool:
     if not png_path.exists() or png_path.stat().st_size < 8:
+        if png_path.exists():
+            try: png_path.unlink()
+            except Exception: pass
         return False
     
-    # Check if zero-filled
-    with open(png_path, 'rb') as f:
-        header = f.read(32)
-        if header.startswith(b'\x00' * 8):
-            return False
-
-    # Fix CGBI if present
-    if b'CgBI' in header:
-        try:
-            # -s for silent, -free to create [name]-free.png
-            subprocess.run([str(PNGDEFRY_BIN), '-s', '-free', str(png_path)], 
-                           check=True, capture_output=True)
-            fixed_path = png_path.with_name(png_path.stem + "-free.png")
-            if fixed_path.exists():
-                fixed_path.replace(png_path)
-        except Exception as e:
-            print(f"  [WARN] pngdefry failed: {e}", file=stderr)
-            
-    # Convert to JPG and Optimize
+    success = False
     try:
+        # Check if zero-filled
+        with open(png_path, 'rb') as f:
+            header = f.read(32)
+            if header.startswith(b'\x00' * 8):
+                return False
+
+        # Fix CGBI if present
+        if b'CgBI' in header:
+            try:
+                # -s for silent, -free to create [name]-free.png
+                subprocess.run([str(PNGDEFRY_BIN), '-s', '-free', str(png_path)], 
+                               check=True, capture_output=True)
+                fixed_path = png_path.with_name(png_path.stem + "-free.png")
+                if fixed_path.exists():
+                    fixed_path.replace(png_path)
+            except Exception as e:
+                print(f"  [WARN] pngdefry failed: {e}", file=stderr)
+                
+        # Convert to JPG and Optimize
         jpg_path = png_path.with_suffix('.jpg')
         with Image.open(png_path) as img:
             # Convert to RGB
@@ -1414,12 +1451,18 @@ def processImage(png_path: Path) -> bool:
             # Save optimized JPEG
             img.save(jpg_path, 'JPEG', quality=80, optimize=True)
             os.chmod(jpg_path, 0o644)
-            
-        png_path.unlink() # Remove PNG after successful conversion
-        return True
+            success = True
     except Exception as e:
         print(f"  [WARN] PIL conversion/optimization failed for {png_path}: {e}", file=stderr)
-        return False
+        success = False
+    finally:
+        # Guarantee PNG is ALWAYS auto-deleted
+        if png_path.exists():
+            try:
+                png_path.unlink()
+            except Exception:
+                pass
+    return success
 
 
 
