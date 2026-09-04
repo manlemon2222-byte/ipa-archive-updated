@@ -17,7 +17,63 @@ import tempfile
 import hashlib
 from PIL import Image, PngImagePlugin, ImageFile
 
-KNOWN_BAD_ARTWORK_MD5 = {'bd660e3972f60fc1934c5faf4b61e6da'}
+KNOWN_BAD_ARTWORK_MD5 = {
+    'bd660e3972f60fc1934c5faf4b61e6da',  # PNG signature 1 of generic dummy artwork
+    '9c086c11db6681d4d7e417243f17bc61',  # JPEG signature 1 of generic dummy artwork
+    '8efd998d4613d0b554d1b38d23618ba7',  # PNG signature 2 of generic dummy artwork (GamesRoom)
+    '234357c49bc4fcfc01fb8ac96c4da2b8',  # JPEG signature 2 of generic dummy artwork (GamesRoom)
+}
+
+KNOWN_BAD_ARTWORK_DHASH = {
+    'a5542a2b6a695300',  # Visual dHash fingerprint of generic dummy placeholder artwork
+}
+
+def calc_dhash(img_path: Path) -> str:
+    """ Computes difference hash (dHash) for visual similarity comparison. """
+    try:
+        with Image.open(img_path) as img:
+            resized = img.convert('L').resize((9, 8), Image.Resampling.LANCZOS)
+            if hasattr(resized, 'get_flattened_data'):
+                pixels = list(resized.get_flattened_data())
+            else:
+                pixels = list(resized.getdata())
+            diff = [pixels[r*9 + c] > pixels[r*9 + c + 1] for r in range(8) for c in range(8)]
+            dec = 0
+            hex_str = []
+            for i, v in enumerate(diff):
+                if v: dec += 2**(i % 8)
+                if (i % 8) == 7:
+                    hex_str.append(hex(dec)[2:].zfill(2))
+                    dec = 0
+            return ''.join(hex_str)
+    except Exception:
+        return ''
+
+def is_bad_artwork(jpg_path: Path) -> bool:
+    """ Checks if image matches known dummy MD5s or visual dHash fingerprints. """
+    if not jpg_path.exists():
+        return False
+    try:
+        with open(jpg_path, 'rb') as f:
+            if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
+                return True
+        
+        # Perceptual Visual Check (dHash)
+        dh = calc_dhash(jpg_path)
+        if dh:
+            for bad_dh in KNOWN_BAD_ARTWORK_DHASH:
+                dist = bin(int(dh, 16) ^ int(bad_dh, 16)).count('1')
+                if dist <= 4:
+                    return True
+    except Exception:
+        pass
+    return False
+
+def clean_plist_str(val) -> str:
+    if isinstance(val, (str, int, float)):
+        return ' '.join(str(val).split())
+    return ''
+
 
 # Increase limit for large metadata chunks
 PngImagePlugin.MAX_TEXT_CHUNK = 100 * 1024 * 1024 # 100MB
@@ -310,15 +366,11 @@ def fix_missing_images(DB: 'CacheDB'):
                 jpg_file = shard_dir / f"{img_pk}.jpg"
                 if f"{img_pk}.jpg" not in existing:
                     missing.append(img_pk)
-                elif jpg_file.exists():
-                    try:
-                        with open(jpg_file, 'rb') as f:
-                            if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
-                                print(f"\n[BAD ARTWORK] [{img_pk}] Found generic bad artwork. Re-extracting icon...")
-                                jpg_file.unlink()
-                                missing.append(img_pk)
-                    except Exception:
-                        pass
+                elif jpg_file.exists() and is_bad_artwork(jpg_file):
+                    print(f"\n[BAD ARTWORK] [{img_pk}] Found generic bad artwork (MD5/dHash). Re-extracting icon...")
+                    try: jpg_file.unlink()
+                    except Exception: pass
+                    missing.append(img_pk)
         checked += len(pks)
         if checked % 100 == 0 or checked == total:
             print(f"\rChecked {checked}/{total} unique images...", end="")
@@ -540,13 +592,10 @@ class CacheDB:
             pk = res[0]
             jpg_file = diskPath(pk, '.jpg')
             if jpg_file.exists():
-                try:
-                    with open(jpg_file, 'rb') as f:
-                        if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
-                            jpg_file.unlink()
-                            return None
-                except Exception:
-                    pass
+                if is_bad_artwork(jpg_file):
+                    try: jpg_file.unlink()
+                    except Exception: pass
+                    return None
                 return pk
         return None
 
@@ -725,9 +774,13 @@ class CacheDB:
                 return
 
         bundleId = plist.get('CFBundleIdentifier')
+        if not isinstance(bundleId, str):
+            bundleId = clean_plist_str(bundleId)
         title = plist.get('CFBundleDisplayName') or plist.get('CFBundleName')
-        v_short = str(plist.get('CFBundleShortVersionString', ''))
-        v_long = str(plist.get('CFBundleVersion', ''))
+        if not isinstance(title, str):
+            title = clean_plist_str(title)
+        v_short = clean_plist_str(plist.get('CFBundleShortVersionString'))
+        v_long = clean_plist_str(plist.get('CFBundleVersion'))
         version = v_short or v_long
         if version != v_long and v_long:
             version += f' ({v_long})'
@@ -1308,9 +1361,13 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                         with open(plist_path, 'rb') as fp:
                             plist = plistlib.load(fp)
                             bid = plist.get('CFBundleIdentifier')
-                            v_short = str(plist.get('CFBundleShortVersionString', ''))
-                            v_long = str(plist.get('CFBundleVersion', ''))
+                            if not isinstance(bid, str):
+                                bid = clean_plist_str(bid)
+                            v_short = clean_plist_str(plist.get('CFBundleShortVersionString'))
+                            v_long = clean_plist_str(plist.get('CFBundleVersion'))
                             ver = v_short or v_long
+                            if ver != v_long and v_long:
+                                ver += f' ({v_long})'
                             
                             db = CacheDB()
                             existing_img_pk = db.hasImage(bid, ver)
@@ -1359,15 +1416,14 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                 extractZipEntry(zip, entry, img_path)
                 if os.path.exists(img_path) and os.path.getsize(img_path) > 0:
                     if processImage(img_path):
-                        # Verify the processed image is not a known generic bad artwork
+                        # Verify the processed image is not a known generic bad artwork (MD5 or dHash)
                         jpg_candidate = img_path.with_suffix('.jpg')
-                        if jpg_candidate.exists():
-                            with open(jpg_candidate, 'rb') as f:
-                                if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
-                                    print(f'  [WARN] [{uid}] Rejected generic bad iTunesArtwork MD5, removing...')
-                                    jpg_candidate.unlink()
-                                    artwork = False
-                                    continue
+                        if jpg_candidate.exists() and is_bad_artwork(jpg_candidate):
+                            print(f'  [WARN] [{uid}] Rejected generic bad iTunesArtwork (MD5/dHash), removing...')
+                            try: jpg_candidate.unlink()
+                            except Exception: pass
+                            artwork = False
+                            continue
                         artwork = True
                         break
                     else:
