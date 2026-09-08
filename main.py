@@ -28,6 +28,60 @@ KNOWN_BAD_ARTWORK_DHASH = {
     'a5542a2b6a695300',  # Visual dHash fingerprint of generic dummy placeholder artwork
 }
 
+# WeChat app IDs are URL-scheme values in the form wx + 16 hexadecimal digits.
+# Remove them from newly extracted Info.plist files before any metadata is saved.
+RE_WECHAT_APP_ID = re.compile(r'^wx[0-9a-f]{16}$', re.IGNORECASE)
+RE_WECHAT_APP_ID_XML = re.compile(
+    rb'<string>\s*wx[0-9a-f]{16}\s*</string>', re.IGNORECASE
+)
+
+def remove_wechat_app_ids(filepath: Path) -> int:
+    """Remove exact WeChat app-ID values from one newly extracted plist."""
+    if not filepath.exists():
+        return 0
+
+    raw = filepath.read_bytes()
+    # XML plists are edited directly so malformed-but-readable metadata remains intact.
+    if raw.lstrip().startswith(b'<'):
+        cleaned, removed = RE_WECHAT_APP_ID_XML.subn(b'', raw)
+        if removed:
+            filepath.write_bytes(cleaned)
+        return removed
+
+    try:
+        plist = plistlib.loads(raw)
+    except Exception as exc:
+        print(f'  [WARN] could not sanitize plist {filepath}: {exc}', file=stderr)
+        return 0
+
+    removed = 0
+
+    def clean(value) -> None:
+        nonlocal removed
+        if isinstance(value, dict):
+            for key in list(value):
+                item = value[key]
+                if isinstance(item, str) and RE_WECHAT_APP_ID.fullmatch(item):
+                    del value[key]
+                    removed += 1
+                else:
+                    clean(item)
+        elif isinstance(value, list):
+            kept = []
+            for item in value:
+                if isinstance(item, str) and RE_WECHAT_APP_ID.fullmatch(item):
+                    removed += 1
+                else:
+                    clean(item)
+                    kept.append(item)
+            value[:] = kept
+
+    clean(plist)
+    if removed:
+        # Preserve binary plist format for binary source files.
+        filepath.write_bytes(plistlib.dumps(plist, fmt=plistlib.FMT_BINARY, sort_keys=False))
+    return removed
+
 def calc_dhash(img_path: Path) -> str:
     """ Computes difference hash (dHash) for visual similarity comparison. """
     try:
@@ -1394,6 +1448,9 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
             if plist_match:
                 app_prefix = plist_match.group(1)
                 extractZipEntry(zip, entry, plist_path)
+                removed_ids = remove_wechat_app_ids(plist_path)
+                if removed_ids:
+                    print(f'  [SANITIZED] removed {removed_ids} wx app ID value(s)')
                 
                 # Deduplication check: if we already have this app's icon, don't download it again
                 if plist_path.exists():

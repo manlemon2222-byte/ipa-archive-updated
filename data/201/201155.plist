@@ -30,7 +30,6 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx09d4abc882b42a3a</string>
         </array>
       </dict>
       <dict>
@@ -68,7 +67,6 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx2522ae6a14730123</string>
         </array>
       </dict>
       <dict>
@@ -76,7 +74,6 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx827dfbc47093816a</string>
         </array>
       </dict>
       <dict>
@@ -84,7 +81,6 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx3d7c53a61184e7a9</string>
         </array>
       </dict>
       <dict>
@@ -92,7 +88,6 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx2bdd2e9788ec32ce</string>
         </array>
       </dict>
       <dict>

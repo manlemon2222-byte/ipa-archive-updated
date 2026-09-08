@@ -242,7 +242,6 @@
         <string>tencentApildentifier</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx24c72e8ff766a772</string>
           <string>tencent1000001443</string>
         </array>
       </dict>

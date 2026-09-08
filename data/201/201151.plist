@@ -151,7 +151,6 @@
         <string>weixin</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx276cf43a91037f07</string>
         </array>
       </dict>
     </array>

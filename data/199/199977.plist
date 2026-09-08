@@ -295,7 +295,6 @@
         <string>wechat</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>wx91ef9ad791b2d0a3</string>
         </array>
       </dict>
     </array>
