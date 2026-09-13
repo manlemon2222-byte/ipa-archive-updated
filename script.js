@@ -90,7 +90,11 @@ function saveConfig() {
  */
 
 function applySearch() {
-    const term = document.getElementById('search').value.toLowerCase();
+    const rawTerm = (document.getElementById('search').value || '').trim();
+    const term = rawTerm.toLowerCase();
+    const cleanTerm = term.replace(/[\s\-_.]+/g, '');
+    const words = term.split(/\s+/).filter(function (w) { return w.length > 0; });
+
     const bundle = document.getElementById('bundleid').value.trim().toLowerCase();
     const unique = document.getElementById('unique').checked;
     const minos = document.getElementById('minos').value;
@@ -115,11 +119,46 @@ function applySearch() {
         if (bundle && ipa[4].toLowerCase().indexOf(bundle) === -1) {
             return;
         }
-        if (!term
-            || ipa[3].toLowerCase().indexOf(term) > -1
-            || ipa[4].toLowerCase().indexOf(term) > -1
-            || ipa[7].toLowerCase().indexOf(term) > -1
-        ) {
+        if (!term) {
+            if (unique) {
+                const bId = ipa[4];
+                if (uniqueBundleIds[bId]) {
+                    return;
+                }
+                uniqueBundleIds[bId] = true;
+            }
+            DB_result.push(i);
+            return;
+        }
+
+        const titleLower = (ipa[3] || '').toLowerCase();
+        const bundleLower = (ipa[4] || '').toLowerCase();
+        const pathLower = (ipa[7] || '').toLowerCase();
+
+        let matched = false;
+
+        // 1. Direct exact substring match
+        if (titleLower.indexOf(term) > -1 || bundleLower.indexOf(term) > -1 || pathLower.indexOf(term) > -1) {
+            matched = true;
+        }
+        // 2. Space / punctuation-insensitive match (e.g. "alive4ever" <=> "alive 4 ever")
+        else if (cleanTerm.length >= 2) {
+            const cleanTitle = titleLower.replace(/[\s\-_.]+/g, '');
+            const cleanBundle = bundleLower.replace(/[\s\-_.]+/g, '');
+            const cleanPath = pathLower.replace(/[\s\-_.]+/g, '');
+            if (cleanTitle.indexOf(cleanTerm) > -1 || cleanBundle.indexOf(cleanTerm) > -1 || cleanPath.indexOf(cleanTerm) > -1) {
+                matched = true;
+            }
+        }
+
+        // 3. Multi-word search (all words must appear in title, bundle, or path)
+        if (!matched && words.length > 1) {
+            matched = words.every(function (w) {
+                return titleLower.indexOf(w) > -1 || bundleLower.indexOf(w) > -1 || pathLower.indexOf(w) > -1;
+            });
+        }
+
+        if (matched) {
             if (unique) {
                 const bId = ipa[4];
                 if (uniqueBundleIds[bId]) {
