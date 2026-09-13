@@ -1,0 +1,305 @@
+================================================================================
+GRAND IPA ARCHIVE - COMPREHENSIVE FULL-SCALE REVERSE ENGINEERING REPORT
+================================================================================
+Generated: 2026-09-13
+Repository: ipa-archive-updated (Forked from relikd, maintained by stuffed18)
+Target Platform: Vintage iOS (iOS 1.0 - 10.x), Termux/Linux & Web
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. EXECUTIVE SUMMARY & PURPOSE
+2. ARCHITECTURAL MAP & SYSTEM DATA FLOW
+3. IN-DEPTH COMPONENT REVERSE ENGINEERING
+   3.1 main.py (Core Engine, Database, Scraper, Worker Threads)
+   3.2 urlfromtxt.py & urls.txt (Ingestion Pipeline)
+   3.3 pngdefry & Image Processing Pipeline
+   3.4 tools/ (Shell Scripts, Plist Utilities, Plist Servers)
+   3.5 Frontend Web Architecture (index.html, script.js, style.css)
+4. THE DHASH & VERIFICATION COMBO (ALGORITHM & MECHANICS)
+5. DATABASE SCHEMA & PRODUCTION METRICS
+6. APPLE OVER-THE-AIR (OTA) INSTALLATION MECHANISM
+7. SECURITY AUDIT, VULNERABILITIES & ENGINEERING RECOMMENDATIONS
+================================================================================
+
+--------------------------------------------------------------------------------
+1. EXECUTIVE SUMMARY & PURPOSE
+--------------------------------------------------------------------------------
+The Grand IPA Archive is an end-to-end indexing, archiving, and wireless 
+installation system for vintage iOS applications (.ipa files). Rather than hosting
+multi-gigabyte collections of pirated or archived binaries directly, this system:
+- Scrapes metadata from public Internet Archive (Archive.org) item collections.
+- Peeks inside remote multi-gigabyte ZIP/RAR/7z archives over HTTP without downloading
+  the entire archive (using HTTP Range requests via RemoteZip and Archive.org bridges).
+- Extracts and parses app metadata (Info.plist), decodes Apple-proprietary CgBI PNG 
+  icons using pngdefry, downscales and optimizes artwork, and deduplicates identical assets.
+- Stores metadata in a local SQLite database (196,005 apps indexed across 4,587 collections).
+- Compiles the database into a static, client-side searchable web index (ipa.json, urls.json).
+- Implements a local Plist Manifest server enabling direct Over-The-Air (OTA) installation
+  on legacy iPhone, iPod Touch, and iPad devices using the native itms-services:// protocol.
+
+--------------------------------------------------------------------------------
+2. ARCHITECTURAL MAP & SYSTEM DATA FLOW
+--------------------------------------------------------------------------------
+
++-------------------------------------------------------------------------------+
+| INGESTION: urls.txt -> urlfromtxt.py -> main.py add <archive_url>              |
++-------------------------------------------------------------------------------+
+                                      |
+                                      v
++-------------------------------------------------------------------------------+
+| SCRAPING: Archive.org API (/metadata/{id}/files) -> Gzip cache in url_cache/  |
+| Enumerates .ipa files, .zip containers, and archive formats (.rar/.7z/.tar)   |
++-------------------------------------------------------------------------------+
+                                      |
+                                      v
++-------------------------------------------------------------------------------+
+| REMOTE EXTRACTION (main.py run):                                              |
+| - RemoteZip sends HTTP Range requests to inspect ZIP Central Directory        |
+| - Bridge scraping for non-ZIP archives (view_archive.php)                     |
+| - Extracts ONLY Info.plist and Icon PNG directly over HTTP (few KB payload)   |
++-------------------------------------------------------------------------------+
+                                      |
+                                      v
++-------------------------------------------------------------------------------+
+| NORMALIZATION & DEDUPLICATION:                                                |
+| - remove_wechat_app_ids(): Strips tracking/app IDs from plists                |
+| - pngdefry: Fixes Apple CgBI proprietary PNG byte ordering & Deflate          |
+| - calc_dhash() + MD5: Rejects dummy/placeholder artwork (Hamming dist <= 4)   |
+| - Image Deduplication: Maps identical (bundle_id, version) to master image_pk |
++-------------------------------------------------------------------------------+
+                                      |
+                                      v
++-------------------------------------------------------------------------------+
+| STORAGE & EXPORT:                                                             |
+| - SQLite: ipa_cache.db (WAL mode, busy_timeout=60s)                           |
+| - Sharded Disk: data/{id // 1000}/{id}.plist & {id}.jpg                       |
+| - Export Engine: main.py export json -> ipa.json (compact) + urls.json        |
++-------------------------------------------------------------------------------+
+                                      |
+                                      v
++-------------------------------------------------------------------------------+
+| CLIENT & INSTALLATION:                                                        |
+| - Browser (index.html / script.js): In-memory client-side search & filtering  |
+| - Plist Server (plist_server.py / index.php): itms-services:// manifest relay |
+| - Device: iOS SpringBoard downloads & installs IPA directly from Archive.org  |
++-------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3. IN-DEPTH COMPONENT REVERSE ENGINEERING
+--------------------------------------------------------------------------------
+
+3.1 main.py (1,861 lines)
+--------------------------------------------------
+The primary executable containing database management, Archive.org scrapers,
+remote ZIP inspectors, image processors, and export utilities.
+
+Key Subsystems:
+A. Database Engine (Class CacheDB):
+   - SQLite database at data/ipa_cache.db with PRAGMA journal_mode=WAL and
+     PRAGMA busy_timeout=60000 to support parallel thread access.
+   - Core Tables:
+     * urls: Primary keys and root URLs for collections.
+     * idx: The core index (pk, base_url, path_name, done, fsize, min_os,
+       platform, title, bundle_id, version, image_pk).
+     * scrape_queue: Resumable URL ingestion queue.
+     * scanned_archives: Tracks processed archives by (base_url_id, archive_name,
+       size, crc) to avoid re-peeking unchanged containers.
+   - Done Status Lifecycle:
+     * 0: Queued / pending extraction.
+     * 1: Extracted and indexed successfully.
+     * 2: Metadata saved, but icon extraction pending retry.
+     * 3: Recoverable error (network failure, HTTP 500/503).
+     * 4: Permanent unfixable error (corrupt ZIP, empty file, tombstoned).
+
+B. CLI Commands:
+   - add: Queues and scrapes Archive.org collections. Supports 'continue' to resume.
+   - update: Checks collections against Archive.org for additions/deletions.
+   - run: Worker loop (ThreadPoolExecutor, max_workers=10).
+   - export: Generates ipa.json and urls.json, or exports .size files.
+   - err: Error management ('reset' to retry done=3, 'fix' for retry loops,
+     'clear' to permanently prune error records and delete orphaned disk files).
+   - get: Inspection utility ('url', 'img', 'ipa' to pull full binary for debugging).
+   - set: Sets column state manually (e.g., mark as done=4).
+   - fix-imgs: Scans unique image_pk entries, flags missing JPGs, and re-extracts them.
+   - clear-queue: Flushes run (done=0) or add (scrape_queue) queues.
+   - special: Image consolidation utility for specific bundle IDs into master image_pk.
+
+C. Remote Inspection & Extraction:
+   - RemoteZip: Uses HTTP Range requests to read the 22-byte End of Central Directory
+     Record (EOCDR) and Central Directory at the end of the remote .ipa file.
+   - extractZipEntry(): Streams only the specific byte ranges for Info.plist and
+     app icons. Includes retry mechanisms and header verification to guard against
+     HTML 404/503 responses, zero-filled blocks, or raw zip headers.
+   - Non-ZIP Containers: Archive.org HTML scraper targets view_archive.php table
+     rows to discover nested .ipa paths within .rar, .7z, and .tar archives without
+     downloading multi-gigabyte archives.
+   - Nested separator: Uses internal '##' separator in path names
+     (e.g., 'Container.zip##Payload/App.app/Info.plist') translated to slashes on export.
+
+D. Data Sanitization & Sentinel Rules:
+   - remove_wechat_app_ids(): Regex RE_WECHAT_APP_ID (wx[0-9a-f]{16}) removes
+     WeChat URL-scheme identifiers from Info.plist XML and binary structures to
+     prevent metadata pollution.
+   - Sentinel Rule & Auto-Fix: Validates extracted bundle IDs and titles against
+     the filename. If completely mismatched, purges cached files and infers real
+     bundle ID/title directly from the filename to eliminate cross-bundle corruption.
+   - prettify_title(): Removes version numbers, hash suffixes (-[0-9a-f]{32}),
+     brackets, and converts CamelCase/underscores into clean Title Case.
+
+3.2 urlfromtxt.py & urls.txt
+--------------------------------------------------
+- urls.txt: A raw list of 4,500+ Archive.org URLs and identifier slugs.
+- urlfromtxt.py: A sequential runner that reads urls.txt and launches
+  subprocess.run([sys.executable, 'main.py', 'add', url]) to safely queue items.
+
+3.3 pngdefry & Image Processing Pipeline
+--------------------------------------------------
+- Problem: Apple utilizes a proprietary CgBI PNG variant in iOS application bundles.
+  Features include:
+  * Non-standard 'CgBI' critical chunk inserted before IHDR.
+  * Byte-swapped color channel representation (BGR / ABGR instead of RGBA).
+  * Raw Deflate data without zlib headers or checksums.
+  * Premultiplied alpha channels.
+  Standard image libraries (Pillow, libpng, browsers) display these images corrupted
+  or completely fail to parse them.
+- Solution:
+  * processImage() checks for the CgBI chunk signature.
+  * Executes pngdefry/pngdefry -s -free <file.png> to reverse CgBI modifications.
+  * Pillow loads the normalized PNG, converts it to RGB, downscales to max 128x128
+    using Lanczos resampling, and saves an optimized JPEG (quality=80).
+  * Automatically unlinks the temporary PNG file, saving significant disk space.
+
+3.4 tools/ (Helper Scripts & Micro-Servers)
+--------------------------------------------------
+- check_error_no_plist.sh: Identifies done=4 (unfixable) entries with remaining plists.
+- check_missing_img.sh: Finds plists lacking corresponding .jpg artwork.
+- convert_plist.sh: Invokes macOS PlistBuddy to convert JSON/ASCII plists to XML.
+- image_optim.sh: macOS automation using sips and ImageOptim.app GUI.
+- plist_server.py: Lightweight Python HTTP daemon serving OTA installation manifests.
+- plist_server/index.php: Alternative PHP implementation of the OTA manifest server.
+
+3.5 Frontend Web Architecture (index.html, script.js, style.css)
+--------------------------------------------------
+- Zero-Backend Static Architecture: The web interface can be hosted on any static
+  web host (GitHub Pages, Nginx, Apache) without dynamic server scripts.
+- In-Memory Database:
+  * Fetches data/urls.json (dictionary of collection ID -> base URL).
+  * Fetches data/ipa.json (~23.8 MB array of tuples).
+  * Total in-memory array representation of 186,000+ items.
+- Compact Array Format:
+  [pk, platform, minOS, title, bundleId, version, baseUrlId, pathName, size, image_pk]
+  * platform: Bitmask (1<<1 iPhone, 1<<2 iPad, 1<<3 TV, 1<<4 Watch).
+  * minOS: Packed integer version (e.g., iOS 5.1.1 -> 50101).
+- State Persistence:
+  * Entire query state (search term, bundle ID, min/max OS, device, page, plist server)
+    is serialized directly into the URL hash fragment (#search=...&minos=...).
+  * Bookmarking or refreshing preserves the exact filtered view.
+
+--------------------------------------------------------------------------------
+4. THE DHASH & VERIFICATION COMBO (ALGORITHM & MECHANICS)
+--------------------------------------------------------------------------------
+In main.py, is_bad_artwork() implements a two-stage verification combo to detect
+and discard generic placeholder artwork uploaded by archive collectors:
+
+1. Stage 1: Cryptographic Byte Hash (MD5)
+   - Fast-path verification:
+     md5(raw_bytes).hexdigest() in KNOWN_BAD_ARTWORK_MD5
+   - Matches byte-identical dummy images in O(1) time without image decoding.
+
+2. Stage 2: Perceptual Difference Hash (dHash)
+   - Fallback verification for images that have been re-encoded, re-compressed,
+     or resized by different archiving tools:
+     * Step A: Convert image to grayscale ('L').
+     * Step B: Resize to 9x8 pixels (72 pixels) with Lanczos filtering.
+     * Step C: Compute horizontal difference gradient:
+       bit = 1 if P[r, c] > P[r, c + 1] else 0 (8 rows x 8 comparisons = 64 bits).
+     * Step D: Pack 64 bits into a 16-character hex fingerprint.
+   - Comparison:
+     Hamming Distance = bin(dHash ^ known_bad_dhash).count('1')
+     * If Hamming Distance <= 4, the image is identified as the generic placeholder
+       and automatically unlinked.
+
+--------------------------------------------------------------------------------
+5. DATABASE SCHEMA & PRODUCTION METRICS
+--------------------------------------------------------------------------------
+
+Database Location: data/ipa_cache.db (Size: ~64.8 MB)
+Active Production Counts:
+- Indexed Applications (idx table): 196,005
+  * Done = 1 (Extracted & Complete): 186,098
+  * Done = 2 (Metadata OK, Image Pending): 9,849
+  * Done = 3 (Transient Error): 57
+  * Done = 4 (Permanent Error): 1
+- Base Collections (urls table): 4,587
+- Scanned Container Archives (scanned_archives table): 67
+
+Table Definitions:
+- urls (pk INTEGER PRIMARY KEY, url TEXT NOT NULL UNIQUE, date INTEGER)
+- idx (pk INTEGER PRIMARY KEY, base_url INTEGER, path_name TEXT, done INTEGER,
+       fsize INTEGER, min_os INTEGER, platform INTEGER, title TEXT,
+       bundle_id TEXT, version TEXT, image_pk INTEGER)
+  Indices: idx_image_pk, idx_done, idx_bundle_ver
+
+Filesystem Layout:
+- data/ partitioned into 205 shards (0 to 204).
+- Subdirectory formula: shard = pk // 1000.
+- Asset files: data/{shard}/{pk}.plist, data/{shard}/{pk}.jpg.
+
+--------------------------------------------------------------------------------
+6. APPLE OVER-THE-AIR (OTA) INSTALLATION MECHANISM
+--------------------------------------------------------------------------------
+Legacy iOS devices cannot install .ipa files via standard web downloads in Safari.
+The system implements Apple's Enterprise OTA distribution workflow:
+
+1. User clicks 'Install' on the webpage.
+2. Web client encodes installation parameters into Base64 JSON:
+   {
+     "u": "https://archive.org/download/.../App.ipa",
+     "n": "App Title",
+     "b": "com.developer.appid",
+     "v": "1.0",
+     "i": "http://<server_ip>:8026/data/.../123.jpg"
+   }
+3. Safari opens:
+   itms-services://?action=download-manifest&url=http://<server_ip>:8026/?d=<base64>
+4. iOS SpringBoard requests the URL from plist_server.py.
+5. Server generates a dynamic XML Property List adhering to Apple's DTD:
+   - items -> assets -> software-package (pointing to Archive.org direct download)
+   - items -> assets -> display-image (pointing to app icon)
+   - items -> metadata (bundle-identifier, bundle-version, title, software)
+6. iOS intercepts the manifest, prompts the user to install, and downloads the IPA
+   directly over the air.
+
+--------------------------------------------------------------------------------
+7. SECURITY AUDIT, VULNERABILITIES & ENGINEERING RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+1. Unauthenticated Server-Side Request Forgery (SSRF) / Open Proxy
+   - Vulnerability: Both tools/plist_server.py (do_GET: action == 'r') and
+     tools/plist_server/index.php (fopen(['r'])) accept arbitrary URLs
+     and relay contents back to the client.
+   - Risk: An attacker on the local network can use the server to probe internal
+     ports, access local IP routers, cloud metadata endpoints, or read internal files.
+   - Recommendation: Restrict ?r= fetches to a strict whitelist (e.g., archive.org,
+     apple.com) and reject private/loopback IP address ranges (RFC 1918).
+
+2. Platform Portability Issues
+   - imgconversion.py contains hardcoded Windows desktop paths (C:/Users/kiren/...).
+   - tools/image_optim.sh relies on macOS-exclusive binaries (sips, open -b net.pornel.ImageOptim).
+   - tools/convert_plist.sh relies on /usr/libexec/PlistBuddy (macOS only).
+   - Recommendation: All cross-platform extraction and conversion logic is already
+     handled cleanly by main.py using Pillow and pngdefry. Redundant platform-locked
+     scripts can be deprecated or updated.
+
+3. Client-Side Memory Footprint on Vintage Devices
+   - ipa.json is ~23.8 MB in raw JSON. Parsing this in Mobile Safari on devices with
+     128MB to 512MB RAM (iPhone 3GS, iPad 1, iPod Touch 4) can trigger out-of-memory
+     tab crashes.
+   - Recommendation: For extremely old hardware, consider pre-partitioning ipa.json
+     by platform/iOS version or utilizing an indexed SQLite WebAssembly / IndexedDB
+     paginated cache.
+
+================================================================================
+END OF REPORT
+================================================================================

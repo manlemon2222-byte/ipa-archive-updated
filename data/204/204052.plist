@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>DoneDrinkn</string>
+	<key>CFBundleExecutable</key>
+	<string>DoneDrinking</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com..DoneDrinking</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>DoneDrinking</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>2.0.2</string>
+	<key>DTCompiler</key>
+	<string>4.2</string>
+	<key>DTPlatformBuild</key>
+	<string>8C134</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTPlatformVersion</key>
+	<string>4.2 Seed 2</string>
+	<key>DTSDKName</key>
+	<string>iphoneos4.2</string>
+	<key>DTXcode</key>
+	<string>0325</string>
+	<key>DTXcodeBuild</key>
+	<string>10M2423</string>
+	<key>Icon files</key>
+	<array>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+	</array>
+	<key>Itunes.product</key>
+	<string>299551530</string>
+	<key>JVL.advVersion</key>
+	<integer>109</integer>
+	<key>JVL.bannerVersion</key>
+	<integer>100</integer>
+	<key>JVL.build</key>
+	<string>Distribution 81370</string>
+	<key>JVL.catalogURL</key>
+	<string>/Catalog/iphone/content_iphone/dd.html</string>
+	<key>JVL.iadPos</key>
+	<string>1</string>
+	<key>JVL.iadType</key>
+	<string>1</string>
+	<key>JVL.master</key>
+	<string>DoneDrinking</string>
+	<key>JVL.offlineGlobalLeaderboard</key>
+	<true/>
+	<key>JVL.product</key>
+	<integer>3</integer>
+	<key>JVL.retinaSupport</key>
+	<false/>
+	<key>MinimumOSVersion</key>
+	<string>3.0</string>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+</dict>
+</plist>
