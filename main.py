@@ -392,6 +392,12 @@ def main():
         
         # After run, always check for missing images
         fix_missing_images(DB)
+        print('Auto-optimizing database...')
+        res = DB.optimize()
+        if res['saved_bytes'] > 0:
+            print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
+        else:
+            print("Database is compact and optimal.")
 
     elif args.cmd == 'err':
         DB = CacheDB()
@@ -401,6 +407,11 @@ def main():
         elif args.err_type == 'clear':
             count = DB.deleteAllErrors()
             print(f'Successfully deleted {count} error entries from the database.')
+            if count > 0:
+                print('Auto-optimizing database...')
+                res = DB.optimize()
+                if res['saved_bytes'] > 0:
+                    print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
         elif args.err_type == 'fix':
             while True:
                 err_count = DB.count(done=3)
@@ -647,6 +658,10 @@ class CacheDB:
         self._db = sqlite3.connect(CACHE_DIR / 'ipa_cache.db', timeout=60.0)
         self._db.execute('PRAGMA journal_mode=WAL;')
         self._db.execute('PRAGMA busy_timeout=60000;')
+        self._db.execute('PRAGMA synchronous=NORMAL;')
+        self._db.execute('PRAGMA temp_store=MEMORY;')
+        self._db.execute('PRAGMA mmap_size=268435456;')
+        self._db.execute('PRAGMA cache_size=-64000;')
 
     def init(self):
         self._db.execute('''
@@ -690,6 +705,30 @@ class CacheDB:
                 FOREIGN KEY (base_url_id) REFERENCES urls (pk) ON DELETE CASCADE
             );
         ''')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_bundle_ver ON idx(bundle_id, version);')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_done ON idx(done);')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_image_pk ON idx(image_pk);')
+        self._db.commit()
+
+    def optimize(self) -> dict:
+        db_file = CACHE_DIR / 'ipa_cache.db'
+        before_size = db_file.stat().st_size
+        freelist_before = self._db.execute('PRAGMA freelist_count;').fetchone()[0]
+
+        self._db.execute('PRAGMA optimize;')
+        self._db.execute('ANALYZE;')
+        self._db.execute('VACUUM;')
+
+        after_size = db_file.stat().st_size
+        freelist_after = self._db.execute('PRAGMA freelist_count;').fetchone()[0]
+
+        return {
+            'before_size': before_size,
+            'after_size': after_size,
+            'freelist_before': freelist_before,
+            'freelist_after': freelist_after,
+            'saved_bytes': before_size - after_size
+        }
 
     def __del__(self) -> None:
         self._db.close()
@@ -1914,6 +1953,13 @@ def export_json():
     with open(CACHE_DIR / 'urls.json', 'w') as fp:
         fp.write(json.dumps(url_map, separators=(',\n', ':'), sort_keys=True))
     print(f'write urls.json: {len(url_map)} entries')
+    
+    print('Auto-optimizing database...')
+    res = DB.optimize()
+    if res['saved_bytes'] > 0:
+        print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
+    else:
+        print("Database is compact and optimal.")
 
 
 def export_filesize():
