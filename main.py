@@ -196,7 +196,19 @@ def is_bad_artwork(jpg_path: Path, check_dhash: bool = True) -> bool:
 
 def clean_plist_str(val) -> str:
     if isinstance(val, (str, int, float)):
-        return ' '.join(str(val).split())
+        s = str(val)
+        sl = s.lower()
+        if (
+            '<!doctype' in sl 
+            or '<plist' in sl 
+            or '<?xml' in sl 
+            or sl.startswith(('$', '{', '('))
+            or 'cfbundledisplayname' in sl 
+            or 'cfbundlename' in sl 
+            or 'product_name' in sl
+        ):
+            return ''
+        return ' '.join(s.split())
     return ''
 
 def safe_load_plist_file(filepath: Path) -> dict:
@@ -614,7 +626,8 @@ def fix_missing_images(DB: 'CacheDB'):
 # --- PRE-COMPILED REGEX FOR INSTANT SPEED ---
 RE_HASH = re.compile(r'-[0-9a-f]{32}')
 RE_BRACKETS = re.compile(r'[\(\[].*?[\)\]]')
-RE_VERSION = re.compile(r'[-.]v?\d+(\.\d+)*')
+RE_VERSION = re.compile(r'[-.\s](?:v\d+(?:\.\d+)*|\d+\.\d+(?:\.\d+)*)')
+RE_NOISE = re.compile(r'[-_]\s*below\s+ios\s*\d*.*$', re.IGNORECASE)
 RE_CAMEL = re.compile(r'([a-z])([A-Z])')
 RE_WORDS = re.compile(r'[a-z0-9]{2,}')
 RE_BID = re.compile(r'([a-z]{2,}\.[a-z0-9]{2,}\.[a-z0-9\.]+)')
@@ -632,10 +645,45 @@ def is_hint_match(word, target):
 
 def prettify_title(title: str, bundle_id: str, path_name: str) -> str:
     """Ultra-fast local title polisher"""
-    if not title or title.lower() in ["cfbundledisplayname", "cfbundlename", "templete", "null", "unknown"]:
-        source = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
-        if len(source) < 3 and bundle_id:
-            source = bundle_id.split('.')[-1]
+    if title:
+        tl = str(title).lower()
+        if (
+            '<plist' in tl 
+            or '<!doctype' in tl 
+            or '<?xml' in tl 
+            or '</' in tl
+            or tl.startswith(('$', '{', '('))
+            or 'cfbundledisplayname' in tl
+            or 'cfbundlename' in tl
+            or 'product_name' in tl
+            or 'product name' in tl
+            or tl in ["templete", "null", "unknown", "none", "game", "app", "application"]
+        ):
+            title = None
+
+    if not title:
+        fn = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
+        if ' - ' in fn:
+            after_dash = fn.split(' - ', 1)[1]
+            if not any(x in after_dash.lower() for x in ['cfbundledisplayname', 'product_name', 'product name']):
+                fn = after_dash
+
+        fn_lower = fn.lower()
+        if (
+            'cfbundledisplayname' in fn_lower 
+            or 'cfbundlename' in fn_lower 
+            or 'product_name' in fn_lower
+            or 'product name' in fn_lower
+            or fn_lower.startswith(('com.', 'net.', 'org.', 'de.', 'fr.', 'jp.', 'cn.', 'ru.'))
+            or len(fn) < 3
+        ):
+            if bundle_id:
+                last_comp = bundle_id.split('.')[-1]
+                source = last_comp if len(last_comp) >= 2 else fn
+            else:
+                source = fn
+        else:
+            source = fn
     elif title.lower().startswith(('com.', 'net.', 'org.')):
         source = title.split('.')[-1]
     else:
@@ -644,8 +692,11 @@ def prettify_title(title: str, bundle_id: str, path_name: str) -> str:
     # Clean noise using pre-compiled regex
     source = RE_HASH.sub('', source)
     source = RE_BRACKETS.sub('', source)
+    source = RE_NOISE.sub('', source)
     source = RE_VERSION.sub('', source)
     
+    # CamelCase splitting so MaritimeKingdom -> Maritime Kingdom
+    source = RE_CAMEL.sub(r'\1 \2', source)
     pretty = source.replace('.', ' ').replace('-', ' ').replace('_', ' ')
     pretty = ' '.join(pretty.split()).title()
     
@@ -992,12 +1043,8 @@ class CacheDB:
             self.setError(uid, done=3)
             return
 
-        bundleId = plist.get('CFBundleIdentifier')
-        if not isinstance(bundleId, str):
-            bundleId = clean_plist_str(bundleId)
-        title = plist.get('CFBundleDisplayName') or plist.get('CFBundleName')
-        if not isinstance(title, str):
-            title = clean_plist_str(title)
+        bundleId = clean_plist_str(plist.get('CFBundleIdentifier'))
+        title = clean_plist_str(plist.get('CFBundleDisplayName') or plist.get('CFBundleName'))
         v_short = clean_plist_str(plist.get('CFBundleShortVersionString'))
         v_long = clean_plist_str(plist.get('CFBundleVersion'))
         version = v_short or v_long
