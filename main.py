@@ -1026,40 +1026,34 @@ class CacheDB:
         if not platforms and minOS[0] in [0, 1, 2, 3]:
             platforms = 1 << 1  # fallback to iPhone for old versions
 
-        # --- ARCHITECTURAL GUARD: UNIVERSAL SENTINEL RULE ---
+        # --- ARCHITECTURAL GUARD: FALLBACK FOR MISSING / DUMMY BUNDLE ID ---
         res = self._db.execute('SELECT path_name FROM idx WHERE pk=?', [uid]).fetchone()
         path_name = res[0] if res else ""
-        
-        if path_name:
-            fn_words = get_clean_words(path_name.split('##')[-1])
-            bid_full = str(bundleId).lower()
-            tl_full = str(title).lower()
-            
-            has_hint = False
-            for w in fn_words:
-                if is_hint_match(w, bid_full) or is_hint_match(w, tl_full):
-                    has_hint = True
-                    break
-            
-            # BLOCK & AUTO-FIX
-            if not has_hint:
-                # 1. Purge corrupted files
-                for ext in ['.plist', '.png', '.jpg']:
-                    p = diskPath(uid, ext)
-                    if p.exists(): p.unlink()
-                
-                # 2. Attempt AUTHENTIC Inference from filename
-                fn = path_name.split('##')[-1].replace('.ipa', '')
-                bid_pattern = RE_BID.search(fn.lower())
-                
-                if bid_pattern:
-                    bundleId = bid_pattern.group(1)
+
+        # Only attempt filename inference if the plist bundle ID is missing or an invalid placeholder
+        is_invalid_bid = (
+            not bundleId
+            or len(str(bundleId).strip()) < 4
+            or '.' not in str(bundleId)
+            or str(bundleId).lower() in {'iphone.app.mega.pack', 'unknown', 'null', 'undefined'}
+            or str(bundleId).lower().startswith(('com.yourcompany.', 'com.example.'))
+        )
+
+        if is_invalid_bid and path_name:
+            # Extract ONLY the filename, stripping all parent directory paths
+            fn = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
+            bid_pattern = RE_BID.search(fn.lower())
+
+            if bid_pattern:
+                bundleId = bid_pattern.group(1)
+                if not title:
                     title = bundleId.split('.')[-1].replace('-', ' ').replace('_', ' ').title()
-                else:
-                    noise = {'old', 'ios', 'ipa', 'v1', 'v2', 'v3'}
-                    parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
+            else:
+                noise = {'old', 'ios', 'ipa', 'v1', 'v2', 'v3'}
+                parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
+                if not title:
                     title = (parts[0] if parts else fn).title()
-                    bundleId = f"com.archive.{title.lower()}"
+                bundleId = f"com.archive.{title.lower()}"
 
         # --- SMART TITLE CLEANING ---
         title = prettify_title(title, bundleId, path_name)
