@@ -22,11 +22,28 @@ KNOWN_BAD_ARTWORK_MD5 = {
     '9c086c11db6681d4d7e417243f17bc61',  # JPEG signature 1 of generic dummy artwork
     '8efd998d4613d0b554d1b38d23618ba7',  # PNG signature 2 of generic dummy artwork (GamesRoom)
     '234357c49bc4fcfc01fb8ac96c4da2b8',  # JPEG signature 2 of generic dummy artwork (GamesRoom)
+    '5b8efa55787e640dd30f0a518e0e658a',  # JPEG signature of coconut dummy artwork
 }
 
 KNOWN_BAD_ARTWORK_DHASH = {
     'a5542a2b6a695300',  # Visual dHash fingerprint of generic dummy placeholder artwork
+    'accc96332b2b9e8e',  # Visual dHash fingerprint of coconut dummy placeholder artwork
 }
+
+# Precomputed 4x4 spatial grid fingerprints (Lite-D2LV) for known dummy artworks
+KNOWN_BAD_ARTWORK_SPATIAL_GRIDS = {
+    'accc96332b2b9e8e': [
+        2184, 13922, 7333, 26231,
+        26252, 22733, 26489, 28391,
+        18022, 19147, 25699, 27886,
+        20172, 22324, 147, 25830
+    ],
+}
+
+# Exact byte sizes of known dummy placeholder images for instant O(1) directory filtering
+KNOWN_BAD_ARTWORK_SIZES = {3817, 1567}
+
+
 
 # WeChat app IDs are URL-scheme values in the form wx + 16 hexadecimal digits.
 # Remove them from newly extracted Info.plist files before any metadata is saved.
@@ -82,11 +99,12 @@ def remove_wechat_app_ids(filepath: Path) -> int:
         filepath.write_bytes(plistlib.dumps(plist, fmt=plistlib.FMT_BINARY, sort_keys=False))
     return removed
 
-def calc_dhash(img_path: Path) -> str:
+def calc_dhash(img_or_path) -> str:
     """ Computes difference hash (dHash) for visual similarity comparison. """
     try:
-        with Image.open(img_path) as img:
-            resized = img.convert('L').resize((9, 8), Image.Resampling.LANCZOS)
+        if isinstance(img_or_path, Image.Image):
+            img_l = img_or_path.convert('L') if img_or_path.mode != 'L' else img_or_path
+            resized = img_l.resize((9, 8), Image.Resampling.LANCZOS)
             if hasattr(resized, 'get_flattened_data'):
                 pixels = list(resized.get_flattened_data())
             else:
@@ -100,33 +118,97 @@ def calc_dhash(img_path: Path) -> str:
                     hex_str.append(hex(dec)[2:].zfill(2))
                     dec = 0
             return ''.join(hex_str)
+
+        with Image.open(img_or_path) as img:
+            return calc_dhash(img)
     except Exception:
         return ''
 
+def extract_spatial_grid(img_l: Image.Image, grid_size: int = 4) -> 'list[int]':
+    """ Lite-D2LV: Extracts local micro-fingerprints across a 4x4 spatial grid. """
+    try:
+        w, h = img_l.size
+        pw, ph = w // grid_size, h // grid_size
+        patches = []
+        for r in range(grid_size):
+            for c in range(grid_size):
+                box = (c * pw, r * ph, (c + 1) * pw, (r + 1) * ph)
+                patch = img_l.crop(box).resize((4, 4), Image.Resampling.LANCZOS)
+                if hasattr(patch, 'get_flattened_data'):
+                    pixels = list(patch.get_flattened_data())
+                else:
+                    pixels = list(patch.getdata())
+                diff = [pixels[i] > pixels[i+1] for i in range(15)]
+                val = sum((1 << i) for i, b in enumerate(diff) if b)
+                patches.append(val)
+        return patches
+    except Exception:
+        return []
+
 def is_bad_artwork(jpg_path: Path, check_dhash: bool = True) -> bool:
-    """ Checks if image matches known dummy MD5s or visual dHash fingerprints. """
+    """
+    Termux-Optimized Smart Image Copy Detection (ICD) Pipeline:
+    Stage 1: O(1) Exact Byte Hash (MD5)
+    Stage 2: Lite-ASL Directional Global Filter (dHash candidate filter)
+    Stage 3: Lite-D2LV Spatial Grid Local Verification (4x4 cell verification)
+    """
     if not jpg_path.exists():
         return False
     try:
+        # Stage 1: Exact Hash Check
         with open(jpg_path, 'rb') as f:
             if hashlib.md5(f.read()).hexdigest() in KNOWN_BAD_ARTWORK_MD5:
                 return True
-        
-        # Perceptual Visual Check (dHash) - performed when check_dhash is True
+
+        # Perceptual Visual Check (Lite-ASL + Lite-D2LV)
         if check_dhash:
-            dh = calc_dhash(jpg_path)
-            if dh:
+            with Image.open(jpg_path) as img:
+                img_l = img.convert('L')
+                dh = calc_dhash(img_l)
+                if not dh:
+                    return False
+
                 for bad_dh in KNOWN_BAD_ARTWORK_DHASH:
                     dist = bin(int(dh, 16) ^ int(bad_dh, 16)).count('1')
+
+                    # Stage 2: Lite-ASL Candidate Filter
                     if dist <= 4:
-                        return True
+                        if bad_dh in KNOWN_BAD_ARTWORK_SPATIAL_GRIDS:
+                            # Stage 3: Lite-D2LV Local Verification
+                            ref_grid = KNOWN_BAD_ARTWORK_SPATIAL_GRIDS[bad_dh]
+                            cand_grid = extract_spatial_grid(img_l, 4)
+                            if cand_grid and len(cand_grid) == len(ref_grid):
+                                matches = sum(1 for a, b in zip(cand_grid, ref_grid) if bin(a ^ b).count('1') <= 2)
+                                if matches >= 12:
+                                    return True
+                        else:
+                            return True
+                    elif dist <= 8 and bad_dh in KNOWN_BAD_ARTWORK_SPATIAL_GRIDS:
+                        ref_grid = KNOWN_BAD_ARTWORK_SPATIAL_GRIDS[bad_dh]
+                        cand_grid = extract_spatial_grid(img_l, 4)
+                        if cand_grid and len(cand_grid) == len(ref_grid):
+                            matches = sum(1 for a, b in zip(cand_grid, ref_grid) if bin(a ^ b).count('1') <= 2)
+                            if matches >= 13:
+                                return True
     except Exception:
         pass
     return False
 
 def clean_plist_str(val) -> str:
     if isinstance(val, (str, int, float)):
-        return ' '.join(str(val).split())
+        s = str(val)
+        sl = s.lower()
+        if (
+            '<!doctype' in sl 
+            or '<plist' in sl 
+            or '<?xml' in sl 
+            or sl.startswith(('$', '{', '('))
+            or 'cfbundledisplayname' in sl 
+            or 'cfbundlename' in sl 
+            or 'product_name' in sl
+        ):
+            return ''
+        return ' '.join(s.split())
     return ''
 
 def safe_load_plist_file(filepath: Path) -> dict:
@@ -322,6 +404,12 @@ def main():
         
         # After run, always check for missing images
         fix_missing_images(DB)
+        print('Auto-optimizing database...')
+        res = DB.optimize()
+        if res['saved_bytes'] > 0:
+            print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
+        else:
+            print("Database is compact and optimal.")
 
     elif args.cmd == 'err':
         DB = CacheDB()
@@ -331,6 +419,11 @@ def main():
         elif args.err_type == 'clear':
             count = DB.deleteAllErrors()
             print(f'Successfully deleted {count} error entries from the database.')
+            if count > 0:
+                print('Auto-optimizing database...')
+                res = DB.optimize()
+                if res['saved_bytes'] > 0:
+                    print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
         elif args.err_type == 'fix':
             while True:
                 err_count = DB.count(done=3)
@@ -461,11 +554,27 @@ def fix_missing_images(DB: 'CacheDB'):
         if not shard_dir.exists():
             missing.extend(pks)
         else:
-            # Batch list the directory for performance
-            existing = {f.name for f in shard_dir.iterdir() if f.suffix == '.jpg'}
+            # Fast in-memory directory scan with zero-overhead file size caching
+            existing_sizes = {}
+            with os.scandir(shard_dir) as it:
+                for entry in it:
+                    if entry.name.endswith('.jpg'):
+                        try:
+                            existing_sizes[entry.name] = entry.stat().st_size
+                        except OSError:
+                            pass
             for img_pk in pks:
-                if f"{img_pk}.jpg" not in existing:
+                img_name = f"{img_pk}.jpg"
+                if img_name not in existing_sizes:
                     missing.append(img_pk)
+                elif existing_sizes[img_name] in KNOWN_BAD_ARTWORK_SIZES:
+                    img_file = shard_dir / img_name
+                    if is_bad_artwork(img_file):
+                        try:
+                            img_file.unlink()
+                        except Exception:
+                            pass
+                        missing.append(img_pk)
         checked += len(pks)
         if checked % 100 == 0 or checked == total:
             print(f"\rChecked {checked}/{total} unique images...", end="")
@@ -473,9 +582,9 @@ def fix_missing_images(DB: 'CacheDB'):
     print(f"\rChecked {total}/{total} unique images. Done.")
     
     if not missing:
-        print("No missing images found.")
+        print("No missing or bad images found.")
     else:
-        print(f"Found {len(missing)} missing unique images. Fixing...")
+        print(f"Found {len(missing)} missing or bad unique images. Fixing...")
         for pk in missing:
             url = DB.getUrl(pk)
             print(f"[{pk}] Fix unique image: {url}")
@@ -517,7 +626,8 @@ def fix_missing_images(DB: 'CacheDB'):
 # --- PRE-COMPILED REGEX FOR INSTANT SPEED ---
 RE_HASH = re.compile(r'-[0-9a-f]{32}')
 RE_BRACKETS = re.compile(r'[\(\[].*?[\)\]]')
-RE_VERSION = re.compile(r'[-.]v?\d+(\.\d+)*')
+RE_VERSION = re.compile(r'[-.\s](?:v\d+(?:\.\d+)*|\d+\.\d+(?:\.\d+)*)')
+RE_NOISE = re.compile(r'[-_]\s*below\s+ios\s*\d*.*$', re.IGNORECASE)
 RE_CAMEL = re.compile(r'([a-z])([A-Z])')
 RE_WORDS = re.compile(r'[a-z0-9]{2,}')
 RE_BID = re.compile(r'([a-z]{2,}\.[a-z0-9]{2,}\.[a-z0-9\.]+)')
@@ -535,10 +645,45 @@ def is_hint_match(word, target):
 
 def prettify_title(title: str, bundle_id: str, path_name: str) -> str:
     """Ultra-fast local title polisher"""
-    if not title or title.lower() in ["cfbundledisplayname", "cfbundlename", "templete", "null", "unknown"]:
-        source = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
-        if len(source) < 3 and bundle_id:
-            source = bundle_id.split('.')[-1]
+    if title:
+        tl = str(title).lower()
+        if (
+            '<plist' in tl 
+            or '<!doctype' in tl 
+            or '<?xml' in tl 
+            or '</' in tl
+            or tl.startswith(('$', '{', '('))
+            or 'cfbundledisplayname' in tl
+            or 'cfbundlename' in tl
+            or 'product_name' in tl
+            or 'product name' in tl
+            or tl in ["templete", "null", "unknown", "none", "game", "app", "application"]
+        ):
+            title = None
+
+    if not title:
+        fn = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
+        if ' - ' in fn:
+            after_dash = fn.split(' - ', 1)[1]
+            if not any(x in after_dash.lower() for x in ['cfbundledisplayname', 'product_name', 'product name']):
+                fn = after_dash
+
+        fn_lower = fn.lower()
+        if (
+            'cfbundledisplayname' in fn_lower 
+            or 'cfbundlename' in fn_lower 
+            or 'product_name' in fn_lower
+            or 'product name' in fn_lower
+            or fn_lower.startswith(('com.', 'net.', 'org.', 'de.', 'fr.', 'jp.', 'cn.', 'ru.'))
+            or len(fn) < 3
+        ):
+            if bundle_id:
+                last_comp = bundle_id.split('.')[-1]
+                source = last_comp if len(last_comp) >= 2 else fn
+            else:
+                source = fn
+        else:
+            source = fn
     elif title.lower().startswith(('com.', 'net.', 'org.')):
         source = title.split('.')[-1]
     else:
@@ -547,8 +692,11 @@ def prettify_title(title: str, bundle_id: str, path_name: str) -> str:
     # Clean noise using pre-compiled regex
     source = RE_HASH.sub('', source)
     source = RE_BRACKETS.sub('', source)
+    source = RE_NOISE.sub('', source)
     source = RE_VERSION.sub('', source)
     
+    # CamelCase splitting so MaritimeKingdom -> Maritime Kingdom
+    source = RE_CAMEL.sub(r'\1 \2', source)
     pretty = source.replace('.', ' ').replace('-', ' ').replace('_', ' ')
     pretty = ' '.join(pretty.split()).title()
     
@@ -561,6 +709,10 @@ class CacheDB:
         self._db = sqlite3.connect(CACHE_DIR / 'ipa_cache.db', timeout=60.0)
         self._db.execute('PRAGMA journal_mode=WAL;')
         self._db.execute('PRAGMA busy_timeout=60000;')
+        self._db.execute('PRAGMA synchronous=NORMAL;')
+        self._db.execute('PRAGMA temp_store=MEMORY;')
+        self._db.execute('PRAGMA mmap_size=268435456;')
+        self._db.execute('PRAGMA cache_size=-64000;')
 
     def init(self):
         self._db.execute('''
@@ -604,6 +756,30 @@ class CacheDB:
                 FOREIGN KEY (base_url_id) REFERENCES urls (pk) ON DELETE CASCADE
             );
         ''')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_bundle_ver ON idx(bundle_id, version);')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_done ON idx(done);')
+        self._db.execute('CREATE INDEX IF NOT EXISTS idx_image_pk ON idx(image_pk);')
+        self._db.commit()
+
+    def optimize(self) -> dict:
+        db_file = CACHE_DIR / 'ipa_cache.db'
+        before_size = db_file.stat().st_size
+        freelist_before = self._db.execute('PRAGMA freelist_count;').fetchone()[0]
+
+        self._db.execute('PRAGMA optimize;')
+        self._db.execute('ANALYZE;')
+        self._db.execute('VACUUM;')
+
+        after_size = db_file.stat().st_size
+        freelist_after = self._db.execute('PRAGMA freelist_count;').fetchone()[0]
+
+        return {
+            'before_size': before_size,
+            'after_size': after_size,
+            'freelist_before': freelist_before,
+            'freelist_after': freelist_after,
+            'saved_bytes': before_size - after_size
+        }
 
     def __del__(self) -> None:
         self._db.close()
@@ -867,12 +1043,8 @@ class CacheDB:
             self.setError(uid, done=3)
             return
 
-        bundleId = plist.get('CFBundleIdentifier')
-        if not isinstance(bundleId, str):
-            bundleId = clean_plist_str(bundleId)
-        title = plist.get('CFBundleDisplayName') or plist.get('CFBundleName')
-        if not isinstance(title, str):
-            title = clean_plist_str(title)
+        bundleId = clean_plist_str(plist.get('CFBundleIdentifier'))
+        title = clean_plist_str(plist.get('CFBundleDisplayName') or plist.get('CFBundleName'))
         v_short = clean_plist_str(plist.get('CFBundleShortVersionString'))
         v_long = clean_plist_str(plist.get('CFBundleVersion'))
         version = v_short or v_long
@@ -901,40 +1073,34 @@ class CacheDB:
         if not platforms and minOS[0] in [0, 1, 2, 3]:
             platforms = 1 << 1  # fallback to iPhone for old versions
 
-        # --- ARCHITECTURAL GUARD: UNIVERSAL SENTINEL RULE ---
+        # --- ARCHITECTURAL GUARD: FALLBACK FOR MISSING / DUMMY BUNDLE ID ---
         res = self._db.execute('SELECT path_name FROM idx WHERE pk=?', [uid]).fetchone()
         path_name = res[0] if res else ""
-        
-        if path_name:
-            fn_words = get_clean_words(path_name.split('##')[-1])
-            bid_full = str(bundleId).lower()
-            tl_full = str(title).lower()
-            
-            has_hint = False
-            for w in fn_words:
-                if is_hint_match(w, bid_full) or is_hint_match(w, tl_full):
-                    has_hint = True
-                    break
-            
-            # BLOCK & AUTO-FIX
-            if not has_hint:
-                # 1. Purge corrupted files
-                for ext in ['.plist', '.png', '.jpg']:
-                    p = diskPath(uid, ext)
-                    if p.exists(): p.unlink()
-                
-                # 2. Attempt AUTHENTIC Inference from filename
-                fn = path_name.split('##')[-1].replace('.ipa', '')
-                bid_pattern = RE_BID.search(fn.lower())
-                
-                if bid_pattern:
-                    bundleId = bid_pattern.group(1)
+
+        # Only attempt filename inference if the plist bundle ID is missing or an invalid placeholder
+        is_invalid_bid = (
+            not bundleId
+            or len(str(bundleId).strip()) < 4
+            or '.' not in str(bundleId)
+            or str(bundleId).lower() in {'iphone.app.mega.pack', 'unknown', 'null', 'undefined'}
+            or str(bundleId).lower().startswith(('com.yourcompany.', 'com.example.'))
+        )
+
+        if is_invalid_bid and path_name:
+            # Extract ONLY the filename, stripping all parent directory paths
+            fn = path_name.split('##')[-1].split('/')[-1].replace('.ipa', '')
+            bid_pattern = RE_BID.search(fn.lower())
+
+            if bid_pattern:
+                bundleId = bid_pattern.group(1)
+                if not title:
                     title = bundleId.split('.')[-1].replace('-', ' ').replace('_', ' ').title()
-                else:
-                    noise = {'old', 'ios', 'ipa', 'v1', 'v2', 'v3'}
-                    parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
+            else:
+                noise = {'old', 'ios', 'ipa', 'v1', 'v2', 'v3'}
+                parts = [w for w in re.split(r'[\.\-_\s\(\)\[\]/]', fn) if w and w.lower() not in noise]
+                if not title:
                     title = (parts[0] if parts else fn).title()
-                    bundleId = f"com.archive.{title.lower()}"
+                bundleId = f"com.archive.{title.lower()}"
 
         # --- SMART TITLE CLEANING ---
         title = prettify_title(title, bundleId, path_name)
@@ -1492,12 +1658,20 @@ def _processIpaZip(uid: int, zip, basename, img_path, plist_path, image_only) ->
                 icon = expandImageName(zip_listing, app_prefix, [icon_name])
                 if icon:
                     extractZipEntry(zip, icon, img_path)
-                    if os.path.exists(img_path) and os.path.getsize(img_path) > 8:
-                        if processImage(img_path):
-                            artwork = True
-                            break
-                        else:
-                            if img_path.exists(): img_path.unlink() # Cleanup
+                    if processImage(img_path):
+                        jpg_candidate = img_path.with_suffix('.jpg')
+                        if jpg_candidate.exists() and is_bad_artwork(jpg_candidate):
+                            print(f'  [WARN] [{uid}] Rejected generic bad plist icon (MD5/dHash), removing...')
+                            try:
+                                jpg_candidate.unlink()
+                            except Exception:
+                                pass
+                            artwork = False
+                            continue
+                        artwork = True
+                        break
+                    else:
+                        if img_path.exists(): img_path.unlink() # Cleanup
         except Exception as e:
             print(f'ERROR: [{uid}] failed to parse plist or find icon: {e}', file=stderr)
 
@@ -1820,6 +1994,13 @@ def export_json():
     with open(CACHE_DIR / 'urls.json', 'w') as fp:
         fp.write(json.dumps(url_map, separators=(',\n', ':'), sort_keys=True))
     print(f'write urls.json: {len(url_map)} entries')
+    
+    print('Auto-optimizing database...')
+    res = DB.optimize()
+    if res['saved_bytes'] > 0:
+        print(f"Database optimized: reclaimed {res['saved_bytes']:,} bytes ({res['saved_bytes'] / (1024*1024):.2f} MB).")
+    else:
+        print("Database is compact and optimal.")
 
 
 def export_filesize():

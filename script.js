@@ -90,7 +90,12 @@ function saveConfig() {
  */
 
 function applySearch() {
-    const term = document.getElementById('search').value.toLowerCase();
+    const rawTerm = (document.getElementById('search').value || '').trim();
+    const term = rawTerm.toLowerCase();
+    const cleanTerm = term.replace(/[\s\-_.]+/g, '');
+    const words = term.split(/\s+/).filter(function (w) { return w.length > 0; });
+    const hasSpecificVersion = words.some(function (w) { return /^[vV]?[0-9]+(\.[0-9]+)+$/.test(w); });
+
     const bundle = document.getElementById('bundleid').value.trim().toLowerCase();
     const unique = document.getElementById('unique').checked;
     const minos = document.getElementById('minos').value;
@@ -108,18 +113,15 @@ function applySearch() {
     DB_result = [];
     isInitial = false;
     const uniqueBundleIds = {};
-    DB.forEach(function (ipa, i) {
-        if (ipa[2] < minV || ipa[2] > maxV || !(ipa[1] & device) || ipa[0] < minPK) {
-            return;
-        }
-        if (bundle && ipa[4].toLowerCase().indexOf(bundle) === -1) {
-            return;
-        }
-        if (!term
-            || ipa[3].toLowerCase().indexOf(term) > -1
-            || ipa[4].toLowerCase().indexOf(term) > -1
-            || ipa[7].toLowerCase().indexOf(term) > -1
-        ) {
+
+    if (!term) {
+        DB.forEach(function (ipa, i) {
+            if (ipa[2] < minV || ipa[2] > maxV || !(ipa[1] & device) || ipa[0] < minPK) {
+                return;
+            }
+            if (bundle && ipa[4].toLowerCase().indexOf(bundle) === -1) {
+                return;
+            }
             if (unique) {
                 const bId = ipa[4];
                 if (uniqueBundleIds[bId]) {
@@ -128,9 +130,77 @@ function applySearch() {
                 uniqueBundleIds[bId] = true;
             }
             DB_result.push(i);
+        });
+        delete uniqueBundleIds;
+        return;
+    }
+
+    // Pass 1: Find direct matches and collect matching bundle IDs
+    const matchingBundles = new Set();
+    const directMatches = new Uint8Array(DB.length);
+
+    for (let i = 0; i < DB.length; i++) {
+        const ipa = DB[i];
+        const titleLower = (ipa[3] || '').toLowerCase();
+        const bundleLower = (ipa[4] || '').toLowerCase();
+        const pathLower = (ipa[7] || '').toLowerCase();
+
+        let matched = false;
+
+        // 1. Direct exact substring match
+        if (titleLower.indexOf(term) > -1 || bundleLower.indexOf(term) > -1 || pathLower.indexOf(term) > -1) {
+            matched = true;
         }
-    });
-    delete uniqueBundleIds; // free up memory
+        // 2. Space / punctuation-insensitive match (e.g. "alive4ever" <=> "alive 4 ever")
+        else if (cleanTerm.length >= 2) {
+            const cleanTitle = titleLower.replace(/[\s\-_.]+/g, '');
+            const cleanBundle = bundleLower.replace(/[\s\-_.]+/g, '');
+            const cleanPath = pathLower.replace(/[\s\-_.]+/g, '');
+            if (cleanTitle.indexOf(cleanTerm) > -1 || cleanBundle.indexOf(cleanTerm) > -1 || cleanPath.indexOf(cleanTerm) > -1) {
+                matched = true;
+            }
+        }
+
+        // 3. Multi-word search (all words must appear in title, bundle, or path)
+        if (!matched && words.length > 1) {
+            matched = words.every(function (w) {
+                return titleLower.indexOf(w) > -1 || bundleLower.indexOf(w) > -1 || pathLower.indexOf(w) > -1;
+            });
+        }
+
+        if (matched) {
+            directMatches[i] = 1;
+            if (!hasSpecificVersion && ipa[4] && ipa[4].length > 3) {
+                matchingBundles.add(ipa[4]);
+            }
+        }
+    }
+
+    // Pass 2: Filter by criteria (minOS, maxOS, device, unique, etc.) and include bundle-expanded entries
+    for (let i = 0; i < DB.length; i++) {
+        const ipa = DB[i];
+        if (ipa[2] < minV || ipa[2] > maxV || !(ipa[1] & device) || ipa[0] < minPK) {
+            continue;
+        }
+        if (bundle && ipa[4].toLowerCase().indexOf(bundle) === -1) {
+            continue;
+        }
+
+        const isMatch = (directMatches[i] === 1) || (!hasSpecificVersion && ipa[4] && matchingBundles.has(ipa[4]));
+        if (!isMatch) {
+            continue;
+        }
+
+        if (unique) {
+            const bId = ipa[4];
+            if (uniqueBundleIds[bId]) {
+                continue;
+            }
+            uniqueBundleIds[bId] = true;
+        }
+        DB_result.push(i);
+    }
+    delete uniqueBundleIds;
 }
 
 function restoreSearch() {
